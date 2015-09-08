@@ -1,1 +1,31 @@
 GRID GRIND - Project Outline and Documentation
+
+Basic Idea
+GridGrind is a basic over head movement game. The goal is to align the players
+circular piece with the open circular posts located around the grid. The
+grid is broken into increments along with the players piece can move.
+
+The game starts with no enemies or obstacles, and at a fairly low speed. The
+idea is that as the game gets further in, everything moves faster and faster.
+I believe it would be best to develop it in a way that is repetitive, but
+very difficult. In a way making it similar to the impossible quiz.
+
+The games would be timed, and each level would add,
+ -- Obstacles
+ -- Enemies
+ -- Larger increments or faster time
+ -- Level ups or power accessories
+
+The game would involve the following components
+ -- Scorekeeper
+   ** Total current score
+   ** Total lives left
+   ** Time left in level
+
+ -- Player
+ -- Posts
+ -- Enemies
+   ** Block entire grid lines for a period of time
+   ** Move in a specific direction
+   ** Converge on the player
+   ** Leave trail of bombs behind them
