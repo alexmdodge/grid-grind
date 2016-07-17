@@ -4,69 +4,193 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"wed",
+				"weddingDay"
+			],
+			[
 				"fade",
-				"fadeOut	.fadeOut()"
+				"fadeToggle	.fadeToggle()"
 			],
 			[
-				"page",
-				"pageSource"
+				"sl",
+				"slideToggle	.slideToggle()"
 			],
 			[
-				"footer",
-				"cairo_font_options_merge"
+				"slid",
+				"slideDown	.slideDown()"
 			],
 			[
-				"m",
-				"medium"
+				"max",
+				"max-height"
+			],
+			[
+				"border",
+				"border-box"
+			],
+			[
+				"bdrco",
+				"border-color"
+			],
+			[
+				"z-",
+				"z-index"
+			],
+			[
+				"vl",
+				"velocity"
+			],
+			[
+				"eas",
+				"ease-in-out"
+			],
+			[
+				"ease",
+				"ease-in-out"
+			],
+			[
+				"bdl",
+				"bdl+	border-left: ${1:1px} ${2:solid} ${3:#000};"
+			],
+			[
+				"bdb",
+				"bdb+	border-bottom: ${1:1px} ${2:solid} ${3:#000};"
+			],
+			[
+				"add_theme",
+				"add_theme_support"
+			],
+			[
+				"apex",
+				"apex_landing_classes"
+			],
+			[
+				"have",
+				"have_posts"
+			],
+			[
+				"wp_nav",
+				"wp_nav_menu"
+			],
+			[
+				"after_",
+				"after_setup_theme"
+			],
+			[
+				"add_the",
+				"add_theme_support"
+			],
+			[
+				"get_tem",
+				"get_template_directory_uri"
+			],
+			[
+				"thi",
+				"third-color"
+			],
+			[
+				"a",
+				"a	Tag"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"paddin",
+				"padding-bottom"
+			],
+			[
+				"font-",
+				"font-weight"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"paddi",
+				"padding-bottom"
+			],
+			[
+				"bordrbo",
+				"border-bottom"
+			],
+			[
+				"border-r",
+				"border-radius"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"bdr",
+				"bdr+	border-right: ${1:1px} ${2:solid} ${3:#000};"
+			],
+			[
+				"bordrt",
+				"border-top"
+			],
+			[
+				"border-le",
+				"border-left-width"
 			],
 			[
 				"bd",
 				"bd+	border: ${1:1px} ${2:solid} ${3:#000};"
 			],
 			[
-				"frame",
-				"frame-small"
+				"inli",
+				"inline-block"
+			],
+			[
+				"re",
+				"ready	document.ready - $(function(){})"
+			],
+			[
+				"po",
+				"pos-f	position: fixed;"
+			],
+			[
+				"todo",
+				"todos"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"contents": "p, span {\n   font-family: \"Lucida Console\", Monaco, monospace;\n}\n\n.noselect {\n    -webkit-touch-callout: none;\n    -webkit-user-select: none;\n    -khtml-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n.description {\n   background-color: #66CCFF;\n   color: white;\n   display: inline-block;\n   margin-left: 400px;\n   padding: 100px 40px 0px;\n   text-align: center;\n   border-radius: 100%;\n   width: 310px;\n   height: 300px;\n   font-weight: bold;\n   text-transform: uppercase;\n   font-size: 130%;\n}\n\n.points {\n   font-weight: bold;\n   font-size: 180%;\n   position: absolute;\n   top: 0;\n   right: 30px;\n   z-index: 9999;\n}\n\n.start {\n   font-weight: normal;\n   font-size: 190%;\n   cursor: pointer;\n}\n\n.start:hover {\n   font-weight: bold;\n   text-decoration: underline;\n}\n\n.player {\n   position: absolute;\n   display: inline-block;\n   width: 100px;\n   height: 100px;\n   background-color: #66CCFF;\n   border-radius: 100%;\n   z-index: 3;\n   opacity: 0;\n}\n\n.post {\n   position: absolute;\n   display: inline-block;\n   width: 100px;\n   height: 100px;\n   border: 5px solid #FF9933;\n   background-color: white;\n   border-radius: 100%;\n   opacity: 0;\n}\n\n",
-			"file": "index.css",
-			"file_size": 1262,
-			"file_write_time": 130844668580000000,
-			"settings":
-			{
-				"buffer_size": 1192,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "index.html",
-			"settings":
-			{
-				"buffer_size": 770,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "index.js",
-			"settings":
-			{
-				"buffer_size": 422,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "GRID GRIND - Project Outline and Documentation.txt",
-			"settings":
-			{
-				"buffer_size": 1055,
-				"line_ending": "Unix",
-				"name": "GRID GRIND - Project Outline and Documentation"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -75,31 +199,43 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 375.0,
-		"last_filter": "pack",
+		"height": 392.0,
+		"last_filter": "package",
 		"selected_items":
 		[
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"color",
+				"ColorSchemeSelector: Select Color Scheme"
+			],
 			[
 				"pack",
 				"Package Control: Install Package"
 			],
 			[
-				"kbu",
-				"Preferences: Key Bindings - User"
+				"i",
+				"Package Control: Install Package"
 			],
 			[
-				"Package Control: I",
+				"theme",
+				"ColorSchemeSelector: Select Color Scheme"
+			],
+			[
+				"install",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 561.0
+		"width": 521.0
 	},
 	"console":
 	{
 		"height": 139.0,
 		"history":
 		[
-			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
 		]
 	},
 	"distraction_free":
@@ -113,69 +249,126 @@
 	},
 	"expanded_folders":
 	[
-		"/home/alex/Desktop/Projects/gridgrind"
 	],
 	"file_history":
 	[
-		"/home/alex/.config/sublime-text-3/Packages/User/FileHeader.sublime-settings",
-		"/home/alex/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/alex/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/alex/Projects/gridgrind/gg-block-binding.js",
 		"/home/alex/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
-		"/home/alex/Desktop/Projects/mysite/php/php-error.log",
-		"/home/alex/Desktop/Alex Dodge - Educator, Programmer, Lifelong Student.html",
-		"/home/alex/Desktop/Projects/mysite/footer.php",
-		"/home/alex/Desktop/Projects/mysite/meta-header.php",
-		"/var/www/html/wordpress/wp-content/themes/twentyfifteen/index.php",
-		"/var/www/html/wordpress/index.php",
-		"/var/www/html/wordpress/wp-content/themes/twentyfifteen/header.php",
-		"/home/alex/Desktop/Projects/mysite/css/header.css",
-		"/var/www/html/wordpress/wp-content/themes/twentyfifteen/footer.php",
-		"/home/alex/Desktop/Projects/mysite/index.html",
-		"/var/www/html/wordpress/wp-content/themes/twentyfifteen/style.css",
-		"/home/alex/Desktop/Projects/mysite/css/main.css",
-		"/var/www/html/wordpress/wp-content/themes/twentyfifteen/functions.php",
-		"/home/alex/Desktop/Projects/mysite/articles.html",
-		"/home/alex/Desktop/Projects/mysite/php/my-header.php",
-		"/home/alex/Desktop/Projects/mysite/my-header.php",
-		"/home/alex/Desktop/Projects/mysite/about.html",
-		"/home/alex/Desktop/Projects/MySite/math11.html",
-		"/home/alex/Desktop/Projects/MySite/css/math11.css",
-		"/home/alex/Desktop/Projects/MySite/physics12.html",
-		"/home/alex/Desktop/Projects/MySite/css/physics12.css",
-		"/home/alex/Desktop/Projects/MySite/css/physics11.css",
-		"/home/alex/Desktop/Projects/MySite/physics11.html",
-		"/home/alex/Desktop/Projects/MySite/css/math12.css",
-		"/home/alex/Desktop/Projects/MySite/math12.html",
-		"/home/alex/Desktop/Projects/MySite/math8.html",
-		"/home/alex/Desktop/Projects/MySite/css/math8.css",
-		"/home/alex/Desktop/Projects/MySite/css/videos.css",
-		"/home/alex/Desktop/Projects/MySite/articles.html",
-		"/home/alex/Desktop/Projects/MySite/edusites.html",
-		"/home/alex/Desktop/Projects/MySite/index.html",
-		"/home/alex/Desktop/Projects/MySite/css/main.css",
-		"/home/alex/Desktop/Projects/MySite/resources.html",
-		"/home/alex/Desktop/Projects/MySite/css/resources.css",
-		"/home/alex/Desktop/Projects/MySite/css/header.css",
-		"/home/alex/Desktop/Projects/checkmymath/index.html",
-		"/home/alex/Desktop/Projects/MySite/videos.html",
-		"/home/alex/Desktop/Projects/MySite/css/resume.css",
-		"/home/alex/Desktop/Projects/MySite/css/contact.css",
-		"/home/alex/Desktop/Projects/MySite/css/articles.css",
-		"/home/alex/Desktop/Projects/MySite/css/projects.css",
-		"/home/alex/.config/sublime-text-3/Packages/BracketHighlighter/Example.sublime-keymap",
-		"/home/alex/Desktop/Projects/MySite/css/edusites.css",
-		"/home/alex/Desktop/Projects/MySite/css/about.css",
-		"/home/alex/Desktop/Projects/MySite/resume.html",
-		"/home/alex/Desktop/Projects/MySite/projects.html",
-		"/home/alex/Desktop/Projects/MySite/contact.html",
-		"/home/alex/Desktop/Projects/MySite/about.html",
-		"/home/alex/Desktop/Projects/checkmymath/README.md",
+		"/home/alex/Projects/our-wedding/app/views/main.html",
+		"/home/alex/Projects/our-wedding/app/views/confirmation/accomodation.html",
+		"/home/alex/Projects/our-wedding/app/views/contact/contact-us.html",
+		"/home/alex/Projects/our-wedding/app/views/weekend/directions.html",
+		"/home/alex/Projects/our-wedding/app/styles/main.scss",
+		"/home/alex/Projects/our-wedding/app/index.html",
+		"/home/alex/Projects/our-wedding/app/views/weekend/schedule.html",
+		"/home/alex/Projects/our-wedding/app/styles/_fonts.scss",
+		"/home/alex/Projects/our-wedding/Gruntfile.js",
+		"/home/alex/Projects/our-wedding/app/scripts/clock.js",
+		"/home/alex/Projects/our-wedding/app/scripts/controllers/main.js",
+		"/home/alex/Projects/our-wedding/app/styles/clock.css",
+		"/home/alex/Projects/our-wedding/app/styles/flipclock.css",
+		"/home/alex/Projects/mysite/V5.0/index.html",
+		"/home/alex/Projects/mysite/V5.0/css/sass/_custom.scss",
+		"/home/alex/Projects/mysite/V5.0/js/dodge.js",
+		"/home/alex/Projects/mysite/V5.0/css/sass/app.scss",
+		"/home/alex/Projects/mysite/V5.0/css/sass/_customVariables.scss",
+		"/home/alex/Projects/mysite/V5.0/css/sass/styles.css",
+		"/home/alex/Projects/mysite/V5.0/css/styles.css",
+		"/home/alex/Projects/mysite/V5.0/_custom.scss",
+		"/home/alex/Projects/mysite/V5.0/css/app.scss",
+		"/home/alex/Projects/apextraining/apexonepage/index.html",
+		"/home/alex/Projects/aurelia-test/index.html",
+		"/home/alex/Projects/aurelia-test/src/app.html",
+		"/home/alex/Projects/aurelia-test/src/app.js",
+		"/home/alex/Projects/apextraining/apexonepage/assets/css/layout.css",
+		"/home/alex/Projects/apextraining/apexonepage/assets/css/essentials.css",
+		"/home/alex/Projects/apextraining/apexonepage/php/contactst.php",
+		"/home/alex/Projects/apextraining/apexonepage/php/contact.php",
+		"/home/alex/Projects/apextraining/apexonepage/php/config.inc.php",
+		"/home/alex/Projects/apextraining/apexonepage/php/contactStuart.php",
+		"/home/alex/Projects/apextraining/apexonepage/php/Readme.txt",
+		"/home/alex/Projects/apextraining/apexonepage/php/phpmailer/5.2.10/PHPMailerAutoload.php",
+		"/home/alex/Projects/apextraining/apexonepage/php/contact-stuart.php",
+		"/home/alex/Projects/apextraining/apexonepage/php_error.log",
+		"/home/alex/Projects/apextraining/apexonepage/php.ini",
+		"/home/alex/Projects/aa Web Templates aa/HTML/index-fullscreen-local-video.html",
+		"/home/alex/Projects/aa Web Templates aa/HTML/index-onepage-youtube.html",
+		"/home/alex/Projects/apextraining/apexonepage/assets/css/color_scheme/apex-color.css",
+		"/home/alex/Projects/apextraining/apexonepage/index-onepage-image.html",
+		"/home/alex/Projects/apextraining/apexonepage/assets/css/added_to_essentials.zip",
+		"/home/alex/Projects/aa Web Templates aa/HTML/page-team-2.html",
+		"/home/alex/Projects/apextraining/apexonepage/assets/js/contact.js",
+		"/home/alex/Projects/apextraining/apexonepage/assets/js/scripts.js",
+		"/home/alex/Projects/apextraining/apextrainingtheme/header.php",
+		"/home/alex/Projects/apextraining/apextrainingtheme/footer.php",
+		"/home/alex/Projects/apextraining/apextrainingtheme/page-notitle.php",
+		"/home/alex/Projects/apextraining/apextrainingtheme/functions.php",
+		"/home/alex/Projects/apextraining/apextrainingtheme/index.php",
+		"/home/alex/Projects/Web Templates/HTML/index-onepage-parallax.html",
+		"/home/alex/Projects/apextraining/apextrainingtheme/css/apex.css",
+		"/home/alex/Projects/apextraining/apextrainingtheme/style.css",
+		"/home/alex/Desktop/Web Templates/HTML/index-onepage-parallax.html",
+		"/home/alex/Projects/apextraining/readme",
+		"/home/alex/Projects/apextraining/apextrainingtheme/js/apex.js",
+		"/home/alex/Desktop/current wedding/styles/main.ccb776ae.css",
+		"/home/alex/Desktop/our-wedding/index.html",
+		"/home/alex/Desktop/our-wedding/scripts/scripts.4ed5bda2.js",
+		"/home/alex/Desktop/current wedding/scripts/scripts.4ed5bda2.js",
+		"/home/alex/Projects/mysite/app/index.html",
+		"/home/alex/Projects/mysite/app/styles/_fonts.scss",
+		"/home/alex/Projects/mysite/app/styles/main.scss",
+		"/home/alex/Desktop/our-wedding/styles/main.ccb776ae.css",
+		"/home/alex/Desktop/our-wedding/scripts/vendor.e4d6f939.js",
+		"/home/alex/Projects/our-wedding/app/scripts/controllers/tidbit.js",
+		"/home/alex/Projects/wedding-app/app/index.html",
+		"/home/alex/Projects/wedding-app/app/views/confirmation/accomodation.html",
+		"/home/alex/Projects/wedding-app/app/styles/main.scss",
+		"/home/alex/Projects/wedding-app/app/views/main.html",
+		"/home/alex/Projects/wedding-app/app/scripts/app.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/tidbit.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/schedule.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/rsvp.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/main.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/directions.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/contact-us.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/wedding-party.js",
+		"/home/alex/Projects/wedding-app/app/views/howtohelp/wedding-party.html",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/accomodation.js",
+		"/home/alex/Projects/wedding-app/app/views/confirmation/rsvp.html",
+		"/home/alex/Projects/wedding-app/app/views/weekend/schedule.html",
+		"/home/alex/Projects/wedding-app/app/views/howtohelp/tidbits.html",
+		"/home/alex/Projects/wedding-app/app/views/weekend/directions.html",
+		"/home/alex/Projects/wedding-app/app/views/contact/contact-us.html",
+		"/home/alex/Projects/wedding-app/app/views/howtohelp/suggest.html",
+		"/home/alex/Projects/wedding-app/app/styles/_fonts.scss",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/contact.js",
+		"/home/alex/Desktop/old/public_html/index.html",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/suggest.js",
+		"/home/alex/Projects/wedding-app/app/scripts/controllers/about.js",
+		"/home/alex/Projects/wedding-app/.jshintrc",
+		"/home/alex/Projects/wedding-app/app/robots.txt",
+		"/home/alex/Projects/wedding-app/old_site/css/prc/index.scss",
+		"/home/alex/Projects/wedding-app/README.md",
+		"/home/alex/Projects/wedding-app/old_site/footer.php",
+		"/home/alex/Projects/wedding-app/old_site/header.php",
+		"/home/alex/Projects/mytodo/app/scripts/app.js",
+		"/home/alex/Projects/mytodo/app/views/main.html",
+		"/home/alex/Projects/mytodo/test/karma.conf.js",
+		"/home/alex/Projects/mytodo/Gruntfile.js",
+		"/home/alex/Projects/mytodo/test/spec/controllers/main.js",
+		"/home/alex/Projects/mytodo/app/scripts/controllers/main.js",
+		"/home/alex/Projects/mytodo/app/views/about.html",
+		"/home/alex/Projects/mytodo/app/index.html",
+		"/home/alex/Projects/mytodo/bower.json",
+		"/home/alex/Projects/mytodo/app/scripts/controllers/about.js",
+		"/home/alex/Projects/mytodo/.bowerrc",
+		"/home/alex/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/alex/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
-		"/home/alex/.config/sublime-text-3/Packages/User/JSON.sublime-settings"
+		"/home/alex/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -186,32 +379,99 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
-			"textures",
-			"\">\n",
-			"fonts",
-			"images",
-			"background",
-			"z-index",
-			"background",
-			"custom",
-			"masthead",
-			"site-header",
-			"custom content",
-			"background-image",
-			"media",
-			"is_front_page()",
-			"body",
-			"body_class()",
-			"border",
-			"border-radius: 8px 8px 4px 4px;",
+			"brackets",
+			"go",
+			"skip",
+			"close",
+			"\n		",
 			"img",
-			"img-sm",
-			"<iframe class=\"frame\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/4y15DBuGE8w\" allowfullscreen></iframe>\n",
-			"         <",
-			"div"
+			"title",
+			"welcome",
+			"footer",
+			"text",
+			"font-family",
+			"font-family:",
+			"font-family: 'Satisfy', cursive;",
+			"font-fam",
+			"font-fmai",
+			"width",
+			"flip-clock-ac",
+			"font-si",
+			"line",
+			"font-si",
+			";\n",
+			"@media",
+			"rsvp-button",
+			"40px",
+			"height",
+			"html",
+			"tooltip",
+			"'>\n",
+			"font",
+			"social",
+			"boostrap-social",
+			"ico",
+			"footer",
+			"contact",
+			"servic",
+			"email",
+			"send_to	",
+			"smtp",
+			"overlay",
+			"ff",
+			"container",
+			"body",
+			"overlay",
+			"parallax",
+			"topMain",
+			"nav",
+			"active",
+			"team",
+			"APEX",
+			"img",
+			"<img class=\"img-responsive width-100\" src=\"assets/images/lifestyle.png\"></img>",
+			".png",
+			"smarty",
+			"1980B6",
+			"00B2A9",
+			"color",
+			"8ab933",
+			"#8ab933",
+			"color",
+			"divider-color",
+			"ico-color",
+			"data-background",
+			"media",
+			"images",
+			"img",
+			"image",
+			"images",
+			"image",
+			"images",
+			"url",
+			"font",
+			"usemin",
+			"url",
+			"rsvp",
+			"title",
+			"parking",
+			"accomodate",
+			"transition",
+			"controllers",
+			"suggest",
+			"transition",
+			"<script src=\"scripts/controllers/directions.js\"></script>",
+			"font",
+			"footer-con	",
+			"copyr",
+			"title",
+			"padding",
+			"margin-top",
+			"border-radius",
+			"irectionsCtrl"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -219,10 +479,8 @@
 		"regex": false,
 		"replace_history":
 		[
-			"font",
-			"img"
 		],
-		"reverse": true,
+		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -231,575 +489,18 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "index.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1192,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								249,
-								249
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								223,
-								9,
-								4,
-								9,
-								41,
-								43,
-								0,
-								0,
-								0,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/CSS3/CSS3.tmLanguage",
-							"tab_size": 2,
-							"tabs_extra_last_activated": 1441754766.43,
-							"tabs_extra_last_activated_sheet_index": 0,
-							"tabs_extra_spawned": true,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 770,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								691,
-								691
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								223,
-								9,
-								4,
-								9,
-								41,
-								43,
-								0,
-								0,
-								0,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 3,
-							"tabs_extra_last_activated": 1441754767.3,
-							"tabs_extra_last_activated_sheet_index": 1,
-							"tabs_extra_spawned": true,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 422,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								95,
-								95
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								223,
-								9,
-								4,
-								9,
-								41,
-								43,
-								0,
-								0,
-								0,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tabs_extra_last_activated": 1441754769.06,
-							"tabs_extra_last_activated_sheet_index": 2,
-							"tabs_extra_spawned": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "GRID GRIND - Project Outline and Documentation.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1055,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1055,
-								1055
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_name": "GRID GRIND - Project Outline and Documentation",
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								223,
-								9,
-								8,
-								23,
-								9,
-								16,
-								0,
-								0,
-								0,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"spell_check": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tabs_extra_last_activated": 1441754769.86,
-							"tabs_extra_last_activated_sheet_index": 3
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 27.0
 	},
 	"input":
 	{
-		"height": 35.0
+		"height": 33.0
 	},
 	"layout":
 	{
@@ -832,7 +533,7 @@
 	"project": "gridgrind.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -841,17 +542,21 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"gg.js"
+			]
 		],
 		"width": 0.0
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"last_filter": "",
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"select_symbol":
 	{
@@ -867,10 +572,10 @@
 	{
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 214.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
