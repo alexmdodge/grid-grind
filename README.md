@@ -1,6 +1,7 @@
-# gridgrind
-A simple game, try it and see! Will branch off of my main site!
+# GRID GRIND
+A simple challenge. Navigate your block through the levels. Each level has unique obstacles and events. It may be fast, it may be slow. How far can you go?
 
-If you want a detailed description of the game, please read the project documentation in the documentation text file!
+# DEMO
 
-- Alex
+This game is still under construction, but a demo version of the game will be available at alexmdodge.ca/apps/gridgrind
+
