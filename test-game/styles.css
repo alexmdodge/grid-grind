@@ -45,8 +45,8 @@ html {
 }
 
 .start-info,
-.start-button {
-   font-size: 180%;
+#start-button {
+   font-size: 140%;
    font-weight: bold;
    text-align: center;
 }
@@ -57,20 +57,20 @@ html {
    width: 40%;
 }
 
-.start-button {
+#start-button {
    background-color: blue;
    border-radius: 10px;
    border: 5px solid darkblue;
    cursor: pointer;
    color: white;
-   margin: 200px auto 0;
+   margin: 50px auto 0;
    padding: 20px;
    width: 20%;
 
    transition: all 0.2s ease-in-out;
 }
 
-.start-button:hover {
+#start-button:hover {
    background-color: #333;
    border: 5px solid #222;
 }
