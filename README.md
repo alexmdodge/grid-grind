@@ -3,5 +3,5 @@ A simple challenge. Navigate your block through the levels. Each level has uniqu
 
 # DEMO
 
-This game is still under construction, but a demo version of the game will be available at alexmdodge.ca/apps/gridgrind
+This game is still under construction, but a demo version of the game will be available at app.alexmdodge.ca/gridgrind
 
