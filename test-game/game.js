@@ -1,101 +1,90 @@
 'use strict';
 
-/* Grid Grind Test */
-/* Below is some pseudo code and ideas for the games interactions */
+/* Store the dom elements in variables */
+var canvas = document.getElementById("my-canvas");
+var ctx = canvas.getContext("2d");
 
-/* Player will be a singleton pattern so cannot create multiple players */
-object player {
-   var player = "#player";
-   var life, posX, posY, isCreated;
+var x = canvas.width/2;
+var y = canvas.height-30;
+var dx = 2;
+var dy = -2;
 
-   constructor = function() {
-      life = 5;
-      posX = $(player).getPosX;
-      posY = $(player).getPosY;
-      isCreated = false;
+// Defines colours for random color change
+var colors = ["red", "blue", "green", "yellow", "black", "orange"];
+var curColor = "green"; 
+
+// Defines the dimensions for the ball and paddle
+var ballRadius = 10;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width-paddleWidth)/2;
+
+// Variables and definitions for the user controls
+var rightPressed = false;
+var leftPressed = false;
+
+function drawBall() {
+   ctx.beginPath();
+   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+   ctx.fillStyle = curColor;
+   ctx.fill();
+   ctx.closePath();
+}
+
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+
+function draw() {
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+   drawBall();
+   drawPaddle();
+
+   x += dx;
+   y += dy;
+
+   if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+      dx = -dx;
+      curColor = colors[(Math.floor(Math.random() * 6))];
+
+   }
+
+   if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+      dy = -dy;
+      curColor = colors[(Math.floor(Math.random() * 6))];
+
+   }
+
+   if(rightPressed && paddleX < canvas.width-paddleWidth) {
+      paddleX += 5;
+   } else if(leftPressed && paddleX > 0) {
+      paddleX -= 5;
    }
 }
 
-/* Balls are constructed with the class selector, as there will eventually 
-   be multiples */
-object ball {
-   var ball = ".ball";
-   var posX, posY, startX;
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
-   constructor = function() {
-      posX = $(ball).getPosX;
-      posY = $(ball).getPosY;
-   }
-
-   genStart = function(posX) {
-      var choice = Math.floor(Math.random());
-   }
+function keyDownHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = true;
+    }
 }
 
-/* Creates a player and fades in the element.
- *
- */
-function initPlayer() {
-   var player = '#player';
-   $(player).delay(1000).fadeIn('slow');
-   // var currentPosX = player.getPosX();
-   // var currentPosY = player.getPosY();
-   // var playerLife = player.getLife();
-   // append player life to header tag
-
+function keyUpHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = false;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
 }
 
-function initBall() {
-   var ball = '#ball';
-   // var currentPosY = player.getPosY();
-   var ballIsFalling = true;
-   var ballHasHit = false;
-   var ballHeight = 100;
-   $(ball).delay(1000).fadeIn('slow');
-
-   while(ballIsFalling) {
-      // Move ball down 10px at a time, function drops ball
-      // ball.fall(); 
-      $(ball).delay(200).css('top:110px;');
-
-      //
-      if(ballHasHit) {
-         ballIsFalling = false;
-      }
-   }
-}
-
-function removeStart() {
-   $('#start-button').fadeOut('fast');
-   $('.start-info').fadeOut('fast');
-}
-
-function initGame() {
-   
-   removeStart();
-   initPlayer();
-   initBall();
-
-   $(document).keydown(function(event) {
-      switch(event.which) {
-         case 37:
-            alert('You moved left!');
-            break;
-
-         case 39:
-            alert('You moved right!');
-            break;
-
-         default: return;
-      }
-
-      event.preventDefault();
-   });
-
-}
-
-$(document).ready(function() {
-   $('#start-button').click(function() {
-      initGame();
-   });
-});
+setInterval(draw, 10);

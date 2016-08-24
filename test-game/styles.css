@@ -6,6 +6,13 @@ html {
    height: 100%;
 }
 
+#my-canvas {
+   display: block;
+   border: 5px solid black;
+   border-radius: 5px;
+   margin: 20px auto 0px;
+}
+
 .game-title {
    text-align: center;
    font-weight: bold;
