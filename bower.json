@@ -1,0 +1,22 @@
+{
+  "name": "alexdodge",
+  "homepage": "https://github.com/alexmdodge/alexdodge-personal",
+  "authors": [
+    "alexmdodge <alex.mdodge@gmail.com>"
+  ],
+  "description": "My personal site built using a variety of tools.",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "velocity": "^1.2.3",
+    "bootstrap-sass": "boostrap-sass#^3.3.6"
+  }
+}
