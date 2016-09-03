@@ -133,8 +133,7 @@ gulp.task('browser-sync', function() {
    browserSync({
       server: {
          baseDir: "./app/",
-      },
-      browser: "firefox"
+      }
    });
 });
 
@@ -142,8 +141,7 @@ gulp.task('browser-sync-build',['clean:dist'], function() {
    browserSync({
       server: {
          baseDir: "./dist/",
-      },
-      browser: "firefox"
+      }
    });
 });
 
