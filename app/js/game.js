@@ -132,13 +132,23 @@ function checkBlockEvents() {
 }
 
 function blockDown(sprite, pointer) {
-   sprite.frame = (sprite.frame + 1) % 6;
-   movesLeft--;
-   movesText.setText("MOVES LEFT: "+ movesLeft);
+   if (movesLeft > 0) {
+      // To-Do
+      // Add tween animation between the frames
+      sprite.frame = (sprite.frame + 1) % 6;
+      movesLeft--;
+      movesText.setText("MOVES LEFT: "+ movesLeft);   
+   } else {
+      // Restart Game
+      location.reload();
+   }
+
+   // Insert modal which says moves used up, game over
 }
 
 function startGame() {
-   startButton.destroy();
+   // Change visibility of the blocks
+   // Fade in score, name, and moves left first, then blocks second
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
