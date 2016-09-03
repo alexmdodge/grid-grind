@@ -71,12 +71,13 @@ function create() {
    // Draws from a randomized array of the original sprite colours
    initBlocks();
 
-   scoreText = game.add.text(15, 15, 'POINTS: ' + score, textStyle);
-   movesText = game.add.text(game.world.width-15, 15, 'MOVES LEFT: '+ movesLeft, textStyle);
+   scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
+   movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
    movesText.anchor.set(1,0);
 }
 
 function update() {
+   checkBlockEvents();
 }
 
 function initBlocks() {
@@ -122,6 +123,18 @@ function initBlocks() {
          blocks.add(newBlock);
       }
    }
+}
+
+function checkBlockEvents() {
+   blocks.forEach(function(block) {  
+      block.events.onInputDown.add(blockDown, this);
+   });
+}
+
+function blockDown(sprite, pointer) {
+   sprite.frame = (sprite.frame + 1) % 6;
+   movesLeft--;
+   movesText.setText("MOVES LEFT: "+ movesLeft);
 }
 
 function startGame() {
