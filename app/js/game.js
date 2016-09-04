@@ -12,7 +12,7 @@ var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //
 //              ///////////////////////////////////////////////
-//              //              New Game Variables           //
+//              //                Game Variables             //
 //              ///////////////////////////////////////////////
 // 
 //             Note that global variables are not best practices
@@ -29,11 +29,15 @@ var inDebug = false;
 var blocks;
 var blockInfo;
 var newBlock;
+var width = 120;
+var height = 120;
+var padding = 10;
+var delta = width+padding;
 
 // Information
 var movesLeft = 999;
 var movesText;
-var playerName = "DaBEAZTxx";
+var playerName = "AlexIsDaBest";
 var nameText;
 var score = 0;
 var scoreText;
@@ -89,34 +93,25 @@ function update() {
 
 function initBlocks() {
    blockInfo = {
-      width: 120,
-      height: 120,
-      count: {
-         row: levelRow,
-         col: levelCol
-      },
-      offset: {
-         top: 60,
-         left: 60
-      },
-      padding: 10
+      top: 60,
+      left: 60
    };
 
    blocks = game.add.group();
    
-   for(var r=0; r < blockInfo.count.row; r++) {
+   for(var r=0; r < levelRow; r++) {
 
       if(inDebug) {
          console.log(r);
       }
-      for(var c=0; c < blockInfo.count.col; c++) {
+      for(var c=0; c < levelCol; c++) {
 
          if(inDebug) {
             console.log(c);
          }
 
-         var blockX = (c*(blockInfo.width+blockInfo.padding))+blockInfo.offset.left;
-         var blockY = (r*(blockInfo.height+blockInfo.padding))+blockInfo.offset.top;
+         var blockX = (c*(width + padding)) + blockInfo.left;
+         var blockY = (r*(height + padding)) + blockInfo.top;
 
          newBlock = game.add.sprite(blockX, blockY, 'blocks');
          var newRandPos = Math.floor(Math.random()*6);
@@ -138,13 +133,23 @@ function checkBlockEvents() {
    });
 }
 
+function buildColorBranch(spriteColorNode) {
+   spriteColorNode.childNodes.forEach( function(color) {
+
+   });
+}
+
 function checkColorChain(sprite) {
-   console.log("" + sprite.frame);
+   console.log("Source Sprite Frame: " + sprite.frame);
+   console.log("X Position of sprite: " + sprite.x);
+   console.log("Y Position of sprite: " + sprite.y);
+
+
    /* FUNCTION IDEAS
 
       Overall the chain of colors will be different in different
       levels. At most 3 colors chained are needed. They will not
-      complete automatically when the world is generated, if can
+      complete automatically when the world is generated, it can
       only be detected on a block click
 
       Find block from position, need to check the position elements
@@ -152,10 +157,53 @@ function checkColorChain(sprite) {
       squares into an array which have the same color frame.
 
       Color frame array color for loop to fill array
+   */
+
+   var tempColorNode;
+   var searchColors = [];
+
+   // Initialize the root of the tree
+   var rootNode = new colorNode();
+
+   // Find all blocks that share the same color and store them as child nodes
+   // store the parent node when it has same position
+   blocks.forEach(function(block) {
+      if (sprite.frame === block.frame) {
+         if (sprite.x === block.x && sprite.y === block.y) {
+            rootNode.nodeData = block;
+         } else {
+            searchColors.push(block);
+
+            console.log("Current Color Array Count: " + searchColors.length);
+         }
+      }
+   });
+
+   /*
 
       Then using the origin sprite, store all sprites in four squares
       around in an array. Then in each array elements store all blocks
       around which weren't in previous array.
+
+      create root object
+      store root in tempColorNode
+      for loop with length of color array
+         for each object in tempColorNode switch statement
+            if equal, set to parent node
+            if deltaX, deltaY, negDeltaX, negDeltaY push to child nodes
+            set tempColorNode to child node array
+
+
+   */
+   
+   tempColorNode = rootNode;
+   
+   // Recursive function which builds each branch and checks for connected colors
+   buildColorBranch(tempColorNode);
+
+
+
+   /*
 
       This is an n node tree storage. Then keep tally of total count
       once the array is built.
