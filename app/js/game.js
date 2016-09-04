@@ -11,13 +11,18 @@ var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //
-//
-//                         New Game Variables
+//              ///////////////////////////////////////////////
+//              //              New Game Variables           //
+//              ///////////////////////////////////////////////
+// 
+//             Note that global variables are not best practices
+//                     they will be changed at some point!      
 //
 //
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Debug Messages
+// Debug Messages, eventually turn this into a function which
+// prints a number of important messages
 var inDebug = false;
 
 // Blocks
@@ -26,9 +31,10 @@ var blockInfo;
 var newBlock;
 
 // Information
-var movesLeft = 3;
+var movesLeft = 999;
 var movesText;
-//var playerName;
+var playerName = "DaBEAZTxx";
+var nameText;
 var score = 0;
 var scoreText;
 
@@ -43,7 +49,7 @@ var levelCol = Math.sqrt(gridSize);
 // Styling Variables
 var textStyle = { 
    font: '18px Arial', 
-   fill: 'grey', 
+   fill: '#888', 
    fontWeight: 'bold'
 };
 
@@ -73,6 +79,7 @@ function create() {
 
    scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
    movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
+   nameText = game.add.text(15, game.world.height-35, "PLAYER: "+ playerName, textStyle);
    movesText.anchor.set(1,0);
 }
 
@@ -131,13 +138,48 @@ function checkBlockEvents() {
    });
 }
 
+function checkColorChain(sprite) {
+   console.log("" + sprite.frame);
+   /* FUNCTION IDEAS
+
+      Overall the chain of colors will be different in different
+      levels. At most 3 colors chained are needed. They will not
+      complete automatically when the world is generated, if can
+      only be detected on a block click
+
+      Find block from position, need to check the position elements
+      If they are even and exact from the scaling then first add all
+      squares into an array which have the same color frame.
+
+      Color frame array color for loop to fill array
+
+      Then using the origin sprite, store all sprites in four squares
+      around in an array. Then in each array elements store all blocks
+      around which weren't in previous array.
+
+      This is an n node tree storage. Then keep tally of total count
+      once the array is built.
+
+      After exit from array, check if count is greater than 2, if so
+      set all objects to animate fade away, increase point total and
+      check if larger than level point objective. If greater set
+      success message and draw next level with point persistence
+
+   */
+
+}
+
 function blockDown(sprite, pointer) {
    if (movesLeft > 0) {
       // To-Do
       // Add tween animation between the frames
       sprite.frame = (sprite.frame + 1) % 6;
       movesLeft--;
-      movesText.setText("MOVES LEFT: "+ movesLeft);   
+      movesText.setText("MOVES LEFT: "+ movesLeft);
+
+      // Take the current sprite which holds information
+      // about position and color and use to check proximity
+      checkColorChain(sprite);  
    } else {
       // Restart Game
       location.reload();
