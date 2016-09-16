@@ -1,12 +1,33 @@
+/*
+ * Node
+ *
+ * The node object has a data element and an array which
+ * contains an array with all of the connected child nodes
+ *
+ */
 function Node(data) {
   this.data = data;
   this.children = [];
 }
 
+/*
+ * Tree
+ *
+ * The main tree objects which contains a number of helpful
+ * methods for adding, removing, and manipulating nodes.
+ *
+ */
 function Tree() {
   this.root = null;
 }
 
+/*
+ * Node
+ *
+ * The node object has a data element and an array which
+ * contains an array with all of the connected child nodes
+ *
+ */
 Tree.prototype.add = function(data, toNodeData) {
   var node = new Node(data);
   var parent = toNodeData ? this.findBFS(toNodeData) : null;
@@ -20,6 +41,7 @@ Tree.prototype.add = function(data, toNodeData) {
     }
   }
 };
+
 Tree.prototype.remove = function(data) {
   if(this.root.data === data) {
     this.root = null;
@@ -37,9 +59,11 @@ Tree.prototype.remove = function(data) {
     }
   }
 };
+
 Tree.prototype.contains = function(data) {
   return this.findBFS(data) ? true : false;
 };
+
 Tree.prototype.findBFS = function(data) {
   var queue = [this.root];
   while(queue.length) {
@@ -53,6 +77,7 @@ Tree.prototype.findBFS = function(data) {
   }
   return null;
 };
+
 Tree.prototype._preOrder = function(node, fn) {
   if(node) {
     if(fn) {
@@ -63,6 +88,7 @@ Tree.prototype._preOrder = function(node, fn) {
     }
   }
 };
+
 Tree.prototype._postOrder = function(node, fn) {
   if(node) {
     for(var i = 0; i < node.children.length; i++) {
@@ -93,6 +119,7 @@ Tree.prototype.traverseBFS = function(fn) {
     }
   }
 };
+
 Tree.prototype.print = function() {
   if(!this.root) {
     return console.log('No root node found');
@@ -112,6 +139,7 @@ Tree.prototype.print = function() {
   }
   console.log(string.slice(0, -2).trim());
 };
+
 Tree.prototype.printByLevel = function() {
   if(!this.root) {
     return console.log('No root node found');
