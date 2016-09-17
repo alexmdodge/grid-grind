@@ -1,32 +1,20 @@
 # GRID GRIND
-A simple challenge. Navigate your block through the levels. Each level has unique obstacles and events. It may be fast, it may be slow. How far can you go?
+A simple match the color challenge with a twist. By learning the color pattern you must acquire enough points to move on to the next level. Each level is randomly generated with unique game elements added along the way. How far can you go?
 
 # DEMO
 
 This game is still under construction, but a demo version of the game will be available at app.alexmdodge.ca/gridgrind
 
 # Usage
-
-Create a clone of the repository, then ensure that the aurelia cli is up and running,
-
-```
-npm install aurelia-cli -g
-```
-
-Next you can install all of the dependencies,
+This game leverages Phaser, jQuery, and a couple of other pieces to make it go!
 
 ```
 npm install
+bower install
 ```
 
-To see what commands are available,
+To get started. Then use your gulpfile to run the build and try it out yourself,
 
 ```
-au help
-```
-
-To run the build and see what it looks like (while watching for updates),
-
-```
-au run --watch
+gulp
 ```
