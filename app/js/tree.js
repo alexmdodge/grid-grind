@@ -6,8 +6,8 @@
  *
  */
 function Node(data) {
-  this.data = data;
-  this.children = [];
+   this.data = data;
+   this.children = [];
 }
 
 /*
@@ -18,34 +18,51 @@ function Node(data) {
  *
  */
 function Tree() {
-  this.root = null;
+   this.root = null;
 }
 
 /*
- * Node
+ * add
  *
- * The node object has a data element and an array which
- * contains an array with all of the connected child nodes
+ * This function adds nodes to the tree
  *
  */
 Tree.prototype.add = function(data, toNodeData) {
-  var node = new Node(data);
-  var parent = toNodeData ? this.findBFS(toNodeData) : null;
-  if(parent) {
-    parent.children.push(node);
-  } else {
-    if(!this.root) {
+   
+   // Creates a node with the data stored and uses the
+   // breadth first search
+   var node = new Node(data);
+   var parent = toNodeData ? this.findBFS(toNodeData) : null;
+   
+   // As a reminder null will return false, and any object
+   // will return true, even with no data assigned.
+   if(parent) {
+      parent.children.push(node);
+   } else {
+
+      // If this is the top level and a root hasn't been assigned
+      // the node will be assigned to it
+      if(!this.root) {
       this.root = node;
-    } else {
-      return 'Root node is already assigned';
-    }
-  }
+      } else {
+         return 'Root node is already assigned';
+      }
+   }
 };
 
+/*
+ * remove
+ *
+ * searches the tree for the node with the particular data
+ * and removes it.
+ *
+ */
 Tree.prototype.remove = function(data) {
-  if(this.root.data === data) {
-    this.root = null;
-  }
+  
+
+   if(this.root.data === data) {
+      this.root = null;
+   }
 
   var queue = [this.root];
   while(queue.length) {
