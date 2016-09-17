@@ -1,3 +1,7 @@
+'use strict';
+
+/* globals console */
+
 /*
  * Node
  *
@@ -59,32 +63,74 @@ Tree.prototype.add = function(data, toNodeData) {
  */
 Tree.prototype.remove = function(data) {
   
-
+   // Checks if the data in the root is the requested
+   // data to delete, not that it does not remove references
    if(this.root.data === data) {
       this.root = null;
    }
 
-  var queue = [this.root];
-  while(queue.length) {
-    var node = queue.shift();
-    for(var i = 0; i < node.children.length; i++) {
-      if(node.children[i].data === data) {
-        node.children.splice(i, 1);
-      } else {
-        queue.push(node.children[i]);
+   // Initializes array named queue with node object which
+   // contains a sub array of all child nodes
+   var queue = [this.root];
+
+   // While there are entries in the queue then continue
+   // At most is O(n) where n is the number of nodes in
+   // the tree
+   while(queue.length) {
+
+      // Removes the node in the queue at index 0
+      var node = queue.shift();
+      
+      // Iterate through the child nodes in the current
+      // array and check if they contain the data.
+      for(var i = 0; i < node.children.length; i++) {
+
+         if(node.children[i].data === data) {
+
+            // If data found splice it from current child node
+            // array
+            node.children.splice(i, 1);
+
+         } else {
+
+            // If data not found add the child node to the queue
+            // and the search continues
+            queue.push(node.children[i]);
+         }
       }
-    }
-  }
+   }
 };
 
+
+/*
+ * contains
+ *
+ * searches the tree for the data using the breadth first
+ * search
+ *
+ */
 Tree.prototype.contains = function(data) {
   return this.findBFS(data) ? true : false;
 };
 
+
+/*
+ * findBFS
+ *
+ * uses a breadth first search to find the node
+ * associated with the data
+ *
+ */
 Tree.prototype.findBFS = function(data) {
-  var queue = [this.root];
-  while(queue.length) {
+
+   // Grab the root node to start the search
+   var queue = [this.root];
+   
+   // Initiate same search as in the remove method
+   while(queue.length) {
+
     var node = queue.shift();
+
     if(node.data === data) {
       return node;
     }
@@ -92,20 +138,46 @@ Tree.prototype.findBFS = function(data) {
       queue.push(node.children[i]);
     }
   }
+
+  // If no node found then it will return null by default
   return null;
 };
 
+/* * * * * * * * * * * * * * * * *
+ *
+ *  RECURSIVE IMPLEMENTATIONS
+ *
+ * * * * * * * * * * * * * * * * */
+
+
+/*
+ * _preOrder
+ *
+ * Uses a recursive approach to search the tree depth first
+ * Will execute the function of the highest node first
+ *
+ */
 Tree.prototype._preOrder = function(node, fn) {
-  if(node) {
-    if(fn) {
-      fn(node);
-    }
-    for(var i = 0; i < node.children.length; i++) {
-      this._preOrder(node.children[i], fn);
-    }
-  }
+   if(node) {
+      if(fn) {
+         fn(node);
+      }
+
+      // For each element in the child array it will
+      // continue to dive deeper until null is returned
+      for(var i = 0; i < node.children.length; i++) {
+         this._preOrder(node.children[i], fn);
+      }
+   }
 };
 
+/*
+ * _postOrder
+ *
+*  Uses a recursive approach to search the tree depth first
+ * Will execute the function of the lowest node first
+ *
+ */
 Tree.prototype._postOrder = function(node, fn) {
   if(node) {
     for(var i = 0; i < node.children.length; i++) {
@@ -116,14 +188,32 @@ Tree.prototype._postOrder = function(node, fn) {
     }
   }
 };
+
+/*
+ * traverseDFS
+ *
+ * Traverses the tree in a depth first search implementing a custom
+ * function for each of the nodes visited
+ *
+ */
 Tree.prototype.traverseDFS = function(fn, method) {
   var current = this.root;
+
+
   if(method) {
     this['_' + method](current, fn);
   } else {
     this._preOrder(current, fn);
   }
 };
+
+/*
+ * traverseBFS
+ *
+ * Traverses the tree in a breadth first search implementing a custom
+ * function for each of the nodes visited. Uses same queue searching method
+ *
+ */
 Tree.prototype.traverseBFS = function(fn) {
   var queue = [this.root];
   while(queue.length) {
@@ -137,6 +227,12 @@ Tree.prototype.traverseBFS = function(fn) {
   }
 };
 
+/*
+ * print
+ *
+ * Prints each node in the tree
+ *
+ */
 Tree.prototype.print = function() {
   if(!this.root) {
     return console.log('No root node found');
@@ -157,6 +253,12 @@ Tree.prototype.print = function() {
   console.log(string.slice(0, -2).trim());
 };
 
+/*
+ * printByLevel
+ *
+ * Prints by a depth first approach
+ *
+ */
 Tree.prototype.printByLevel = function() {
   if(!this.root) {
     return console.log('No root node found');
@@ -176,6 +278,8 @@ Tree.prototype.printByLevel = function() {
   }
   console.log(string.trim());
 };
+
+// Tree Implementation Examples
 
 var tree = new Tree();
 tree.add('ceo');
