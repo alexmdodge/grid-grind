@@ -156,28 +156,19 @@ function checkColorChain(sprite) {
       If they are even and exact from the scaling then first add all
       squares into an array which have the same color frame.
 
-      Color frame array color for loop to fill array
    */
-
-   var tempColorNode;
-   var searchColors = [];
-
-   // Initialize the root of the tree
-   var rootNode = new colorNode();
 
    // Find all blocks that share the same color and store them as child nodes
    // store the parent node when it has same position
-   blocks.forEach(function(block) {
-      if (sprite.frame === block.frame) {
-         if (sprite.x === block.x && sprite.y === block.y) {
-            rootNode.nodeData = block;
-         } else {
-            searchColors.push(block);
+   var allSameColors = [];
 
-            console.log("Current Color Array Count: " + searchColors.length);
-         }
+   blocks.forEach(function(block) {
+      if (sprite.x === block.x && sprite.y === block.y) {
+         searchColors.push(block);
+         console.log("Current Color Array Count: " + searchColors.length);
       }
    });
+
 
    /*
 
@@ -196,12 +187,6 @@ function checkColorChain(sprite) {
 
    */
    
-   tempColorNode = rootNode;
-   
-   // Recursive function which builds each branch and checks for connected colors
-   buildColorBranch(tempColorNode);
-
-
 
    /*
 

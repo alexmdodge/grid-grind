@@ -9,7 +9,7 @@
  * contains an array with all of the connected child nodes
  *
  */
-function Node(data) {
+function ColorNode(data) {
    this.data = data;
    this.children = [];
 }
@@ -21,7 +21,7 @@ function Node(data) {
  * methods for adding, removing, and manipulating nodes.
  *
  */
-function Tree() {
+function ColouTree() {
    this.root = null;
 }
 
