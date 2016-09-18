@@ -150,7 +150,7 @@ function checkColorChain(sprite) {
    var allSameColors = [];
 
    blocks.forEach(function(block) {
-      if (sprite.x === block.x && sprite.y === block.y) {
+      if (sprite.frame === block.frame) {
          allSameColors.push(block);
          console.log("Current Color Array Count: " + allSameColors.length);
       }
