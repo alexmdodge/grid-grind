@@ -1,5 +1,5 @@
 'use strict';
-/* globals Phaser, console */
+/* globals Phaser, console, ColorTree */
 
 var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
    preload: preload, 
@@ -145,60 +145,18 @@ function checkColorChain(sprite) {
    console.log("Y Position of sprite: " + sprite.y);
 
 
-   /* FUNCTION IDEAS
-
-      Overall the chain of colors will be different in different
-      levels. At most 3 colors chained are needed. They will not
-      complete automatically when the world is generated, it can
-      only be detected on a block click
-
-      Find block from position, need to check the position elements
-      If they are even and exact from the scaling then first add all
-      squares into an array which have the same color frame.
-
-   */
-
    // Find all blocks that share the same color and store them as child nodes
    // store the parent node when it has same position
    var allSameColors = [];
 
    blocks.forEach(function(block) {
       if (sprite.x === block.x && sprite.y === block.y) {
-         searchColors.push(block);
-         console.log("Current Color Array Count: " + searchColors.length);
+         allSameColors.push(block);
+         console.log("Current Color Array Count: " + allSameColors.length);
       }
    });
 
-
-   /*
-
-      Then using the origin sprite, store all sprites in four squares
-      around in an array. Then in each array elements store all blocks
-      around which weren't in previous array.
-
-      create root object
-      store root in tempColorNode
-      for loop with length of color array
-         for each object in tempColorNode switch statement
-            if equal, set to parent node
-            if deltaX, deltaY, negDeltaX, negDeltaY push to child nodes
-            set tempColorNode to child node array
-
-
-   */
-   
-
-   /*
-
-      This is an n node tree storage. Then keep tally of total count
-      once the array is built.
-
-      After exit from array, check if count is greater than 2, if so
-      set all objects to animate fade away, increase point total and
-      check if larger than level point objective. If greater set
-      success message and draw next level with point persistence
-
-   */
+   var colorChainTree = new ColorTree();
 
 }
 

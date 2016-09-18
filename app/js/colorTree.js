@@ -15,13 +15,14 @@ function ColorNode(data) {
 }
 
 /*
- * Tree
+ * ColorTree
  *
  * The main tree objects which contains a number of helpful
  * methods for adding, removing, and manipulating nodes.
  *
  */
-function ColouTree() {
+function ColorTree() {
+   this.nodeCount = 0;
    this.root = null;
 }
 
@@ -31,11 +32,11 @@ function ColouTree() {
  * This function adds nodes to the tree
  *
  */
-Tree.prototype.add = function(data, toNodeData) {
+ColorTree.prototype.add = function(data, toNodeData) {
    
    // Creates a node with the data stored and uses the
    // breadth first search
-   var node = new Node(data);
+   var node = new ColorNode(data);
    var parent = toNodeData ? this.findBFS(toNodeData) : null;
    
    // As a reminder null will return false, and any object
@@ -61,7 +62,7 @@ Tree.prototype.add = function(data, toNodeData) {
  * and removes it.
  *
  */
-Tree.prototype.remove = function(data) {
+ColorTree.prototype.remove = function(data) {
   
    // Checks if the data in the root is the requested
    // data to delete, not that it does not remove references
@@ -109,7 +110,7 @@ Tree.prototype.remove = function(data) {
  * search
  *
  */
-Tree.prototype.contains = function(data) {
+ColorTree.prototype.contains = function(data) {
   return this.findBFS(data) ? true : false;
 };
 
@@ -121,7 +122,7 @@ Tree.prototype.contains = function(data) {
  * associated with the data
  *
  */
-Tree.prototype.findBFS = function(data) {
+ColorTree.prototype.findBFS = function(data) {
 
    // Grab the root node to start the search
    var queue = [this.root];
@@ -157,7 +158,7 @@ Tree.prototype.findBFS = function(data) {
  * Will execute the function of the highest node first
  *
  */
-Tree.prototype._preOrder = function(node, fn) {
+ColorTree.prototype._preOrder = function(node, fn) {
    if(node) {
       if(fn) {
          fn(node);
@@ -178,7 +179,7 @@ Tree.prototype._preOrder = function(node, fn) {
  * Will execute the function of the lowest node first
  *
  */
-Tree.prototype._postOrder = function(node, fn) {
+ColorTree.prototype._postOrder = function(node, fn) {
   if(node) {
     for(var i = 0; i < node.children.length; i++) {
       this._postOrder(node.children[i], fn);
@@ -196,7 +197,7 @@ Tree.prototype._postOrder = function(node, fn) {
  * function for each of the nodes visited
  *
  */
-Tree.prototype.traverseDFS = function(fn, method) {
+ColorTree.prototype.traverseDFS = function(fn, method) {
   var current = this.root;
 
 
@@ -214,7 +215,7 @@ Tree.prototype.traverseDFS = function(fn, method) {
  * function for each of the nodes visited. Uses same queue searching method
  *
  */
-Tree.prototype.traverseBFS = function(fn) {
+ColorTree.prototype.traverseBFS = function(fn) {
   var queue = [this.root];
   while(queue.length) {
     var node = queue.shift();
@@ -233,11 +234,11 @@ Tree.prototype.traverseBFS = function(fn) {
  * Prints each node in the tree
  *
  */
-Tree.prototype.print = function() {
+ColorTree.prototype.print = function() {
   if(!this.root) {
     return console.log('No root node found');
   }
-  var newline = new Node('|');
+  var newline = new ColorNode('|');
   var queue = [this.root, newline];
   var string = '';
   while(queue.length) {
@@ -259,11 +260,11 @@ Tree.prototype.print = function() {
  * Prints by a depth first approach
  *
  */
-Tree.prototype.printByLevel = function() {
+ColorTree.prototype.printByLevel = function() {
   if(!this.root) {
     return console.log('No root node found');
   }
-  var newline = new Node('\n');
+  var newline = new ColorNode('\n');
   var queue = [this.root, newline];
   var string = '';
   while(queue.length) {
@@ -279,9 +280,9 @@ Tree.prototype.printByLevel = function() {
   console.log(string.trim());
 };
 
-// Tree Implementation Examples
+// ColorTree Implementation Examples
 
-var tree = new Tree();
+var tree = new ColorTree();
 tree.add('ceo');
 tree.add('cto', 'ceo');
 tree.add('dev1', 'cto');
