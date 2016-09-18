@@ -1,5 +1,5 @@
 'use strict';
-/* globals Phaser, console, ColorTree */
+/* globals Phaser, console, ColorTree, ColorNode */
 
 var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
    preload: preload, 
@@ -133,12 +133,6 @@ function checkBlockEvents() {
    });
 }
 
-function buildColorBranch(spriteColorNode) {
-   spriteColorNode.childNodes.forEach( function(color) {
-
-   });
-}
-
 function checkColorChain(sprite) {
    console.log("Source Sprite Frame: " + sprite.frame);
    console.log("X Position of sprite: " + sprite.x);
@@ -149,17 +143,90 @@ function checkColorChain(sprite) {
    // store the parent node when it has same position
    var allSameColors = [];
 
+   // A node container object which wraps the current tile with information
+   // about whether it has already been stored in the color tree
+   function ColorNodeContainer(colorTile) {
+      this.tile = colorTile;
+      this.matched = false;
+   }
+
    blocks.forEach(function(block) {
       if (sprite.frame === block.frame) {
-         allSameColors.push(block);
+         allSameColors.push(new ColorNodeContainer(block));
          console.log("Current Color Array Count: " + allSameColors.length);
       }
    });
 
+
+   /* Create the color tree, and add the source sprite from the click
+    * as the root node. Then add it to the search queue to begin populating
+    * the color chain tree.
+    */ 
    var colorChainTree = new ColorTree();
+   colorChainTree.root = new ColorNode(sprite);
+   var searchQueue = [colorChainTree.root];
+
+
+   // Executes until there are no longer nodes to check and add
+   while(searchQueue.length) {
+
+      var node = searchQueue.shift();
+      var toAdd = false;
+
+      for(var i = 0; i < allSameColors.length; i++) {
+
+         /*
+          * This statement first checks if the node has already been matched
+          * to ensure no duplicate nodes are added.
+          *
+          * This statement checks each node by first checking for horizontal
+          * positioning. If adding the delta and keeping the y value the same
+          * evaluates true, then the node is not diagonal and in the proper
+          * position.
+          *
+          * It repeats this logic for all of the color tiles around the current
+          * source tile.
+          */
+
+         if (!allSameColors[i].matched) {
+
+            // Right Tile Check
+            if(node.data.x + delta == allSameColors[i].tile.x && node.data.y == allSameColors[i].tile.y) {
+               toAdd = true;
+            } 
+            
+            // Left Tile Check
+            else if(node.data.x - delta == allSameColors[i].tile.x && node.data.y == allSameColors[i].tile.y) {
+               toAdd = true;
+            }
+
+            // Up Tile Check
+            else if(node.data.y - delta == allSameColors[i].tile.y && node.data.x == allSameColors[i].tile.x) {
+               toAdd = true;
+            } 
+
+            // Down Tile Check
+            else if(node.data.y + delta == allSameColors[i].tile.y && node.data.x == allSameColors[i].tile.x) {
+               toAdd = true;
+            }
+
+            if(toAdd) {
+               allSameColors[i].matched = true;
+               var newConnect = new ColorNode(allSameColors[i]);
+               node.children.push(newConnect);
+               searchQueue.push(newConnect);
+               colorChainTree.nodeCount++;
+
+               console.log('Node added. Current node count: ' + colorChainTree.nodeCount);
+               toAdd = false;
+            }
+         }
+
+      }
+   }
+
 
 }
-
 function blockDown(sprite, pointer) {
    if (movesLeft > 0) {
       // To-Do
