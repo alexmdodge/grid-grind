@@ -212,7 +212,7 @@ function checkColorChain(sprite) {
 
             if(toAdd) {
                allSameColors[i].matched = true;
-               var newConnect = new ColorNode(allSameColors[i]);
+               var newConnect = new ColorNode(allSameColors[i].tile);
                node.children.push(newConnect);
                searchQueue.push(newConnect);
                colorChainTree.nodeCount++;
@@ -224,9 +224,9 @@ function checkColorChain(sprite) {
 
       }
    }
-
-
 }
+
+
 function blockDown(sprite, pointer) {
    if (movesLeft > 0) {
       // To-Do
