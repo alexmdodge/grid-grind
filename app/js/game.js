@@ -70,9 +70,6 @@ function preload() {
 }
 
 function create() {
-   startButton = game.add.button(game.world.width*0.5, game.world.height*0.5, 'button', startGame, this, 1, 0, 2);
-   startButton.anchor.set(0.5);
-
    // Enables physics for the game
    //game.physics.startSystem(Phaser.Physics.ARCADE);
    // game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -221,8 +218,17 @@ function checkColorChain(sprite) {
                toAdd = false;
             }
          }
+      } // End of for loop
+   } // End of color tree population
 
-      }
+   if(colorChainTree.nodeCount > 2) {
+      // Traverses the tree, fades out linked elements, and sets the input so they can
+      // no longer be accessed
+      colorChainTree.traverseBFS(function(node) {game.add.tween(node.data).to( { alpha: 0 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true); node.data.inputEnabled = false;});
+
+      // More complex score chaining system when later levels introduced
+      score += colorChainTree.nodeCount;
+      scoreText.setText("POINTS: "+ score);
    }
 }
 
