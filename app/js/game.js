@@ -43,7 +43,6 @@
 
    // Blocks
    var blocks;
-   var blockInfo;
    var newBlock;
    var width = 120;
    var height = 120;
@@ -59,9 +58,9 @@
    var scoreText;
 
    // Grid Variables
-   var gridSize = 9;
-   var levelRow = Math.sqrt(gridSize);
-   var levelCol = Math.sqrt(gridSize);
+   // The grid is always square and level size represents both the size of the
+   // columns and the rows
+   var levelSize = 3;
 
    // Styling Variables
    var textStyle = { 
@@ -69,22 +68,6 @@
       fill: '#888', 
       fontWeight: 'bold'
    };
-
-   /* Blue    #5f8ffd
-      Orange  #fcca60
-      Green   #69fe5e
-      Red     #ff5c5c
-      Purple  #d560fc
-      Yellow  #f7fc60
-
-   var tileObjects = {
-      width: 120,
-      height: 120,
-      padding: 10 ,
-      fillStyles: {'#5f8ffd', '#fcca60', '#69fe5e', '#ff5c5c', '#d560fc'}
-   };
-   */
-
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                              
@@ -167,17 +150,31 @@
 
    function initBlocks() {
 
-      // Starting position for the generated blocks
-      blockInfo = {
-         top: 60,
-         left: 60
+      /* * * * * * * * * * *
+       *  Color Reference  *
+       * * * * * * * * * * *
+         Blue    #5f8ffd
+         Orange  #fcca60
+         Green   #69fe5e
+         Red     #ff5c5c
+         Purple  #d560fc
+         Yellow  #f7fc60
+      */
+    
+      var blockInfo = {
+         top: 60,       // Starting position from top
+         left: 60,      // Starting position from left
+         width: 120,    // Width of each block
+         height: 120,   // Height of each block
+         padding: 10 ,  // Padding in between each block
+         fillStyles: ['#5f8ffd', '#fcca60', '#69fe5e', '#ff5c5c', '#d560fc', '#f7fc60']
       };
 
       blocks = game.add.group();
       
-      for(var r=0; r < levelRow; r++) {
+      for(var r=0; r < levelSize; r++) {
 
-         for(var c=0; c < levelCol; c++) {
+         for(var c=0; c < levelSize; c++) {
 
             var blockX = (c*(width + padding)) + blockInfo.left;
             var blockY = (r*(height + padding)) + blockInfo.top;
@@ -302,7 +299,10 @@
       if(colorChainTree.nodeCount > 2) {
          // Traverses the tree, fades out linked elements, and sets the input so they can
          // no longer be accessed
-         colorChainTree.traverseBFS(function(node) {game.add.tween(node.data).to( { alpha: 0 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true); node.data.inputEnabled = false;});
+         colorChainTree.traverseBFS(function(node) {
+            game.add.tween(node.data).to( { alpha: 0 }, 500+delay, Phaser.Easing.Linear.None, true, 0, 200, true); 
+            delay += 1500;
+            node.data.inputEnabled = false;});
 
          // More complex score chaining system when later levels introduced
          score += colorChainTree.nodeCount;
@@ -311,7 +311,7 @@
    }
 
 
-   function blockDown(sprite, pointer) {
+   function blockDown(sprite) {
       if (movesLeft > 0) {
          // To-Do
          // Add tween animation between the frames
@@ -330,9 +330,10 @@
       // Insert modal which says moves used up, game over
    }
 
+   /*
    function startGame() {
       // Change visibility of the blocks
       // Fade in score, name, and moves left first, then blocks second
-   }
+   }*/
 
 })();

@@ -1,6 +1,7 @@
 'use strict';
 
 /* globals console */
+var delay = 0;
 
 /*
  * Node
