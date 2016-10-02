@@ -58,9 +58,6 @@
    var score = 0;
    var scoreText;
 
-   var startGame;
-   var startButton;
-
    // Grid Variables
    var gridSize = 9;
    var levelRow = Math.sqrt(gridSize);
