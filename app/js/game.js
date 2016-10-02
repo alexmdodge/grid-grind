@@ -1,6 +1,29 @@
 'use strict';
 /* globals Phaser, console, ColorTree, ColorNode */
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *              ///////////////////////////////////////////////
+ *              //                  Grid Grind               //
+ *              ///////////////////////////////////////////////
+ * 
+ *                              Author : Alex Dodge
+ *                       Last Modified : October 2, 2016
+ *                             License : MIT     
+ *
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/*
+ * The game object initializes each piece.
+ *
+ * Game(width, height, renderer, phaser state objects)
+ *
+ * The Phaser.AUTO will auto detect which browser rendering to use and the null
+ * parameter sets the default phaser states (preload, create, update).
+ *
+ */
 var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
    preload: preload, 
    create: create, 
@@ -8,22 +31,13 @@ var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
 });
 
 
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
-//              ///////////////////////////////////////////////
-//              //                Game Variables             //
-//              ///////////////////////////////////////////////
-// 
-//             Note that global variables are not best practices
-//                     they will be changed at some point!      
-//
-//
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// Debug Messages, eventually turn this into a function which
-// prints a number of important messages
-var inDebug = false;
+/*
+ * Game Variables
+ *
+ * Currently these are global variables. This is NOT best practice. The game will
+ * either be wrapped in an IIFE, or I'll convert the syntax to ES 2015.
+ *
+ */
 
 // Blocks
 var blocks;
@@ -37,7 +51,7 @@ var delta = width+padding;
 // Information
 var movesLeft = 999;
 var movesText;
-var playerName = "AlexIsDaBest";
+var playerName = "Alex";
 var nameText;
 var score = 0;
 var scoreText;
@@ -57,6 +71,32 @@ var textStyle = {
    fontWeight: 'bold'
 };
 
+/* Blue    #5f8ffd
+   Orange  #fcca60
+   Green   #69fe5e
+   Red     #ff5c5c
+   Purple  #d560fc
+   Yellow  #f7fc60
+
+var tileObjects = {
+   width: 120,
+   height: 120,
+   padding: 10 ,
+   fillStyles: {'#5f8ffd', '#fcca60', '#69fe5e', '#ff5c5c', '#d560fc'}
+};
+*/
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                              
+ *                               preload()
+ *
+ * Used to load assets and also setup the features of the game. In this case
+ * the background color is set, the page is scaled, and the sprites are loaded
+ * into the game.
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 function preload() {
    // Scales the game to the screen size
    //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -64,31 +104,71 @@ function preload() {
    game.scale.pageAlignVertically = true;
    game.stage.backgroundColor = '#eee';
 
-   // Example spritsheet for animations
-   game.load.spritesheet('button', '../img/button.png', 120, 40);
+   /* Spritesheets for various components. Note the blocks are
+    * going to be removed and generated. If you wanted to load a
+    * button in the example is below.
+    *
+    * game.load.spritesheet('button', '../img/button.png', 120, 40);
+    */
    game.load.spritesheet('blocks', '../img/blocks.png', 25, 25);
 }
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                            
+ *                                 create()
+ *
+ * This is called once the preload is finished and is responsible for the setup
+ * logic where you use the sprites. For this game with blocks are generated
+ * and the text fields are setup. 
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 function create() {
-   // Enables physics for the game
-   //game.physics.startSystem(Phaser.Physics.ARCADE);
+   // To use physics with certain objects use this syntax
+   // game.physics.startSystem(Phaser.Physics.ARCADE);
    // game.physics.enable(ball, Phaser.Physics.ARCADE);
 
    // Draws the block objects on the screen for each frame
    // Draws from a randomized array of the original sprite colours
    initBlocks();
 
+   // Adds the various text elements for the game.
    scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
    movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
    nameText = game.add.text(15, game.world.height-35, "PLAYER: "+ playerName, textStyle);
    movesText.anchor.set(1,0);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                            
+ *                                  update()
+ *
+ * Called on every frame, this is reponsible for the actual interactions with
+ * the game. In this case this function listens for players to click on the
+ * blocks. When it detects input, it triggers the block update and chain search
+ * function. These generate
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 function update() {
    checkBlockEvents();
 }
 
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                            
+ *                                 Support Functions
+ *
+ * These are responsible for segmenting and organizing the game logic into
+ * more manageable chunks.
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 function initBlocks() {
+
+   // Starting position for the generated blocks
    blockInfo = {
       top: 60,
       left: 60
@@ -98,14 +178,7 @@ function initBlocks() {
    
    for(var r=0; r < levelRow; r++) {
 
-      if(inDebug) {
-         console.log(r);
-      }
       for(var c=0; c < levelCol; c++) {
-
-         if(inDebug) {
-            console.log(c);
-         }
 
          var blockX = (c*(width + padding)) + blockInfo.left;
          var blockY = (r*(height + padding)) + blockInfo.top;
@@ -116,7 +189,7 @@ function initBlocks() {
 
          newBlock.scale.setTo(5, 5);
 
-         // Allows the block to be listened to
+         // Allows the block to listen to events
          newBlock.inputEnabled = true;
 
          blocks.add(newBlock);
@@ -130,6 +203,12 @@ function checkBlockEvents() {
    });
 }
 
+
+/*
+ * checkColorChain() - Uses the N node Tree to search for and test chains
+ * of blocks to see if there chain length is long enough to score.
+ *
+ */
 function checkColorChain(sprite) {
    console.log("Source Sprite Frame: " + sprite.frame);
    console.log("X Position of sprite: " + sprite.x);
@@ -256,29 +335,3 @@ function startGame() {
    // Change visibility of the blocks
    // Fade in score, name, and moves left first, then blocks second
 }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
- *          Example Function of using transition animations
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-function ballHitBrick(ball, brick) {
-   var killTween = game.add.tween(brick.scale);
-   killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
-   killTween.onComplete.addOnce(function(){
-      brick.kill();
-   }, this);
-   killTween.start();
-
-
-   score += 10;
-   scoreText.setText('Points: '+score);
-
-   if(score === blockInfo.count.row*blockInfo.count.col*10) {
-      alert('You won the game, congratulations!');
-      location.reload();
-   }
-}
-
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
