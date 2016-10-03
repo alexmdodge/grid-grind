@@ -11,9 +11,16 @@
 	<a name="game" aria-hidden="true" class="anchor"></a>
 	Game Info
 </h2>
-This game works by matching chains of color tiles. I'm still working out some of the finer details, but the main idea is that in each level you must accrue a certain number of points to continue on. If you don't obtain enough points by the time your tries are up, then you lose the game. 
+### How to Play
+Click any of the color blocks and watch them change to the next color. **I will be implementing a visible color pattern below the game so you can see in which order the blocks change.** The idea is that you have to be careful what order you change the blocks in. I'll put up an example soon.
 
-Another aspect is that the order in which the blocks rotate will be different for each level
+### Objective
+The objective of this game is to obtain points by clicking the blocks and creating chains of the same color. If a chain is only three colors long then only 1 point is given for each block. As the chains get bigger, the points obtained per block get bigger and bigger.
+
+**At the moment there is no level or point tracking system.**
+
+### Moving to the Next Level
+In order to move to the next level I will eventually implement a point counter. If you don't obtain a certain number of points on a level with the given number of tries then you will have to start over. If you complete a certain number of levels successfully then you will be awarded bonus moves or extra tries.
 
 <h2>
 	<a name="demo" aria-hidden="true" class="anchor"></a>
