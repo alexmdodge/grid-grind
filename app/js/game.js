@@ -69,75 +69,6 @@
       fontWeight: 'bold'
    };
 
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                              
-    *                               preload()
-    *
-    * Used to load assets and also setup the features of the game. In this case
-    * the background color is set, the page is scaled, and the sprites are loaded
-    * into the game.
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-   function preload() {
-      // Scales the game to the screen size
-      //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      game.scale.pageAlignHorizontally = true;
-      game.scale.pageAlignVertically = true;
-      game.stage.backgroundColor = '#eee';
-
-      /* Spritesheets for various components. Note the blocks are
-       * going to be removed and generated. If you wanted to load a
-       * button in the example is below.
-       *
-       * game.load.spritesheet('button', '../img/button.png', 120, 40);
-       */
-      game.load.spritesheet('blocks', '../img/blocks.png', 25, 25);
-   }
-
-
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                            
-    *                                 create()
-    *
-    * This is called once the preload is finished and is responsible for the setup
-    * logic where you use the sprites. For this game with blocks are generated
-    * and the text fields are setup. 
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-   function create() {
-      // To use physics with certain objects use this syntax
-      // game.physics.startSystem(Phaser.Physics.ARCADE);
-      // game.physics.enable(ball, Phaser.Physics.ARCADE);
-
-      // Draws the block objects on the screen for each frame
-      // Draws from a randomized array of the original sprite colours
-      initBlocks();
-
-      // Adds the various text elements for the game.
-      scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
-      movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
-      nameText = game.add.text(15, game.world.height-35, "PLAYER: "+ playerName, textStyle);
-      movesText.anchor.set(1,0);
-   }
-
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                            
-    *                                  update()
-    *
-    * Called on every frame, this is reponsible for the actual interactions with
-    * the game. In this case this function listens for players to click on the
-    * blocks. When it detects input, it triggers the block update and chain search
-    * function. These generate
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-   function update() {
-      checkBlockEvents();
-   }
-
-
-
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                            
     *                                 Support Functions
@@ -167,23 +98,22 @@
          width: 120,    // Width of each block
          height: 120,   // Height of each block
          padding: 10 ,  // Padding in between each block
-         fillStyles: ['#5f8ffd', '#fcca60', '#69fe5e', '#ff5c5c', '#d560fc', '#f7fc60']
       };
 
       blocks = game.add.group();
       
-      for(var r=0; r < levelSize; r++) {
+      for(var row=0; row < levelSize; row++) {
 
-         for(var c=0; c < levelSize; c++) {
+         for(var col=0; col < levelSize; col++) {
 
-            var blockX = (c*(width + padding)) + blockInfo.left;
-            var blockY = (r*(height + padding)) + blockInfo.top;
+            var blockX = (col*(blockInfo.width + blockInfo.padding)) + blockInfo.left;
+            var blockY = (row*(blockInfo.height + blockInfo.padding)) + blockInfo.top;
 
             newBlock = game.add.sprite(blockX, blockY, 'blocks');
             var newRandPos = Math.floor(Math.random()*6);
             newBlock.frame = newRandPos;
 
-            newBlock.scale.setTo(5, 5);
+            newBlock.scale.setTo(1.2, 1.2);
 
             // Allows the block to listen to events
             newBlock.inputEnabled = true;
@@ -300,8 +230,9 @@
          // Traverses the tree, fades out linked elements, and sets the input so they can
          // no longer be accessed
          colorChainTree.traverseBFS(function(node) {
-            game.add.tween(node.data).to( { alpha: 0 }, 500+delay, Phaser.Easing.Linear.None, true, 0, 200, true); 
-            delay += 1500;
+            // For flashing blocks
+            // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true); 
+            game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true); 
             node.data.inputEnabled = false;});
 
          // More complex score chaining system when later levels introduced
@@ -336,4 +267,70 @@
       // Fade in score, name, and moves left first, then blocks second
    }*/
 
+   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                              
+    *                               preload()
+    *
+    * Used to load assets and also setup the features of the game. In this case
+    * the background color is set, the page is scaled, and the sprites are loaded
+    * into the game.
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+   function preload() {
+      // Scales the game to the screen size
+      //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      game.scale.pageAlignHorizontally = true;
+      game.scale.pageAlignVertically = true;
+      game.stage.backgroundColor = '#eee';
+
+      /* Spritesheets for various components. Note the blocks are
+       * going to be removed and generated. If you wanted to load a
+       * button in the example is below.
+       *
+       * game.load.spritesheet('button', '../img/button.png', 120, 40);
+       */
+      game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
+   }
+
+
+   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                            
+    *                                 create()
+    *
+    * This is called once the preload is finished and is responsible for the setup
+    * logic where you use the sprites. For this game with blocks are generated
+    * and the text fields are setup. 
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+   function create() {
+      // To use physics with certain objects use this syntax
+      // game.physics.startSystem(Phaser.Physics.ARCADE);
+      // game.physics.enable(ball, Phaser.Physics.ARCADE);
+
+      // Draws the block objects on the screen for each frame
+      // Draws from a randomized array of the original sprite colours
+      initBlocks();
+
+      // Adds the various text elements for the game.
+      scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
+      movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
+      nameText = game.add.text(15, game.world.height-35, "PLAYER: "+ playerName, textStyle);
+      movesText.anchor.set(1,0);
+   }
+
+   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                            
+    *                                  update()
+    *
+    * Called on every frame, this is reponsible for the actual interactions with
+    * the game. In this case this function listens for players to click on the
+    * blocks. When it detects input, it triggers the block update and chain search
+    * function. These generate
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+   function update() {
+      checkBlockEvents();
+   }
 })();
