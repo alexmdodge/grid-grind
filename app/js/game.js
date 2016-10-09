@@ -1,5 +1,5 @@
 'use strict';
-/* globals Phaser, console, ColorTree, ColorNode */
+/* globals Phaser, console, ColorTree, ColorNode, $, jQuery */
 
 (function() { 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
