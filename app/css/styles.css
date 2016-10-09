@@ -10,3 +10,9 @@ html {
    border-radius: 3px;
    cursor: pointer;
 }
+
+.user-interface {
+	z-index: 9999;
+	background-color: red;
+}
+
