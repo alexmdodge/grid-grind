@@ -65,3 +65,8 @@ There are a number of upcoming features listed here!
   * Explosion tile hidden in pattern
   * Obstacles in later levels
   * Timer for later levels
+* User Interface
+  * Remove interface from game and bring it into the DOM
+  * Add help tutorial and instructions on side menu
+  * Markup for level success
+  * Design percentage bar for level completion
