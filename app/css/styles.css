@@ -38,7 +38,7 @@ html {
 	text-align: center;
 	width: 150px;
 	font-size: 90%;
-	padding: 20px;
+	padding: 20px 20px 40px;
 	margin: 10px 0px 0px 0px;
 }
 
@@ -50,4 +50,12 @@ html {
 	border: 1px dashed #777;
 }
 
+.top-menu {
+	background-color: #ddd;
+	border: 1px solid #bbb;c
+	border-radius: 3px;
+}
 
+.player-avatar {
+	float: left;
+}
