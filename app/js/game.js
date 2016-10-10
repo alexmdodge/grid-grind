@@ -103,6 +103,8 @@
             var blockY = (row*(blockInfo.height + blockInfo.padding)) + blockInfo.top;
 
             newBlock = game.add.sprite(blockX, blockY, 'blocks');
+            newBlock.alpha = 0;
+            game.add.tween(newBlock).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true);
             var newRandPos = Math.floor(Math.random()*6);
             newBlock.frame = newRandPos;
 
