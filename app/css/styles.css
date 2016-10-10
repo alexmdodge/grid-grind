@@ -12,7 +12,42 @@ html {
 }
 
 .user-interface {
-	z-index: 9999;
-	background-color: red;
+	width: 800px;
+	margin: 0 auto;
 }
+
+.help-icon {
+	color: #888;
+	font-size: 250%;
+	font-weight: bold;
+	padding: 11px 9px 9px 11px;
+	vertical-align: center;
+	background-color: #bbb;
+	border-radius: 100%;
+	border: 1px solid #777;
+	margin: -50px auto 15px;
+	text-align: center;
+	width: 38px;
+}
+
+.side-menu {
+	background-color: #ddd;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	float: right;
+	text-align: center;
+	width: 150px;
+	font-size: 90%;
+	padding: 20px;
+	margin: 10px 0px 0px 0px;
+}
+
+.side-menu-title {
+	width: 80%;
+	margin: 0 auto 10px;
+	padding: 10px;
+	text-align: center;
+	border: 1px dashed #777;
+}
+
 
