@@ -26,8 +26,8 @@
     *
     */
    var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
-      preload: preload, 
-      create: create, 
+      preload: preload,
+      create: createLoadingScreen,
       update: update
    });
 
@@ -56,6 +56,8 @@
    var nameText;
    var score = 0;
    var scoreText;
+   var gameStarted = false;
+   var loadingScreen;
 
    // Grid Variables
    // The grid is always square and level size represents both the size of the
@@ -291,23 +293,36 @@
        * game.load.spritesheet('button', '../img/button.png', 120, 40);
        */
       game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
+      game.load.spritesheet('logo', '../img/grid-grind-logo.png', 1000, 653);
+      game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
    }
 
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                            
+    *
     *                                 create()
     *
     * This is called once the preload is finished and is responsible for the setup
     * logic where you use the sprites. For this game with blocks are generated
-    * and the text fields are setup. 
+    * and the text fields are setup.
     *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-   function create() {
+   function createLoadingScreen() {
+      loadingScreen = game.add.group();
+
+      game.add.sprite(game.world.width/2-125, 50, 'logo', 0, loadingScreen).scale.set(0.25,0.25);
+      game.add.button(game.world.width/2-150, 250, 'buttons', createGame, this, 0, 0, 0, loadingScreen).scale.set(0.5, 0.5);
+      game.add.button(game.world.width/2-150, 325, 'buttons', createGame, this, 1, 1, 1, loadingScreen).scale.set(0.5, 0.5);
+   }
+
+   function createGame() {
       // To use physics with certain objects use this syntax
       // game.physics.startSystem(Phaser.Physics.ARCADE);
       // game.physics.enable(ball, Phaser.Physics.ARCADE);
+
+      // Cleans out all previous objects
+      game.world.removeAll(true);
 
       // Draws the block objects on the screen for each frame
       // Draws from a randomized array of the original sprite colours
@@ -318,6 +333,8 @@
       movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
       nameText = game.add.text(15, game.world.height-35, "PLAYER: "+ playerName, textStyle);
       movesText.anchor.set(1,0);
+
+      gameStarted = true;
    }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -331,6 +348,8 @@
     *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
    function update() {
-      checkBlockEvents();
+      if(gameStarted) {
+         checkBlockEvents();
+      }
    }
 })();
