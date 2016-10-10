@@ -7,7 +7,46 @@
    </head>
 
    <body id="my-canvas">
+      <div class="user-interface">
+         <div class="top-menu">
+            
+            <div class="row">
+               <div class="top-menu-avatar">
+                  <!-- <img src="" alt="Player Avatar"> -->
+                  <span class="player-avatar">A</span>
+               </div>
+
+               <h3 class="top-menu-title">Player Name Here</h3>
+            </div>
+
+            <div class="row">
+               <h6 class="top-menu-total">Total Points : <span class="update-point">0</span></h6>
+               <h6 class="top-menu-moves">Moves Left : <span class="update-moves-left">3</span></h6>
+            </div>
+
+            <div class="row">
+               <h6 class="top-menu-current">Level : <span class="update-level">1</span></h6>
+               <h6 class="top-menu-left">Next Level : <span class="update-points-left">9</span></h6>
+               <div class="top-menu-progress">
+                  <div class="progress-bar"> ------------------------------------------------------</div>
+               </div>
+            </div>
+         </div>
+
+         <div class="side-menu">
+            <h1 class="help-icon">?</h1>
+            <h3 class="side-menu-title">How to Play</h3>
+            <small class="side-menu-description">
+               Click the blocks to change their color. If you connect at least 3 colors in a row you
+               score points. Any combination other than diagonals connect. The longer the chain the more
+               points you get.
+            </small>
+         </div>
+      </div>
+
       <div class="game-container">
+
+         <script src="js/jquery.min.js"></script>
          <script src="js/phaser.min.js"></script>
          <script src="js/colorTree.js"></script>
          <script src="js/game.js"></script>

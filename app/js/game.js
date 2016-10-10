@@ -1,5 +1,5 @@
 'use strict';
-/* globals Phaser, console, ColorTree, ColorNode */
+/* globals Phaser, console, ColorTree, ColorNode, $, jQuery */
 
 (function() { 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -25,8 +25,8 @@
     * parameter sets the default phaser states (preload, create, update).
     *
     */
-   var game = new Phaser.Game(500, 500, Phaser.AUTO, null, {
-      preload: preload,
+   var game = new Phaser.Game(400, 400, Phaser.AUTO, null, {
+      preload: preload, 
       create: createLoadingScreen,
       update: update
    });
@@ -64,13 +64,6 @@
    // columns and the rows
    var levelSize = 3;
 
-   // Styling Variables
-   var textStyle = { 
-      font: '18px Arial', 
-      fill: '#888', 
-      fontWeight: 'bold'
-   };
-
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                            
     *                                 Support Functions
@@ -95,8 +88,8 @@
       */
     
       var blockInfo = {
-         top: 60,       // Starting position from top
-         left: 60,      // Starting position from left
+         top: 10,       // Starting position from top
+         left: 10,      // Starting position from left
          width: 120,    // Width of each block
          height: 120,   // Height of each block
          padding: 10 ,  // Padding in between each block
@@ -112,6 +105,8 @@
             var blockY = (row*(blockInfo.height + blockInfo.padding)) + blockInfo.top;
 
             newBlock = game.add.sprite(blockX, blockY, 'blocks');
+            newBlock.alpha = 0;
+            game.add.tween(newBlock).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true);
             var newRandPos = Math.floor(Math.random()*6);
             newBlock.frame = newRandPos;
 
@@ -239,7 +234,7 @@
 
          // More complex score chaining system when later levels introduced
          score += colorChainTree.nodeCount;
-         scoreText.setText("POINTS: "+ score);
+         //scoreText.setText("POINTS: "+ score);
       }
    }
 
@@ -250,7 +245,7 @@
          // Add tween animation between the frames
          sprite.frame = (sprite.frame + 1) % 6;
          movesLeft--;
-         movesText.setText("MOVES LEFT: "+ movesLeft);
+         //movesText.setText("MOVES LEFT: "+ movesLeft);
 
          // Take the current sprite which holds information
          // about position and color and use to check proximity
@@ -283,7 +278,7 @@
       // Scales the game to the screen size
       //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       game.scale.pageAlignHorizontally = true;
-      game.scale.pageAlignVertically = true;
+      //game.scale.pageAlignVertically = true;
       game.stage.backgroundColor = '#eee';
 
       /* Spritesheets for various components. Note the blocks are
@@ -328,12 +323,8 @@
       // Draws from a randomized array of the original sprite colours
       initBlocks();
 
-      // Adds the various text elements for the game.
-      scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
-      movesText = game.add.text(game.world.width-15, 15, "MOVES LEFT: "+ movesLeft, textStyle);
-      nameText = game.add.text(15, game.world.height-35, "PLAYER: "+ playerName, textStyle);
-      movesText.anchor.set(1,0);
-
+      // To add text elements to the game
+      //scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
       gameStarted = true;
    }
 
