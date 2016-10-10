@@ -4,6 +4,7 @@
    <head>
       <title> GridGrind | The Random Puzzle Game </title>
       <link rel="stylesheet" type="text/css" href="css/styles.css">
+      <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
    </head>
 
    <body id="my-canvas">
@@ -11,25 +12,36 @@
          <div class="top-menu">
             
             <div class="row">
-               <div class="top-menu-avatar">
-                  <!-- <img src="" alt="Player Avatar"> -->
-                  <span class="player-avatar">A</span>
-               </div>
-
+               <span id="top-menu-avatar" class="fa fa-user"></span>
+                  
                <h3 class="top-menu-title">Player Name Here</h3>
-            </div>
-
-            <div class="row">
-               <h6 class="top-menu-total">Total Points : <span class="update-point">0</span></h6>
-               <h6 class="top-menu-moves">Moves Left : <span class="update-moves-left">3</span></h6>
-            </div>
-
-            <div class="row">
-               <h6 class="top-menu-current">Level : <span class="update-level">1</span></h6>
-               <h6 class="top-menu-left">Next Level : <span class="update-points-left">9</span></h6>
-               <div class="top-menu-progress">
-                  <div class="progress-bar"> ------------------------------------------------------</div>
+               
+               <div class="player-row">
+                  <h6 class="top-menu-total">Total Points
+                     <i class="fa fa-diamond"></i> 
+                     <span class="update-point">0</span>
+                  </h6>
+                  <h6 class="top-menu-moves">Moves Left 
+                     <i class="fa fa-heart"></i> 
+                     <span class="update-moves-left">3</span>
+                  </h6>
                </div>
+            </div>
+
+
+            <div class="level-row">
+               <h6 class="top-menu-current">Level 
+                  <i class="fa fa-star"></i> 
+                  <span class="update-level">1</span>
+               </h6>
+               <h6 class="top-menu-left">Next Level
+                  <i class="fa fa-level-up"></i> 
+                  <span class="update-points-left">9</span>
+               </h6>
+            </div>
+            
+            <div class="top-menu-progress">
+               <div class="progress-bar"></div>
             </div>
          </div>
 

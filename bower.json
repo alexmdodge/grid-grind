@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "velocity": "^1.2.3",
-    "bootstrap-sass": "boostrap-sass#^3.3.6"
+    "bootstrap-sass": "boostrap-sass#^3.3.6",
+    "font-awesome": "^4.6.3"
   }
 }
