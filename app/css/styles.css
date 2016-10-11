@@ -6,9 +6,17 @@ html {
    height: 100%;
 }
 
-#my-canvas > canvas {
-   border-radius: 3px;
-   cursor: pointer;
+.float-right { float: right; }
+.float-left { float: left; }
+.row {
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+.game-container > canvas {
+   margin: 30px auto;
+   padding: 10px;
 }
 
 .user-interface {
@@ -30,7 +38,7 @@ html {
 	width: 38px;
 }
 
-.side-menu {
+.right-side-menu {
 	background-color: #ddd;
 	border: 1px solid #bbb;
 	border-radius: 3px;
@@ -39,10 +47,23 @@ html {
 	width: 150px;
 	font-size: 90%;
 	padding: 20px 20px 40px;
-	margin: 10px 0px 0px 0px;
+	margin: 40px 0px 0px 0px;
 }
 
-.side-menu-title {
+.left-side-menu {
+	background-color: #ddd;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	float: left;
+	text-align: center;
+	width: 150px;
+	font-size: 90%;
+	padding: 20px 20px 30px;
+	margin: 40px 10px 0px 0px;
+}
+
+.right-side-menu-title,
+.left-side-menu-title, {
 	width: 80%;
 	margin: 0 auto 10px;
 	padding: 10px;
@@ -50,12 +71,98 @@ html {
 	border: 1px dashed #777;
 }
 
+.color-order {
+	padding-top: 15px;
+}
+
+.help-block {
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	border: 1px solid #555;
+}
+
 .top-menu {
 	background-color: #ddd;
-	border: 1px solid #bbb;c
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.top-menu-title {
+	display: inline-block;
+	padding: 0;
+	margin: 10px;
+}
+
+#top-menu-avatar {
+	float: left;
+	color: #888;
+	width: 85px;
+	height: 70px;
+	background-color: #bbb;
+	border: 1px solid #777;
+	border-radius: 100%;
+	text-align: center;
+	padding-top: 16px;
+	font-size: 50px;
+	margin: 0px 20px 10px 10px;
+}
+
+.top-menu-total,
+.top-menu-moves {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	width: 145px;
+}
+.top-menu-current,
+.top-menu-left {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	width: 250px;
+}
+
+.top-menu-left {
+	text-align: right;
+	padding-left: 50px;
+}
+
+.player-row {
+	text-align: center;
+	width: 300px;
+	padding: 10px;
+	display: inline-block;
+	/*background-color: rgba(137,200,110,0.4);*/
+	background-color: #69fe5e;
+	border: 1px solid rgba(137,200,110,1);
+	
 	border-radius: 3px;
 }
 
-.player-avatar {
-	float: left;
+.progress-bar {
+	width: 600px;
+	height: 20px;
+	margin-left: 120px;
+	background-color: #ccc;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+}
+
+.progress-bar-done {
+	display: inline-block;
+	/*background-color: rgba(137,200,110,0.4);*/
+	background-color: #69fe5e;
+	border-radius: 3px;
+	width: 30px;
+	height: 20px;
+	z-index: 9999;
+}
+
+.level-row {
+	display: inline-block;
+	padding: 5px;
+	width: 640px;
 }

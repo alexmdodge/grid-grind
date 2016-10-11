@@ -4,6 +4,7 @@
    <head>
       <title> GridGrind | The Random Puzzle Game </title>
       <link rel="stylesheet" type="text/css" href="css/styles.css">
+      <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
    </head>
 
    <body id="my-canvas">
@@ -11,37 +12,77 @@
          <div class="top-menu">
             
             <div class="row">
-               <div class="top-menu-avatar">
-                  <!-- <img src="" alt="Player Avatar"> -->
-                  <span class="player-avatar">A</span>
-               </div>
-
+               <span id="top-menu-avatar" class="fa fa-user"></span>
+                  
                <h3 class="top-menu-title">Player Name Here</h3>
+               
+               <div class="player-row">
+                  <h6 class="top-menu-total">Total Points
+                     <i class="fa fa-diamond"></i> 
+                     <span class="update-point">0</span>
+                  </h6>
+                  <h6 class="top-menu-moves">Moves Left 
+                     <i class="fa fa-heart"></i> 
+                     <span class="update-moves-left">3</span>
+                  </h6>
+               </div>
             </div>
 
-            <div class="row">
-               <h6 class="top-menu-total">Total Points : <span class="update-point">0</span></h6>
-               <h6 class="top-menu-moves">Moves Left : <span class="update-moves-left">3</span></h6>
-            </div>
 
-            <div class="row">
-               <h6 class="top-menu-current">Level : <span class="update-level">1</span></h6>
-               <h6 class="top-menu-left">Next Level : <span class="update-points-left">9</span></h6>
-               <div class="top-menu-progress">
-                  <div class="progress-bar"> ------------------------------------------------------</div>
+            <div class="level-row">
+               <h6 class="top-menu-current">Level 
+                  <i class="fa fa-star"></i> 
+                  <span class="update-level">1</span>
+               </h6>
+               <h6 class="top-menu-left">Next Level
+                  <i class="fa fa-level-up"></i> 
+                  <span class="update-points-left">9</span>
+               </h6>
+            </div>
+            
+            <div class="top-menu-progress">
+               <div class="progress-bar">
+                  <span class="progress-bar-done"></span>
                </div>
             </div>
          </div>
 
-         <div class="side-menu">
+         <div class="left-side-menu">
+            <h1 class="help-icon"><i class="fa fa-cube"></i></h1>
+            <h3 class="left-side-menu-title">Block Order</h3>
+            <small class="left-side-menu-description">
+               When you click a square it will change color. The order of the colors is
+               shown below. You will need to think ahead to find the best pattern series.
+            </small>
+         <!--  
+         Blue    #5f8ffd
+         Green   #69fe5e
+         Red     #ff5c5c
+         Purple  #d560fc
+         Orange  #fcca60
+         Yellow  #f7fc60
+         -->
+
+            <div class="color-order">
+               <span class="help-block blue fa fa-angle-right" style="background-color: #5f8ffd;"></span>
+               <span class="help-block green fa fa-angle-right" style="background-color: #69fe5e;"></span>
+               <span class="help-block red fa fa-angle-right" style="background-color: #ff5c5c;"></span>
+               <span class="help-block purple fa fa-angle-right" style="background-color: #d560fc;"></span>
+               <span class="help-block orange fa fa-angle-right" style="background-color: #fcca60;"></span>
+               <span class="help-block yellow fa fa-angle-right" style="background-color: #f7fc60;"></span>
+            </div>
+         </div>
+
+         <div class="right-side-menu">
             <h1 class="help-icon">?</h1>
-            <h3 class="side-menu-title">How to Play</h3>
-            <small class="side-menu-description">
+            <h3 class="right-side-menu-title">How to Play</h3>
+            <small class="right-side-menu-description">
                Click the blocks to change their color. If you connect at least 3 colors in a row you
                score points. Any combination other than diagonals connect. The longer the chain the more
                points you get.
             </small>
          </div>
+
       </div>
 
       <div class="game-container">

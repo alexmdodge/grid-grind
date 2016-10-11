@@ -277,7 +277,7 @@
    function preload() {
       // Scales the game to the screen size
       //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      game.scale.pageAlignHorizontally = true;
+      //game.scale.pageAlignHorizontally = true;
       //game.scale.pageAlignVertically = true;
       game.stage.backgroundColor = '#eee';
 
