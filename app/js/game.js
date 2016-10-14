@@ -209,7 +209,10 @@
                   toAdd = true;
                }
 
-               if(toAdd) {
+               // Final check ensures the tile is to be added and that it already hasn't been scored
+               // (faded when scored so alpha will be 0)
+               console.log("The alpha value is: " + allSameColors[i].tile.alpha);
+               if(toAdd && allSameColors[i].tile.alpha != 0) {
                   allSameColors[i].matched = true;
                   var newConnect = new ColorNode(allSameColors[i].tile);
                   node.children.push(newConnect);
@@ -252,7 +255,7 @@
          checkColorChain(sprite);  
       } else {
          // Restart Game
-         location.reload();
+         createGame();
       }
 
       // Insert modal which says moves used up, game over
