@@ -50,12 +50,9 @@
    var delta = width+padding;
 
    // Information
-   var movesLeft = 999;
-   var movesText;
+   var movesLeft = 9;
    var playerName = "Alex";
-   var nameText;
    var score = 0;
-   var scoreText;
    var gameStarted = false;
    var loadingScreen;
 
@@ -63,6 +60,7 @@
    // The grid is always square and level size represents both the size of the
    // columns and the rows
    var levelSize = 3;
+   var currentLevel = 1;
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                            
@@ -237,7 +235,7 @@
 
          // More complex score chaining system when later levels introduced
          score += colorChainTree.nodeCount;
-         //scoreText.setText("POINTS: "+ score);
+         document.getElementById("update-points").innerHTML=score;
       }
    }
 
@@ -248,6 +246,7 @@
          // Add tween animation between the frames
          sprite.frame = (sprite.frame + 1) % 6;
          movesLeft--;
+         document.getElementById("update-moves-left").innerHTML=movesLeft;
          //movesText.setText("MOVES LEFT: "+ movesLeft);
 
          // Take the current sprite which holds information
@@ -255,6 +254,8 @@
          checkColorChain(sprite);  
       } else {
          // Restart Game
+         score = 0;
+         movesLeft = 3;
          createGame();
       }
 
@@ -327,6 +328,8 @@
       initBlocks();
 
       // To add text elements to the game
+      document.getElementById("update-points").innerHTML=score;
+      document.getElementById("update-moves-left").innerHTML=movesLeft;
       //scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
       gameStarted = true;
    }
