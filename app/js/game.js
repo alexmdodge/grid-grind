@@ -50,9 +50,10 @@
 
    // Information
    var level; 
-   var currentLevel = 10;
+   var currentLevel = 1;
    var PADDING = 5;
    var movesLeft = 4;
+   var pointsLeft = 8;
    var playerName = "Alex";
    var score = 0;
    var gameStarted = false;
@@ -242,10 +243,11 @@
 
          // More complex score chaining system when later levels introduced
          score += colorChainTree.nodeCount;
-         document.getElementById("update-points").innerHTML=score;
+         pointsLeft -= score;
+         $("#update-points").html(score);
+         $("#update-points-left").html(pointsLeft);
       }
    }
-
 
    function blockDown(sprite) {
       if (movesLeft > 0) {
@@ -262,7 +264,7 @@
       } else {
          // Restart Game
          score = 0;
-         movesLeft = level.getMovesLeft();
+         movesLeft = level.getMoves();
          createGame();
       }
 
@@ -338,6 +340,7 @@
       $("#update-points").html(score);
       $("#update-moves-left").html(movesLeft);
       $("#player-name").html(playerName);
+      $("#update-points-left").html(pointsLeft);
 
       gameStarted = true;
    }
