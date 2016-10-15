@@ -286,6 +286,7 @@
       } else {
          // Restart Game
          score = 0;
+         currentLevel = 1;
          pointsLeft = level.getPoints();
          movesLeft = level.getMoves();
          $('#progress-bar-done').animate({ width: '0%' });
