@@ -90,7 +90,9 @@
 
       level = new Level(currentLevel, game.width, referenceSrite.width);
       var blockSize = level.getBlockSize();
+      console.log("The current block size is " + blockSize);
       var gridSize = level.getGridSize();
+      var blockScale = level.getBlockScale();
     
       blocks = game.add.group();
       
@@ -112,7 +114,7 @@
             console.log("Block width is " + newBlock.width);
 
             // Will be level.getBlockSize / newBlock.width
-            newBlock.scale.setTo(1, 1);
+            newBlock.scale.setTo(blockScale, blockScale);
 
             // Allows the block to listen to events
             newBlock.inputEnabled = true;
@@ -166,7 +168,7 @@
       var colorChainTree = new ColorTree();
       colorChainTree.root = new ColorNode(sprite);
       var searchQueue = [colorChainTree.root];
-      var delta = level.getGridSize() + PADDING;
+      var delta = level.getBlockSize() + PADDING;
 
 
       // Executes until there are no longer nodes to check and add
