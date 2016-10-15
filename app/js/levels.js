@@ -21,7 +21,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* Constructor */
-function Levels(currentLevel, gameSize, spriteSize) {
+function Level(currentLevel, gameSize, spriteSize) {
 	this.currentLevel = currentLevel;
 	this.gameSize = gameSize;
 	this.spriteSize = spriteSize;
@@ -34,7 +34,7 @@ function Levels(currentLevel, gameSize, spriteSize) {
  * by perfect squares each level, with some levels increasing only point value. The
  * pattern for generation will change depending on how quickly the levels can be played.
  */
-Levels.prototype.getGridSize = function() {
+Level.prototype.getGridSize = function() {
 	return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
 };
 
@@ -44,7 +44,7 @@ Levels.prototype.getGridSize = function() {
  *
  * Returns the number of moves available to the player
  */
-Levels.prototype.getMoves = function() {
+Level.prototype.getMoves = function() {
 	return this.currentLevel*4; // Increase the moves each level by 4
 };
 
@@ -57,7 +57,7 @@ Levels.prototype.getMoves = function() {
  * then the padding is subtracted from each to account for it in the drawing
  * function.
  */
-Levels.prototype.getBlockSize = function() {
+Level.prototype.getBlockSize = function() {
 	var size = Math.floor( (this.gameSize / this.getGridSize()) - 5); 
 	return size;
 };
@@ -71,7 +71,7 @@ Levels.prototype.getBlockSize = function() {
  * the size of the game. Will change dynamically depending of game size, even
  * when scaled.
  */
-Levels.prototype.getBlockScale = function() {
+Level.prototype.getBlockScale = function() {
 	var scale = this.getBlockSize() / this.spriteSize; 
 	return scale;
 };
