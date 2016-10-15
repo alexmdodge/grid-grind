@@ -50,7 +50,7 @@
 
    // Information
    var level; 
-   var currentLevel = 1;
+   var currentLevel = 10;
    var PADDING = 5;
    var movesLeft = 4;
    var playerName = "Alex";
