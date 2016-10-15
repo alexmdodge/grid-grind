@@ -54,7 +54,7 @@ Level.prototype.getMoves = function() {
  * Returns the number of points to complete the leve
  */
 Level.prototype.getPoints = function() {
-	return this.getMoves()*2 - this.currentLevel; // Require twice as many points as moves
+	return this.currentLevel*5; // Require five more points every level
 };
 
 
