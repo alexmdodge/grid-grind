@@ -44,7 +44,7 @@ Level.prototype.getGridSize = function() {
  *
  * Returns the number of moves available to the player
  */
-Level.prototype.getMoves = function() {
+Level.prototype.getMovesLeft = function() {
 	return this.currentLevel*4; // Increase the moves each level by 4
 };
 
