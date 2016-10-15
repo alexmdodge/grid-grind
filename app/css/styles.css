@@ -151,14 +151,13 @@ html {
 	border-radius: 3px;
 }
 
-.progress-bar-done {
+#progress-bar-done {
 	display: inline-block;
-	/*background-color: rgba(137,200,110,0.4);*/
 	background-color: #69fe5e;
 	border-radius: 3px;
-	width: 0%;
 	height: 20px;
 	z-index: 9999;
+	width: 0%;
 }
 
 .level-row {

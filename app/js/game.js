@@ -244,13 +244,27 @@
          // More complex score chaining system when later levels introduced
          score += colorChainTree.nodeCount;
          pointsLeft -= score;
-         $("#update-points").html(score);
-         $("#update-points-left").html(pointsLeft);
+
+         if(pointsLeft < 1) {
+            // trigger next level
+         } else {
+            $("#update-points").html(score);
+            $("#update-points-left").html(pointsLeft);
+            gainExp();
+         }
       }
    }
 
+   function gainExp() {
+      var progressWidth = Math.floor(100 * ((level.getPoints()-pointsLeft)/level.getPoints())) + '%';
+      console.log("Percentage done is " + progressWidth);
+      $('#progress-bar-done').animate({
+         width: progressWidth
+      });
+   }
+
    function blockDown(sprite) {
-      if (movesLeft > 0) {
+      if (movesLeft > 1) {
          // To-Do
          // Add tween animation between the frames
          sprite.frame = (sprite.frame + 1) % 6;
@@ -265,6 +279,7 @@
          // Restart Game
          score = 0;
          movesLeft = level.getMoves();
+         $('#progress-bar-done').animate({ width: '0%' });
          createGame();
       }
 
