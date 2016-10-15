@@ -1,5 +1,5 @@
 'use strict';
-/* globals Phaser, console, ColorTree, ColorNode */
+/* globals Phaser, console, ColorTree, ColorNode, Level, $ */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
@@ -16,7 +16,7 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
- 
+
 (function() { 
 
 
@@ -47,12 +47,12 @@
    // Blocks
    var blocks;
    var newBlock;
-   var width = 120;
-   var padding = 10;
-   var delta = width+padding;
 
    // Information
-   var movesLeft = 9;
+   var level; 
+   var currentLevel = 1;
+   var PADDING = 5;
+   var movesLeft = 4;
    var playerName = "Alex";
    var score = 0;
    var gameStarted = false;
@@ -61,8 +61,6 @@
    // Grid Variables
    // The grid is always square and level size represents both the size of the
    // columns and the rows
-   var levelSize = 4;
-   var currentLevel = 1;
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                            
@@ -85,24 +83,28 @@
          Purple  #d560fc
          Yellow  #f7fc60
       */
-    
-      var blockInfo = {
-         width: 100,    // Width of each block
-         height: 100,   // Height of each block
-         padding: 5,  // Padding in between each block
-      };
 
+      // Create a reference sprite to be passed into the current level
+      var referenceSrite = game.add.sprite(0,0,'blocks');
+      referenceSrite.visible = false;
+
+      level = new Level(currentLevel, game.width, referenceSrite.width);
+      var blockSize = level.getBlockSize();
+      var gridSize = level.getGridSize();
+    
       blocks = game.add.group();
       
-      for(var row=0; row < levelSize; row++) {
+      for(var row=0; row < gridSize; row++) {
 
-         for(var col=0; col < levelSize; col++) {
+         for(var col=0; col < gridSize; col++) {
 
-            var blockX = (col*(blockInfo.width + blockInfo.padding));
-            var blockY = (row*(blockInfo.height + blockInfo.padding));
+            var blockX = (col*(blockSize + PADDING));
+            var blockY = (row*(blockSize + PADDING));
 
             newBlock = game.add.sprite(blockX, blockY, 'blocks');
             newBlock.alpha = 0;
+
+            // Fades in block when added
             game.add.tween(newBlock).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true);
             var newRandPos = Math.floor(Math.random()*6);
             newBlock.frame = newRandPos;
@@ -164,6 +166,7 @@
       var colorChainTree = new ColorTree();
       colorChainTree.root = new ColorNode(sprite);
       var searchQueue = [colorChainTree.root];
+      var delta = level.getGridSize() + PADDING;
 
 
       // Executes until there are no longer nodes to check and add
@@ -248,7 +251,7 @@
          // Add tween animation between the frames
          sprite.frame = (sprite.frame + 1) % 6;
          movesLeft--;
-         document.getElementById("update-moves-left").innerHTML=movesLeft;
+         $("#update-moves-left").html(movesLeft);
          //movesText.setText("MOVES LEFT: "+ movesLeft);
 
          // Take the current sprite which holds information
@@ -257,7 +260,7 @@
       } else {
          // Restart Game
          score = 0;
-         movesLeft = 3;
+         movesLeft = level.getMovesLeft();
          createGame();
       }
 
@@ -330,9 +333,10 @@
       initBlocks();
 
       // To add text elements to the game
-      document.getElementById("update-points").innerHTML=score;
-      document.getElementById("update-moves-left").innerHTML=movesLeft;
-      //scoreText = game.add.text(15, 15, "POINTS: " + score, textStyle);
+      $("#update-points").html(score);
+      $("#update-moves-left").html(movesLeft);
+      $("#player-name").html(playerName);
+
       gameStarted = true;
    }
 
