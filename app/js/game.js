@@ -1,19 +1,23 @@
 'use strict';
-/* globals Phaser, console, ColorTree, ColorNode, $, jQuery */
+/* globals Phaser, console, ColorTree, ColorNode */
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *              
+ *    [][][]  [][][] [][][] [][][]    [][][]  [][][] [][][] []    [] [][][]
+ *    []      []  []   []   []   []   []      []  []   []   [][]  [] []   []
+ *    [] [][] [][]     []   []   []   [] [][] [][]     []   [] [] [] []   []
+ *    []  []  [] []    []   []   []   []  []  [] []    []   []  [][] []   []
+ *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
+ * 
+ *                              Author : Alex Dodge
+ *                       Last Modified : October 15, 2016
+ *                             License : MIT     
+ *
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
 (function() { 
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *
-    *              ///////////////////////////////////////////////
-    *              //                  Grid Grind               //
-    *              ///////////////////////////////////////////////
-    * 
-    *                              Author : Alex Dodge
-    *                       Last Modified : October 2, 2016
-    *                             License : MIT     
-    *
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
    /*
@@ -31,7 +35,6 @@
       update: update
    });
 
-
    /*
     * Game Variables
     *
@@ -45,7 +48,6 @@
    var blocks;
    var newBlock;
    var width = 120;
-   var height = 120;
    var padding = 10;
    var delta = width+padding;
 
@@ -59,7 +61,7 @@
    // Grid Variables
    // The grid is always square and level size represents both the size of the
    // columns and the rows
-   var levelSize = 3;
+   var levelSize = 4;
    var currentLevel = 1;
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -73,7 +75,6 @@
 
 
    function initBlocks() {
-
       /* * * * * * * * * * *
        *  Color Reference  *
        * * * * * * * * * * *
@@ -86,11 +87,9 @@
       */
     
       var blockInfo = {
-         top: 10,       // Starting position from top
-         left: 10,      // Starting position from left
-         width: 120,    // Width of each block
-         height: 120,   // Height of each block
-         padding: 10 ,  // Padding in between each block
+         width: 100,    // Width of each block
+         height: 100,   // Height of each block
+         padding: 5,  // Padding in between each block
       };
 
       blocks = game.add.group();
@@ -99,8 +98,8 @@
 
          for(var col=0; col < levelSize; col++) {
 
-            var blockX = (col*(blockInfo.width + blockInfo.padding)) + blockInfo.left;
-            var blockY = (row*(blockInfo.height + blockInfo.padding)) + blockInfo.top;
+            var blockX = (col*(blockInfo.width + blockInfo.padding));
+            var blockY = (row*(blockInfo.height + blockInfo.padding));
 
             newBlock = game.add.sprite(blockX, blockY, 'blocks');
             newBlock.alpha = 0;
@@ -108,7 +107,10 @@
             var newRandPos = Math.floor(Math.random()*6);
             newBlock.frame = newRandPos;
 
-            newBlock.scale.setTo(1.2, 1.2);
+            console.log("Block width is " + newBlock.width);
+
+            // Will be level.getBlockSize / newBlock.width
+            newBlock.scale.setTo(1, 1);
 
             // Allows the block to listen to events
             newBlock.inputEnabled = true;
@@ -210,7 +212,7 @@
                // Final check ensures the tile is to be added and that it already hasn't been scored
                // (faded when scored so alpha will be 0)
                console.log("The alpha value is: " + allSameColors[i].tile.alpha);
-               if(toAdd && allSameColors[i].tile.alpha != 0) {
+               if(toAdd && allSameColors[i].tile.alpha !== 0) {
                   allSameColors[i].matched = true;
                   var newConnect = new ColorNode(allSameColors[i].tile);
                   node.children.push(newConnect);
