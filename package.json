@@ -4,16 +4,16 @@
   "description": "My personal site built using a variety of tools. Used as a portfolio and a way to show a variety of project examples",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run" : "gulp",
+    "test": "mocha -w -R spec ./test/gridGrindTest.js"
   },
   "author": "Alex Dodge",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexmdodge/alexdodge-personal.git"
+    "url": "https://github.com/alexmdodge/grid-grind.git"
   },
   "devDependencies": {
-    "aurelia-cli": "^0.18.0",
     "bower": "^1.7.9",
     "browser-sync": "^2.13.0",
     "del": "^2.2.1",
@@ -26,6 +26,5 @@
     "mocha": "^3.1.2"
   },
   "dependencies": {
-    "nprogress": "^0.2.0"
   }
 }
