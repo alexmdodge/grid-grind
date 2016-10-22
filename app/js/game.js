@@ -60,10 +60,6 @@
    var gameStarted = false;
    var loadingScreen;
 
-   // Grid Variables
-   // The grid is always square and level size represents both the size of the
-   // columns and the rows
-
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                            
     *                                 Support Functions
