@@ -18,6 +18,7 @@ var gulp   = require('gulp'),
    del     = require('del'),
 	uglify  = require('gulp-uglify'),
 	rename  = require('gulp-rename'),
+   babel   = require("gulp-babel"),
 	compass = require('gulp-compass'),
 	plumber = require('gulp-plumber'),
    browserSync = require('browser-sync'),
@@ -60,7 +61,9 @@ var gulp   = require('gulp'),
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 gulp.task('test-scripts', function() {
-   gulp.src(['app/js/**/*.js', '!app/js/**/min.js'])
+   gulp.src(['app/js/**/*.js', '!app/js/**.min.js'])
+      .pipe(babel())
+      .pipe(gulp.dest("dist"))
       .pipe(plumber())
       .pipe(reload({stream:true}));
 });
