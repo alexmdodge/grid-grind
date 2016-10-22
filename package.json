@@ -4,7 +4,7 @@
   "description": "My personal site built using a variety of tools. Used as a portfolio and a way to show a variety of project examples",
   "main": "app.js",
   "scripts": {
-    "run" : "gulp",
+    "run": "gulp",
     "test": "mocha -w -R spec ./test/gridGrindTest.js"
   },
   "author": "Alex Dodge",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "bower": "^1.7.9",
     "browser-sync": "^2.13.0",
+    "chai": "^3.5.0",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
@@ -25,6 +26,5 @@
     "gulp-uglify": "^1.5.4",
     "mocha": "^3.1.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
