@@ -46,7 +46,7 @@ export class Level {
 	 * Returns the number of moves available to the player
 	 */
 	getMoves() {
-		return this.currentLevel * 2 + 3; // Increase the moves each level by 4
+		return this.currentLevel * 2 + 6; // Increase the moves each level by 4
 	}
 
 	/*
