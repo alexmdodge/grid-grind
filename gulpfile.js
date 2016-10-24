@@ -1,5 +1,7 @@
 'use strict';
 
+/* globals require */
+
 /*************************************************************************
  * 
  * REQUIRED MODULES
@@ -14,16 +16,18 @@
  *
  *************************************************************************/
 
-var gulp   = require('gulp'),
-   del     = require('del'),
-	uglify  = require('gulp-uglify'),
-	rename  = require('gulp-rename'),
+var gulp   = require("gulp"),
+   fs      = require("fs"),
+   del     = require("del"),
+	uglify  = require("gulp-uglify"),
+	rename  = require("gulp-rename"),
    babel   = require("gulp-babel"),
-	compass = require('gulp-compass'),
-	plumber = require('gulp-plumber'),
-   browserSync = require('browser-sync'),
-   reload = browserSync.reload;
-
+	compass = require("gulp-compass"),
+	plumber = require("gulp-plumber"),
+   browserSync = require("browser-sync"),
+   browserify  = require("browserify"),
+   source      = require("vinyl-source-stream"),
+   reload      = browserSync.reload;
 
 /*************************************************************************
  * 
@@ -61,11 +65,14 @@ var gulp   = require('gulp'),
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 gulp.task('test-scripts', function() {
-   gulp.src(['app/js/**/*.js', '!app/js/**.min.js'])
-      .pipe(babel())
-      .pipe(gulp.dest("dist"))
+   var bundleStream = browserify("./app/js/game.js").transform("babelify", {presets: ["es2015"]}).bundle()
+
+   bundleStream
+      .pipe(source('app/js/game.js'))
+      .pipe(rename('mainGame.js'))
+      .pipe(gulp.dest('./app/js/'))
       .pipe(plumber())
-      .pipe(reload({stream:true}));
+      .pipe(reload({stream:true}))
 });
 
 gulp.task('build-scripts',['clean:dist'], function() {
@@ -213,7 +220,7 @@ gulp.task('build-bower',['clean:dist'], function() {
 /* * * * * * * * * * WATCH TASKS * * * * * * * * * * * * * * * * * * * */
 
 gulp.task('watch', function() {
-	gulp.watch('app/js/**/*.js', ['test-scripts']);
+	gulp.watch(['app/js/**/*.js','!app/js/mainGame.js'], ['test-scripts']);
 	gulp.watch('app/css/*.css', ['test-css']);
    gulp.watch('app/**/*.html', ['test-html']);
 });
