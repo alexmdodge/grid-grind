@@ -1,6 +1,16 @@
 /* globals console */
 /* jshint esversion: 6 */
 
+// A node container object which wraps the current tile with information
+// about whether it has already been stored in the color tree
+export class ColorNodeContainer {
+   
+   constructor(colorTile) {
+      this.tile = colorTile;
+      this.matched = false;
+   }
+}
+
 /*
  * Node
  *
