@@ -15,12 +15,13 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-import Levels from 'levels.js'; 
-import {ColorNode, ColorTree, ColorNodeContainer} from 'colorTree.js';
+import {Level} from './levels.js'; 
+import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
 
 class GameState extends Phaser.State {
 
 	constructor() {
+		super();
 		this.blocks = null;
 	   this.level = null; 
 	   this.currentLevel = 1;
@@ -33,6 +34,97 @@ class GameState extends Phaser.State {
 	   this.gameStarted = false;
 	   this.loadingScreen = null;
 	}
+
+	   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                              
+    *                               preload()
+    *
+    * Used to load assets and also setup the features of the game. In this case
+    * the background color is set, the page is scaled, and the sprites are loaded
+    * into the game.
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+   preload() {
+      // Scales the game to the screen size
+      //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      //game.scale.pageAlignHorizontally = true;
+      //game.scale.pageAlignVertically = true;
+      this.game.stage.backgroundColor = '#eee';
+
+      /* Spritesheets for various components. Note the blocks are
+       * going to be removed and generated. If you wanted to load a
+       * button in the example is below.
+       *
+       * this.game.load.spritesheet('button', '../img/button.png', 120, 40);
+       */
+      this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
+      this.game.load.spritesheet('logo', '../img/grid-grind-logo.png', 1000, 653);
+      this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
+   }
+
+
+   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *
+    *                                 create()
+    *
+    * This is called once the preload is finished and is responsible for the setup
+    * logic where you use the sprites. For this game with blocks are generated
+    * and the text fields are setup.
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+   create() {
+      this.loadingScreen = this.game.add.group();
+
+      this.game.add.sprite(this.game.world.width/2-125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25,0.25);
+      this.game.add.button(this.game.world.width/2-150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
+      this.game.add.button(this.game.world.width/2-150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
+      console.log("Game created. Loading screen up.");
+   }
+
+   initGame() {
+      // To use physics with certain objects use this syntax
+      // game.physics.startSystem(Phaser.Physics.ARCADE);
+      // game.physics.enable(ball, Phaser.Physics.ARCADE);
+
+      // Cleans out all previous objects
+      this.game.world.removeAll(true);
+
+      // Draws the block objects on the screen for each frame
+      // Draws from a randomized array of the original sprite colours
+      this.initBlocks();
+
+      // Level is now defined here
+      console.log("This level is now defined, is attributes are,");
+      console.log(this.level.getPoints());
+      console.log(this.level.getMoves());
+
+      // To add text elements to the game
+      this.levelScore = 0;
+      this.pointsLeft = this.level.getPoints();
+      this.movesLeft = this.level.getMoves();
+      console.log(this.movesLeft);
+      $("#update-points").html(this.score);
+      $("#update-moves-left").html(this.movesLeft);
+      $("#player-name").html(this.playerName);
+      $("#update-points-left").html(this.pointsLeft);
+
+      this.gameStarted = true;
+   }
+
+   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                            
+    *                                  update()
+    *
+    * Called on every frame, this is reponsible for the actual interactions with
+    * the game. In this case this function listens for players to click on the
+    * blocks. When it detects input, it triggers the block update and chain search
+    * function. These generate
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+   update() {
+   }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                            
@@ -60,10 +152,15 @@ class GameState extends Phaser.State {
       referenceSrite.visible = false;
 
       this.level = new Level(this.currentLevel, this.game.width, referenceSrite.width);
-      var blockSize = this.level.getBlockSize();
+      console.log("Level constructed. The status is: " + this.level);
+      let blockSize = this.level.getBlockSize();
+      let gridSize = this.level.getGridSize();
+      let blockScale = this.level.getBlockScale();
       console.log("The current block size is " + blockSize);
-      var gridSize = this.level.getGridSize();
-      var blockScale = this.level.getBlockScale();
+      console.log("The current grid size is" + blockSize);
+      console.log("The current block scale is " + blockScale);
+      console.log("The current points left are : " + this.level.getPoints());
+      console.log("The current moves left are : " + this.level.getMoves());
     
       this.blocks = this.game.add.group();
       
@@ -82,23 +179,15 @@ class GameState extends Phaser.State {
             let newRandPos = Math.floor(Math.random()*6);
             newBlock.frame = newRandPos;
 
-            console.log("Block width is " + newBlock.width);
-
             // Will be level.getBlockSize / newBlock.width
             newBlock.scale.setTo(blockScale, blockScale);
 
             // Allows the block to listen to events
             newBlock.inputEnabled = true;
-
+            newBlock.events.onInputDown.add(this.blockDown, this);
             this.blocks.add(newBlock);
          }
       }
-   }
-
-   checkBlockEvents() {
-      this.blocks.forEach(function(block) {  
-         block.events.onInputDown.add(blockDown, this);
-      });
    }
 
    checkColorChain(sprite) {
@@ -126,7 +215,7 @@ class GameState extends Phaser.State {
       let colorChainTree = new ColorTree();
       colorChainTree.root = new ColorNode(sprite);
       let searchQueue = [colorChainTree.root];
-      let delta = this.level.getBlockSize() + PADDING;
+      let delta = this.level.getBlockSize() + this.PADDING;
 
 
       // Executes until there are no longer nodes to check and add
@@ -192,18 +281,19 @@ class GameState extends Phaser.State {
       } // End of color tree population
 
       if(colorChainTree.nodeCount > 2) {
+      	let self = this;
          // Traverses the tree, fades out linked elements, and sets the input so they can
          // no longer be accessed
          colorChainTree.traverseBFS(function(node) {
             // For flashing blocks
             // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true); 
-            this.game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true); 
+            self.game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true); 
             node.data.inputEnabled = false;});
 
          // More complex score chaining system when later levels introduced
          this.score += colorChainTree.nodeCount;
          this.levelScore += colorChainTree.nodeCount;
-         this.pointsLeft -= levelScore;
+         this.pointsLeft -= this.levelScore;
 
          if(this.pointsLeft < 1) {
             // trigger next level by increasing
@@ -211,18 +301,18 @@ class GameState extends Phaser.State {
             $('#progress-bar-done').animate({ width: '100%' });
             $('#progress-bar-done').animate({ width: '0%' });
             $('#update-level').html(this.currentLevel);
-            createGame();
+            this.initGame();
             
          } else {
             $("#update-points").html(this.score);
             $("#update-points-left").html(this.pointsLeft);
-            gainExp();
+            this.gainExp();
          }
       }
    }
 
    gainExp() {
-      let progressWidth = Math.floor(100 * ((this.level.getPoints()-pointsLeft)/this.level.getPoints())) + '%';
+      let progressWidth = Math.floor(100 * ((this.level.getPoints()-this.pointsLeft)/this.level.getPoints())) + '%';
       console.log("Percentage done is " + progressWidth);
       $('#progress-bar-done').animate({
          width: progressWidth
@@ -230,117 +320,30 @@ class GameState extends Phaser.State {
    }
 
    blockDown(sprite) {
+   	console.log("The current level is :" + this.currentLevel);
+   	console.log("In blockDown the number of moves left are: " + this.movesLeft);
       if (this.movesLeft > 1) {
-         // To-Do
-         // Add tween animation between the frames
+
+         // Rotate the sprite frame
          sprite.frame = (sprite.frame + 1) % 6;
          this.movesLeft--;
          $("#update-moves-left").html(this.movesLeft);
 
          // Take the current sprite which holds information
          // about position and color and use to check proximity
-         checkColorChain(sprite);  
+         this.checkColorChain(sprite);  
       } else {
          // Restart Game
+         console.log("Moves left less than 1: " + this.movesLeft);
          this.score = 0;
          this.currentLevel = 1;
          this.pointsLeft = this.level.getPoints();
          this.movesLeft = this.level.getMoves();
          $('#progress-bar-done').animate({ width: '0%' });
-         createGame();
-      }
-
-      // Insert modal which says moves used up, game over
-   }
-
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                              
-    *                               preload()
-    *
-    * Used to load assets and also setup the features of the game. In this case
-    * the background color is set, the page is scaled, and the sprites are loaded
-    * into the game.
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-   preload() {
-      // Scales the game to the screen size
-      //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      //game.scale.pageAlignHorizontally = true;
-      //game.scale.pageAlignVertically = true;
-      this.game.stage.backgroundColor = '#eee';
-
-      /* Spritesheets for various components. Note the blocks are
-       * going to be removed and generated. If you wanted to load a
-       * button in the example is below.
-       *
-       * game.load.spritesheet('button', '../img/button.png', 120, 40);
-       */
-      this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
-      this.game.load.spritesheet('logo', '../img/grid-grind-logo.png', 1000, 653);
-      this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
-   }
-
-
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *
-    *                                 create()
-    *
-    * This is called once the preload is finished and is responsible for the setup
-    * logic where you use the sprites. For this game with blocks are generated
-    * and the text fields are setup.
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-   create() {
-      this.loadingScreen = this.game.add.group();
-
-      this.game.add.sprite(game.world.width/2-125, 50, 'logo', 0, loadingScreen).scale.set(0.25,0.25);
-      this.game.add.button(game.world.width/2-150, 250, 'buttons', initGame, this, 0, 0, 0, loadingScreen).scale.set(0.5, 0.5);
-      this.game.add.button(game.world.width/2-150, 325, 'buttons', initGame, this, 1, 1, 1, loadingScreen).scale.set(0.5, 0.5);
-   }
-
-   initGame() {
-      // To use physics with certain objects use this syntax
-      // game.physics.startSystem(Phaser.Physics.ARCADE);
-      // game.physics.enable(ball, Phaser.Physics.ARCADE);
-
-      // Cleans out all previous objects
-      this.game.world.removeAll(true);
-
-      // Draws the block objects on the screen for each frame
-      // Draws from a randomized array of the original sprite colours
-      initBlocks();
-
-      // To add text elements to the game
-      this.levelScore = 0;
-      this.pointsLeft = this.level.getPoints();
-      this.movesLeft = this.level.getMoves();
-      $("#update-points").html(this.score);
-      $("#update-moves-left").html(this.movesLeft);
-      $("#player-name").html(this.playerName);
-      $("#update-points-left").html(this.pointsLeft);
-
-      this.gameStarted = true;
-   }
-
-   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                            
-    *                                  update()
-    *
-    * Called on every frame, this is reponsible for the actual interactions with
-    * the game. In this case this function listens for players to click on the
-    * blocks. When it detects input, it triggers the block update and chain search
-    * function. These generate
-    *
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-   update() {
-      if(this.gameStarted) {
-         checkBlockEvents();
+         this.initGame();
       }
    }
+
 }
 
 export default GameState;
-
-

@@ -16,7 +16,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-import GameState from 'gameState.js';
+import GameState from './gameState.js';
 
 class Game extends Phaser.Game {
 
