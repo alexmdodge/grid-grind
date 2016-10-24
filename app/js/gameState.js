@@ -16,6 +16,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 import Levels from 'levels.js'; 
+import {ColorNode, ColorTree, ColorNodeContainer} from 'colorTree.js';
 
 class GameState extends Phaser.State {
 
@@ -95,7 +96,7 @@ class GameState extends Phaser.State {
    }
 
    checkBlockEvents() {
-      blocks.forEach(function(block) {  
+      this.blocks.forEach(function(block) {  
          block.events.onInputDown.add(blockDown, this);
       });
    }
@@ -108,16 +109,9 @@ class GameState extends Phaser.State {
 
       // Find all blocks that share the same color and store them as child nodes
       // store the parent node when it has same position
-      var allSameColors = [];
+      let allSameColors = [];
 
-      // A node container object which wraps the current tile with information
-      // about whether it has already been stored in the color tree
-      function ColorNodeContainer(colorTile) {
-         this.tile = colorTile;
-         this.matched = false;
-      }
-
-      blocks.forEach(function(block) {
+      this.blocks.forEach(function(block) {
          if (sprite.frame === block.frame) {
             allSameColors.push(new ColorNodeContainer(block));
             console.log("Current Color Array Count: " + allSameColors.length);
@@ -129,17 +123,17 @@ class GameState extends Phaser.State {
        * as the root node. Then add it to the search queue to begin populating
        * the color chain tree.
        */ 
-      var colorChainTree = new ColorTree();
+      let colorChainTree = new ColorTree();
       colorChainTree.root = new ColorNode(sprite);
-      var searchQueue = [colorChainTree.root];
-      var delta = level.getBlockSize() + PADDING;
+      let searchQueue = [colorChainTree.root];
+      let delta = this.level.getBlockSize() + PADDING;
 
 
       // Executes until there are no longer nodes to check and add
       while(searchQueue.length) {
 
-         var node = searchQueue.shift();
-         var toAdd = false;
+         let node = searchQueue.shift();
+         let toAdd = false;
 
          for(var i = 0; i < allSameColors.length; i++) {
 
@@ -181,9 +175,11 @@ class GameState extends Phaser.State {
                // Final check ensures the tile is to be added and that it already hasn't been scored
                // (faded when scored so alpha will be 0)
                console.log("The alpha value is: " + allSameColors[i].tile.alpha);
+               
                if(toAdd && allSameColors[i].tile.alpha !== 0) {
                   allSameColors[i].matched = true;
-                  var newConnect = new ColorNode(allSameColors[i].tile);
+
+                  let newConnect = new ColorNode(allSameColors[i].tile);
                   node.children.push(newConnect);
                   searchQueue.push(newConnect);
                   colorChainTree.nodeCount++;
@@ -201,32 +197,32 @@ class GameState extends Phaser.State {
          colorChainTree.traverseBFS(function(node) {
             // For flashing blocks
             // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true); 
-            game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true); 
+            this.game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true); 
             node.data.inputEnabled = false;});
 
          // More complex score chaining system when later levels introduced
-         score += colorChainTree.nodeCount;
-         levelScore += colorChainTree.nodeCount;
-         pointsLeft -= levelScore;
+         this.score += colorChainTree.nodeCount;
+         this.levelScore += colorChainTree.nodeCount;
+         this.pointsLeft -= levelScore;
 
-         if(pointsLeft < 1) {
+         if(this.pointsLeft < 1) {
             // trigger next level by increasing
-            currentLevel++;
+            this.currentLevel++;
             $('#progress-bar-done').animate({ width: '100%' });
             $('#progress-bar-done').animate({ width: '0%' });
-            $('#update-level').html(currentLevel);
+            $('#update-level').html(this.currentLevel);
             createGame();
             
          } else {
-            $("#update-points").html(score);
-            $("#update-points-left").html(pointsLeft);
+            $("#update-points").html(this.score);
+            $("#update-points-left").html(this.pointsLeft);
             gainExp();
          }
       }
    }
 
    gainExp() {
-      var progressWidth = Math.floor(100 * ((level.getPoints()-pointsLeft)/level.getPoints())) + '%';
+      let progressWidth = Math.floor(100 * ((this.level.getPoints()-pointsLeft)/this.level.getPoints())) + '%';
       console.log("Percentage done is " + progressWidth);
       $('#progress-bar-done').animate({
          width: progressWidth
@@ -234,23 +230,22 @@ class GameState extends Phaser.State {
    }
 
    blockDown(sprite) {
-      if (movesLeft > 1) {
+      if (this.movesLeft > 1) {
          // To-Do
          // Add tween animation between the frames
          sprite.frame = (sprite.frame + 1) % 6;
-         movesLeft--;
-         $("#update-moves-left").html(movesLeft);
-         //movesText.setText("MOVES LEFT: "+ movesLeft);
+         this.movesLeft--;
+         $("#update-moves-left").html(this.movesLeft);
 
          // Take the current sprite which holds information
          // about position and color and use to check proximity
          checkColorChain(sprite);  
       } else {
          // Restart Game
-         score = 0;
-         currentLevel = 1;
-         pointsLeft = level.getPoints();
-         movesLeft = level.getMoves();
+         this.score = 0;
+         this.currentLevel = 1;
+         this.pointsLeft = this.level.getPoints();
+         this.movesLeft = this.level.getMoves();
          $('#progress-bar-done').animate({ width: '0%' });
          createGame();
       }
@@ -273,7 +268,7 @@ class GameState extends Phaser.State {
       //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       //game.scale.pageAlignHorizontally = true;
       //game.scale.pageAlignVertically = true;
-      game.stage.backgroundColor = '#eee';
+      this.game.stage.backgroundColor = '#eee';
 
       /* Spritesheets for various components. Note the blocks are
        * going to be removed and generated. If you wanted to load a
@@ -281,9 +276,9 @@ class GameState extends Phaser.State {
        *
        * game.load.spritesheet('button', '../img/button.png', 120, 40);
        */
-      game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
-      game.load.spritesheet('logo', '../img/grid-grind-logo.png', 1000, 653);
-      game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
+      this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
+      this.game.load.spritesheet('logo', '../img/grid-grind-logo.png', 1000, 653);
+      this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
    }
 
 
@@ -298,11 +293,11 @@ class GameState extends Phaser.State {
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
    create() {
-      loadingScreen = game.add.group();
+      this.loadingScreen = this.game.add.group();
 
-      game.add.sprite(game.world.width/2-125, 50, 'logo', 0, loadingScreen).scale.set(0.25,0.25);
-      game.add.button(game.world.width/2-150, 250, 'buttons', initGame, this, 0, 0, 0, loadingScreen).scale.set(0.5, 0.5);
-      game.add.button(game.world.width/2-150, 325, 'buttons', initGame, this, 1, 1, 1, loadingScreen).scale.set(0.5, 0.5);
+      this.game.add.sprite(game.world.width/2-125, 50, 'logo', 0, loadingScreen).scale.set(0.25,0.25);
+      this.game.add.button(game.world.width/2-150, 250, 'buttons', initGame, this, 0, 0, 0, loadingScreen).scale.set(0.5, 0.5);
+      this.game.add.button(game.world.width/2-150, 325, 'buttons', initGame, this, 1, 1, 1, loadingScreen).scale.set(0.5, 0.5);
    }
 
    initGame() {
@@ -311,22 +306,22 @@ class GameState extends Phaser.State {
       // game.physics.enable(ball, Phaser.Physics.ARCADE);
 
       // Cleans out all previous objects
-      game.world.removeAll(true);
+      this.game.world.removeAll(true);
 
       // Draws the block objects on the screen for each frame
       // Draws from a randomized array of the original sprite colours
       initBlocks();
 
       // To add text elements to the game
-      levelScore = 0;
-      pointsLeft = level.getPoints();
-      movesLeft = level.getMoves();
-      $("#update-points").html(score);
-      $("#update-moves-left").html(movesLeft);
-      $("#player-name").html(playerName);
-      $("#update-points-left").html(pointsLeft);
+      this.levelScore = 0;
+      this.pointsLeft = this.level.getPoints();
+      this.movesLeft = this.level.getMoves();
+      $("#update-points").html(this.score);
+      $("#update-moves-left").html(this.movesLeft);
+      $("#player-name").html(this.playerName);
+      $("#update-points-left").html(this.pointsLeft);
 
-      gameStarted = true;
+      this.gameStarted = true;
    }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -340,7 +335,7 @@ class GameState extends Phaser.State {
     *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
    update() {
-      if(gameStarted) {
+      if(this.gameStarted) {
          checkBlockEvents();
       }
    }
