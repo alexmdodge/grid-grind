@@ -438,7 +438,6 @@ var GameState = function (_Phaser$State) {
          this.game.add.sprite(this.game.world.width / 2 - 125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25, 0.25);
          this.game.add.button(this.game.world.width / 2 - 150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
          this.game.add.button(this.game.world.width / 2 - 150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
-         console.log("Game created. Loading screen up.");
       }
    }, {
       key: 'initGame',
@@ -454,16 +453,10 @@ var GameState = function (_Phaser$State) {
          // Draws from a randomized array of the original sprite colours
          this.initBlocks();
 
-         // Level is now defined here
-         console.log("This level is now defined, is attributes are,");
-         console.log(this.level.getPoints());
-         console.log(this.level.getMoves());
-
          // To add text elements to the game
          this.levelScore = 0;
          this.pointsLeft = this.level.getPoints();
          this.movesLeft = this.level.getMoves();
-         console.log(this.movesLeft);
          $("#update-points").html(this.score);
          $("#update-moves-left").html(this.movesLeft);
          $("#player-name").html(this.playerName);
@@ -515,15 +508,9 @@ var GameState = function (_Phaser$State) {
          referenceSrite.visible = false;
 
          this.level = new _levels.Level(this.currentLevel, this.game.width, referenceSrite.width);
-         console.log("Level constructed. The status is: " + this.level);
          var blockSize = this.level.getBlockSize();
          var gridSize = this.level.getGridSize();
          var blockScale = this.level.getBlockScale();
-         console.log("The current block size is " + blockSize);
-         console.log("The current grid size is" + blockSize);
-         console.log("The current block scale is " + blockScale);
-         console.log("The current points left are : " + this.level.getPoints());
-         console.log("The current moves left are : " + this.level.getMoves());
 
          this.blocks = this.game.add.group();
 
@@ -557,10 +544,6 @@ var GameState = function (_Phaser$State) {
       value: function checkColorChain(sprite) {
          var _this2 = this;
 
-         console.log("Source Sprite Frame: " + sprite.frame);
-         console.log("X Position of sprite: " + sprite.x);
-         console.log("Y Position of sprite: " + sprite.y);
-
          // Find all blocks that share the same color and store them as child nodes
          // store the parent node when it has same position
          var allSameColors = [];
@@ -568,7 +551,6 @@ var GameState = function (_Phaser$State) {
          this.blocks.forEach(function (block) {
             if (sprite.frame === block.frame) {
                allSameColors.push(new _colorTree.ColorNodeContainer(block));
-               console.log("Current Color Array Count: " + allSameColors.length);
             }
          });
 
@@ -626,7 +608,6 @@ var GameState = function (_Phaser$State) {
 
                   // Final check ensures the tile is to be added and that it already hasn't been scored
                   // (faded when scored so alpha will be 0)
-                  console.log("The alpha value is: " + allSameColors[i].tile.alpha);
 
                   if (toAdd && allSameColors[i].tile.alpha !== 0) {
                      allSameColors[i].matched = true;
@@ -636,7 +617,6 @@ var GameState = function (_Phaser$State) {
                      searchQueue.push(newConnect);
                      colorChainTree.nodeCount++;
 
-                     console.log('Node added. Current node count: ' + colorChainTree.nodeCount);
                      toAdd = false;
                   }
                }
@@ -679,7 +659,6 @@ var GameState = function (_Phaser$State) {
       key: 'gainExp',
       value: function gainExp() {
          var progressWidth = Math.floor(100 * ((this.level.getPoints() - this.pointsLeft) / this.level.getPoints())) + '%';
-         console.log("Percentage done is " + progressWidth);
          $('#progress-bar-done').animate({
             width: progressWidth
          });
@@ -687,8 +666,6 @@ var GameState = function (_Phaser$State) {
    }, {
       key: 'blockDown',
       value: function blockDown(sprite) {
-         console.log("The current level is :" + this.currentLevel);
-         console.log("In blockDown the number of moves left are: " + this.movesLeft);
          if (this.movesLeft > 1) {
 
             // Rotate the sprite frame
@@ -701,7 +678,6 @@ var GameState = function (_Phaser$State) {
             this.checkColorChain(sprite);
          } else {
             // Restart Game
-            console.log("Moves left less than 1: " + this.movesLeft);
             this.score = 0;
             this.currentLevel = 1;
             this.pointsLeft = this.level.getPoints();
