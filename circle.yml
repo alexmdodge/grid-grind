@@ -1,0 +1,15 @@
+## Customize dependencies
+dependencies:
+  pre:
+    - npm install
+
+  override:
+    - bundle install: # note ':' here
+        timeout: 360 # fail if command has no output for 3 minutes
+        # IMPORTANT NOTE: ^^ the timeout modifier above must be
+        # double indented (four spaces) from the previous line
+  
+## Customize test commands
+test:
+  override:
+    - mocha -w -R spec ./test/gridGrindTest.js # Use mocha for testing
