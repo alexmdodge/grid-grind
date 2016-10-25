@@ -12,4 +12,4 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - mocha -w -R spec ./test/gridGrindTest.js # Use mocha for testing
+    - mocha -w -R spec --require babel-register ./test/gridGrindTest.js # Use mocha for testing
