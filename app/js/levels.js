@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *  
  *                              []     [][][] []  [] [][][] []     [][][]
@@ -37,7 +35,11 @@ export class Level {
 	 * pattern for generation will change depending on how quickly the levels can be played.
 	 */
 	getGridSize() {
-		return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
+		if( this.currentLevel < 1) {
+			return -1; // Indicates level error
+		} else {
+			return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
+		}
 	}
 
 	/*
@@ -46,7 +48,11 @@ export class Level {
 	 * Returns the number of moves available to the player
 	 */
 	getMoves() {
-		return this.currentLevel * 2 + 6; // Increase the moves each level by 4
+		if( this.currentLevel < 1) {
+			return -1; // Indicates level error
+		} else {
+			return this.currentLevel * 2 + 6; // Increase by 2, start at 6
+		}
 	}
 
 	/*
@@ -55,7 +61,11 @@ export class Level {
 	 * Returns the number of points to complete the leve
 	 */
 	getPoints() {
-		return this.currentLevel * this.currentLevel + 4; // Square points required
+		if( this.currentLevel < 1) {
+			return -1; // Indicates level error
+		} else {
+			return this.currentLevel * this.currentLevel + 4; // Increase by square, start at 4
+		}
 	}
 
 	/*
@@ -68,7 +78,12 @@ export class Level {
 	 */
 	getBlockSize() {
 		var size = Math.floor( (this.gameSize / this.getGridSize()) - 5); 
-		return size;
+
+		if(size < 0) {
+			return -1; // indicates error
+		} else {
+			return size;
+		}
 	}
 
 	/*
@@ -80,7 +95,7 @@ export class Level {
 	 * when scaled.
 	 */
 	getBlockScale() {
-		var scale = this.getBlockSize() / this.spriteSize; 
+		var scale = this.getBlockSize() / this.spriteSize;
 		return scale;
 	}
 }
