@@ -20,11 +20,8 @@ The objective of this game is to obtain points by clicking the blocks and creati
 ### *Moving to the Next Level* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Plus_sign_font_awesome.svg/512px-Plus_sign_font_awesome.svg.png" width="25px">
 In order to move to the next level you have to achieve a minimum number of points. Your progress is tracked by the experience bar at the top.
 
-<h2>
-	<a name="demo" aria-hidden="true" class="anchor"></a>
-	Demo
-	<img src="http://zanifesto.com/zfassets/graphics/ionicons/game-controller-b-512px.svg" width="30px">
-</h2> 
+<a name="demo" aria-hidden="true" class="anchor"></a>
+### *Demo* <img src="http://zanifesto.com/zfassets/graphics/ionicons/game-controller-b-512px.svg" width="30px">
 This game is currently in **alpha** and will be available to demo in a couple of weeks.
 
 <h1>
