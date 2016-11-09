@@ -3,27 +3,27 @@
 <html lang="en">
    <head>
       <title> GridGrind | The Random Puzzle Game </title>
-      <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
-      <link rel="stylesheet" type="text/css" href="css/styles.css" />
-      <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+      <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+      <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+      <link rel="stylesheet" type="text/css" href="./css/font-awesome.css" />
    </head>
 
    <body id="my-canvas">
       <div class="user-interface">
          <div class="top-menu">
-            
+
             <div class="row">
                <span id="top-menu-avatar" class="fa fa-user"></span>
-                  
+
                <h3 class="top-menu-title"><span id="player-name">Player Name Here</span></h3>
-               
+
                <div class="player-row">
                   <h6 class="top-menu-total">Total Points
-                     <i class="fa fa-diamond"></i> 
+                     <i class="fa fa-diamond"></i>
                      <span id="update-points">0</span>
                   </h6>
-                  <h6 class="top-menu-moves">Moves Left 
-                     <i class="fa fa-heart"></i> 
+                  <h6 class="top-menu-moves">Moves Left
+                     <i class="fa fa-heart"></i>
                      <span id="update-moves-left">3</span>
                   </h6>
                </div>
@@ -31,16 +31,16 @@
 
 
             <div class="level-row">
-               <h6 class="top-menu-current">Level 
-                  <i class="fa fa-star"></i> 
+               <h6 class="top-menu-current">Level
+                  <i class="fa fa-star"></i>
                   <span id="update-level">1</span>
                </h6>
                <h6 class="top-menu-left">Next Level
-                  <i class="fa fa-level-up"></i> 
+                  <i class="fa fa-level-up"></i>
                   <span id="update-points-left">9</span>
                </h6>
             </div>
-            
+
             <div class="top-menu-progress">
                <div class="progress-bar">
                   <span id="progress-bar-done"></span>
@@ -55,7 +55,7 @@
                When you click a square it will change color. The order of the colors is
                shown below. You will need to think ahead to find the best pattern series.
             </small>
-               <!--  
+               <!--
                Blue    #5f8ffd
                Green   #69fe5e
                Red     #ff5c5c
@@ -87,12 +87,11 @@
       </div>
 
       <div id="game-container">
-
-         <script src="js/vendor/jquery.min.js"></script>
-         <script src="js/vendor/phaser.min.js"></script>
-         <script src="js/mainGame.js"></script>
+         <script src="./js/jquery.min.js"></script>
+         <script src="./js/phaser.min.js"></script>
+         <script src="./js/mainGame.js"></script>
       </div>
    </body>
-</html>   
+</html>
 
 
