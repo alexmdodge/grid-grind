@@ -51,7 +51,7 @@ export class Level {
 		if( this.currentLevel < 1) {
 			return -1; // Indicates level error
 		} else {
-			return this.currentLevel * 2 + 6; // Increase by 2, start at 6
+			return this.currentLevel * 2 + 5; // Increase by 2, start at 6
 		}
 	}
 
@@ -64,7 +64,7 @@ export class Level {
 		if( this.currentLevel < 1) {
 			return -1; // Indicates level error
 		} else {
-			return this.currentLevel * this.currentLevel + 4; // Increase by square, start at 4
+			return this.currentLevel * this.currentLevel + (3 * this.currentLevel); // Increase by square, start at 4
 		}
 	}
 

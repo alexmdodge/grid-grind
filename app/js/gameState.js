@@ -74,15 +74,15 @@ class GameState extends Phaser.State {
     *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+   //create() {
+      //this.loadingScreen = this.game.add.group();
+
+      //this.game.add.sprite(this.game.world.width/2-125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25,0.25);
+      //this.game.add.button(this.game.world.width/2-150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
+      //this.game.add.button(this.game.world.width/2-150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
+   //}
+
    create() {
-      this.loadingScreen = this.game.add.group();
-
-      this.game.add.sprite(this.game.world.width/2-125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25,0.25);
-      this.game.add.button(this.game.world.width/2-150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
-      this.game.add.button(this.game.world.width/2-150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
-   }
-
-   initGame() {
       // To use physics with certain objects use this syntax
       // game.physics.startSystem(Phaser.Physics.ARCADE);
       // game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -280,7 +280,7 @@ class GameState extends Phaser.State {
             $('#progress-bar-done').animate({ width: '100%' });
             $('#progress-bar-done').animate({ width: '0%' });
             $('#update-level').html(this.currentLevel);
-            this.initGame();
+            this.create();
             
          } else {
             $("#update-points").html(this.score);
@@ -315,7 +315,7 @@ class GameState extends Phaser.State {
          this.pointsLeft = this.level.getPoints();
          this.movesLeft = this.level.getMoves();
          $('#progress-bar-done').animate({ width: '0%' });
-         this.initGame();
+         this.create();
       }
    }
 

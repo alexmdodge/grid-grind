@@ -430,18 +430,17 @@ var GameState = function (_Phaser$State) {
        *
        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+      //create() {
+      //this.loadingScreen = this.game.add.group();
+
+      //this.game.add.sprite(this.game.world.width/2-125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25,0.25);
+      //this.game.add.button(this.game.world.width/2-150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
+      //this.game.add.button(this.game.world.width/2-150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
+      //}
+
    }, {
       key: 'create',
       value: function create() {
-         this.loadingScreen = this.game.add.group();
-
-         this.game.add.sprite(this.game.world.width / 2 - 125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25, 0.25);
-         this.game.add.button(this.game.world.width / 2 - 150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
-         this.game.add.button(this.game.world.width / 2 - 150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
-      }
-   }, {
-      key: 'initGame',
-      value: function initGame() {
          // To use physics with certain objects use this syntax
          // game.physics.startSystem(Phaser.Physics.ARCADE);
          // game.physics.enable(ball, Phaser.Physics.ARCADE);
@@ -646,7 +645,7 @@ var GameState = function (_Phaser$State) {
                   $('#progress-bar-done').animate({ width: '100%' });
                   $('#progress-bar-done').animate({ width: '0%' });
                   $('#update-level').html(_this2.currentLevel);
-                  _this2.initGame();
+                  _this2.create();
                } else {
                   $("#update-points").html(_this2.score);
                   $("#update-points-left").html(_this2.pointsLeft);
@@ -683,7 +682,7 @@ var GameState = function (_Phaser$State) {
             this.pointsLeft = this.level.getPoints();
             this.movesLeft = this.level.getMoves();
             $('#progress-bar-done').animate({ width: '0%' });
-            this.initGame();
+            this.create();
          }
       }
    }]);
@@ -703,8 +702,6 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/* jshint esversion: 6 */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *  
@@ -749,7 +746,11 @@ var Level = exports.Level = function () {
 	_createClass(Level, [{
 		key: "getGridSize",
 		value: function getGridSize() {
-			return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
+			if (this.currentLevel < 1) {
+				return -1; // Indicates level error
+			} else {
+				return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
+			}
 		}
 
 		/*
@@ -761,7 +762,11 @@ var Level = exports.Level = function () {
 	}, {
 		key: "getMoves",
 		value: function getMoves() {
-			return this.currentLevel * 2 + 6; // Increase the moves each level by 4
+			if (this.currentLevel < 1) {
+				return -1; // Indicates level error
+			} else {
+				return this.currentLevel * 2 + 5; // Increase by 2, start at 6
+			}
 		}
 
 		/*
@@ -773,7 +778,11 @@ var Level = exports.Level = function () {
 	}, {
 		key: "getPoints",
 		value: function getPoints() {
-			return this.currentLevel * this.currentLevel + 4; // Square points required
+			if (this.currentLevel < 1) {
+				return -1; // Indicates level error
+			} else {
+				return this.currentLevel * this.currentLevel + 3 * this.currentLevel; // Increase by square, start at 4
+			}
 		}
 
 		/*
@@ -789,7 +798,12 @@ var Level = exports.Level = function () {
 		key: "getBlockSize",
 		value: function getBlockSize() {
 			var size = Math.floor(this.gameSize / this.getGridSize() - 5);
-			return size;
+
+			if (size < 0) {
+				return -1; // indicates error
+			} else {
+				return size;
+			}
 		}
 
 		/*
