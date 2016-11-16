@@ -3,7 +3,7 @@
 /* globals require */
 
 /*************************************************************************
- * 
+ *
  * REQUIRED MODULES
  *
  *************************************************************************
@@ -17,20 +17,22 @@
  *************************************************************************/
 
 var gulp   = require("gulp"),
-   fs      = require("fs"),
-   del     = require("del"),
-	uglify  = require("gulp-uglify"),
-	rename  = require("gulp-rename"),
-   babel   = require("gulp-babel"),
-	compass = require("gulp-compass"),
-	plumber = require("gulp-plumber"),
-   browserSync = require("browser-sync"),
-   browserify  = require("browserify"),
-   source      = require("vinyl-source-stream"),
-   reload      = browserSync.reload;
+  exorcist   = require('exorcist'),
+  path    = require("path"),
+  fs = require('fs'),
+  mapfile = path.join(__dirname, 'mainGame.js.map'),
+  del     = require("del"),
+  uglify  = require("gulp-uglify"),
+  rename  = require("gulp-rename"),
+  compass = require("gulp-compass"),
+  plumber = require("gulp-plumber"),
+  browserSync = require("browser-sync"),
+  browserify  = require("browserify"),
+  source      = require("vinyl-source-stream"),
+  reload      = browserSync.reload;
 
 /*************************************************************************
- * 
+ *
  * TASKS
  *
  *************************************************************************
@@ -38,14 +40,14 @@ var gulp   = require("gulp"),
  * In this section all of the tasks are defined. Each of these does a
  * specific thing, like watch javascript or css files. It can also compile
  * or trigger browser sync.
- * 
- * On the command line you can trigger individual tasks with 
+ *
+ * On the command line you can trigger individual tasks with
  *    $ gulp taskName
  *
  * Some of the general globs or search patterns (similar to regex) which
  * are most commonly used can be found below,
  *    css/*.css      --> Matches all files ending in css
- *    css/** /*.css  --> All files ending in css in all child directories 
+ *    css/** /*.css  --> All files ending in css in all child directories
                          (no spaces, needed for comment)
  *    !css/style.css --> excludes files
  *    *.+(js|css)    --> Matches all files in root ending in js or css
@@ -65,14 +67,17 @@ var gulp   = require("gulp"),
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 gulp.task('test-scripts', function() {
-   var bundleStream = browserify("./app/js/game.js").transform("babelify", {presets: ["es2015"]}).bundle()
+   var bundleStream = browserify("./app/js/game.js",{debug: true})
+    .transform("babelify",{presets: ["es2015"]})
+    .bundle();
 
    bundleStream
+      .pipe(exorcist('app/js/mainGame.js.map'))
       .pipe(source('app/js/game.js'))
       .pipe(rename('mainGame.js'))
-      .pipe(gulp.dest('./app/js/'))
+      .pipe(gulp.dest('app/js/'))
       .pipe(plumber())
-      .pipe(reload({stream:true}))
+      .pipe(reload({stream:true}));
 });
 
 gulp.task('build-scripts',['clean:dist'], function() {
@@ -157,7 +162,7 @@ gulp.task('browser-sync-build',['clean:dist'], function() {
 
 
 /* * * * * * * * * * FOLDER CLEAN UP * * * * * * * * * * * * * * * * * * *
- * The del module allows you to use globs to delete folders and files. 
+ * The del module allows you to use globs to delete folders and files.
  * In this case we clean up each folder in the dist directory. I still need
  * to set up at some point a gulp sequence tasks so the cleaning task runs
  * first.
@@ -202,7 +207,7 @@ gulp.task('build-bower',['clean:dist'], function() {
 });
 
 /*************************************************************************
- * 
+ *
  * WATCH AND DEFAULT TASKS
  *
  *************************************************************************
@@ -213,7 +218,7 @@ gulp.task('build-bower',['clean:dist'], function() {
  *
  * The default tasks will run all connected tasks when the gulp command
  * is typed in the terminal. The build task will run everything that minifies
- * and checks the code. 
+ * and checks the code.
  *
  *************************************************************************
 
@@ -230,5 +235,5 @@ gulp.task('watch', function() {
 gulp.task('default', ['test-scripts', 'watch', 'test-css', 'test-html', 'browser-sync']);
 
 // For a fully clean build, run clean:dist first
-gulp.task('build', ['clean:dist','build-images', 'build-fonts', 'build-scripts', 'build-css', 
+gulp.task('build', ['clean:dist','build-images', 'build-fonts', 'build-scripts', 'build-css',
    'build-html', 'browser-sync-build', 'build-css-vendor', 'build-bower']);
