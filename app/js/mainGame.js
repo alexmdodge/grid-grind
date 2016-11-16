@@ -353,16 +353,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- *              
+ *
  *    [][][]  [][][] [][][] [][][]    [][][]  [][][] [][][] []    [] [][][]
  *    []      []  []   []   []   []   []      []  []   []   [][]  [] []   []
  *    [] [][] [][]     []   []   []   [] [][] [][]     []   [] [] [] []   []
  *    []  []  [] []    []   []   []   []  []  [] []    []   []  [][] []   []
  *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
- * 
+ *
  *                              Author : Alex Dodge
  *                       Last Modified : October 23, 2016
- *                             License : MIT     
+ *                             License : MIT
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -391,7 +391,7 @@ var GameState = function (_Phaser$State) {
    }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-   *                              
+   *
    *                               preload()
    *
    * Used to load assets and also setup the features of the game. In this case
@@ -465,7 +465,7 @@ var GameState = function (_Phaser$State) {
       }
 
       /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-       *                            
+       *
        *                                  update()
        *
        * Called on every frame, this is reponsible for the actual interactions with
@@ -480,7 +480,7 @@ var GameState = function (_Phaser$State) {
       value: function update() {}
 
       /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-       *                            
+       *
        *                                 Support Functions
        *
        * These are responsible for segmenting and organizing the game logic into
@@ -629,12 +629,13 @@ var GameState = function (_Phaser$State) {
                // no longer be accessed
                colorChainTree.traverseBFS(function (node) {
                   // For flashing blocks
-                  // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true); 
+                  // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true);
                   self.game.add.tween(node.data).to({ alpha: 0 }, 800, Phaser.Easing.Linear.None, true);
                   node.data.inputEnabled = false;
                });
 
                // More complex score chaining system when later levels introduced
+               console.log("node count is " + colorChainTree.nodeCount);
                _this2.score += colorChainTree.nodeCount;
                _this2.levelScore += colorChainTree.nodeCount;
                _this2.pointsLeft -= _this2.levelScore;
@@ -826,4 +827,5 @@ var Level = exports.Level = function () {
 	return Level;
 }();
 
-},{}]},{},[2]);
+},{}]},{},[2])
+//# sourceMappingURL=mainGame.js.map

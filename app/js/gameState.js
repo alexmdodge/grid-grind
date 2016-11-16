@@ -2,20 +2,20 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- *              
+ *
  *    [][][]  [][][] [][][] [][][]    [][][]  [][][] [][][] []    [] [][][]
  *    []      []  []   []   []   []   []      []  []   []   [][]  [] []   []
  *    [] [][] [][]     []   []   []   [] [][] [][]     []   [] [] [] []   []
  *    []  []  [] []    []   []   []   []  []  [] []    []   []  [][] []   []
  *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
- * 
+ *
  *                              Author : Alex Dodge
  *                       Last Modified : October 23, 2016
- *                             License : MIT     
+ *                             License : MIT
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-import {Level} from './levels.js'; 
+import {Level} from './levels.js';
 import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
 
 class GameState extends Phaser.State {
@@ -23,7 +23,7 @@ class GameState extends Phaser.State {
 	constructor() {
 		super();
 		this.blocks = null;
-	   this.level = null; 
+	   this.level = null;
 	   this.currentLevel = 1;
 	   this.PADDING = 5;
 	   this.movesLeft = 4;
@@ -36,7 +36,7 @@ class GameState extends Phaser.State {
 	}
 
 	   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                              
+    *
     *                               preload()
     *
     * Used to load assets and also setup the features of the game. In this case
@@ -107,7 +107,7 @@ class GameState extends Phaser.State {
    }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                            
+    *
     *                                  update()
     *
     * Called on every frame, this is reponsible for the actual interactions with
@@ -120,7 +120,7 @@ class GameState extends Phaser.State {
    }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                            
+    *
     *                                 Support Functions
     *
     * These are responsible for segmenting and organizing the game logic into
@@ -148,9 +148,9 @@ class GameState extends Phaser.State {
       let blockSize = this.level.getBlockSize();
       let gridSize = this.level.getGridSize();
       let blockScale = this.level.getBlockScale();
-    
+
       this.blocks = this.game.add.group();
-      
+
       for(let row=0; row < gridSize; row++) {
 
          for(let col=0; col < gridSize; col++) {
@@ -192,7 +192,7 @@ class GameState extends Phaser.State {
       /* Create the color tree, and add the source sprite from the click
        * as the root node. Then add it to the search queue to begin populating
        * the color chain tree.
-       */ 
+       */
       let colorChainTree = new ColorTree();
       colorChainTree.root = new ColorNode(sprite);
       let searchQueue = [colorChainTree.root];
@@ -225,8 +225,8 @@ class GameState extends Phaser.State {
                // Right Tile Check
                if(node.data.x + delta == allSameColors[i].tile.x && node.data.y == allSameColors[i].tile.y) {
                   toAdd = true;
-               } 
-               
+               }
+
                // Left Tile Check
                else if(node.data.x - delta == allSameColors[i].tile.x && node.data.y == allSameColors[i].tile.y) {
                   toAdd = true;
@@ -235,7 +235,7 @@ class GameState extends Phaser.State {
                // Up Tile Check
                else if(node.data.y - delta == allSameColors[i].tile.y && node.data.x == allSameColors[i].tile.x) {
                   toAdd = true;
-               } 
+               }
 
                // Down Tile Check
                else if(node.data.y + delta == allSameColors[i].tile.y && node.data.x == allSameColors[i].tile.x) {
@@ -244,7 +244,7 @@ class GameState extends Phaser.State {
 
                // Final check ensures the tile is to be added and that it already hasn't been scored
                // (faded when scored so alpha will be 0)
-               
+
                if(toAdd && allSameColors[i].tile.alpha !== 0) {
                   allSameColors[i].matched = true;
 
@@ -265,11 +265,13 @@ class GameState extends Phaser.State {
          // no longer be accessed
          colorChainTree.traverseBFS(function(node) {
             // For flashing blocks
-            // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true); 
-            self.game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true); 
-            node.data.inputEnabled = false;});
+            // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true);
+            self.game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true);
+            node.data.inputEnabled = false;
+         });
 
          // More complex score chaining system when later levels introduced
+         console.log("node count is " + colorChainTree.nodeCount);
          this.score += colorChainTree.nodeCount;
          this.levelScore += colorChainTree.nodeCount;
          this.pointsLeft -= this.levelScore;
@@ -281,7 +283,7 @@ class GameState extends Phaser.State {
             $('#progress-bar-done').animate({ width: '0%' });
             $('#update-level').html(this.currentLevel);
             this.create();
-            
+
          } else {
             $("#update-points").html(this.score);
             $("#update-points-left").html(this.pointsLeft);
@@ -307,7 +309,7 @@ class GameState extends Phaser.State {
 
          // Take the current sprite which holds information
          // about position and color and use to check proximity
-         this.checkColorChain(sprite);  
+         this.checkColorChain(sprite);
       } else {
          // Restart Game
          this.score = 0;
