@@ -383,7 +383,6 @@ var GameState = function (_Phaser$State) {
       _this.movesLeft = 4;
       _this.pointsLeft = 5;
       _this.playerName = "Alex";
-      _this.levelScore = 0;
       _this.score = 0;
       _this.gameStarted = false;
       _this.loadingScreen = null;
@@ -453,7 +452,6 @@ var GameState = function (_Phaser$State) {
          this.initBlocks();
 
          // To add text elements to the game
-         this.levelScore = 0;
          this.pointsLeft = this.level.getPoints();
          this.movesLeft = this.level.getMoves();
          $("#update-points").html(this.score);
@@ -553,13 +551,20 @@ var GameState = function (_Phaser$State) {
             }
          });
 
-         /* Create the color tree, and add the source sprite from the click
+         /* 
+          * Create the color tree, and add the source sprite from the click
           * as the root node. Then add it to the search queue to begin populating
           * the color chain tree.
           */
          var colorChainTree = new _colorTree.ColorTree();
          colorChainTree.root = new _colorTree.ColorNode(sprite);
          var searchQueue = [colorChainTree.root];
+
+         /*
+          * Represents the difference a block needs to be in order to have
+          * a valid place in the chain. This could be delta left, right, up
+          * or down.
+          */
          var delta = this.level.getBlockSize() + this.PADDING;
 
          // Executes until there are no longer nodes to check and add
@@ -634,11 +639,16 @@ var GameState = function (_Phaser$State) {
                   node.data.inputEnabled = false;
                });
 
-               // More complex score chaining system when later levels introduced
-               console.log("node count is " + colorChainTree.nodeCount);
-               _this2.score += colorChainTree.nodeCount;
-               _this2.levelScore += colorChainTree.nodeCount;
-               _this2.pointsLeft -= _this2.levelScore;
+               /*
+                * Chain modifier multiplies the points as the chains gets larger. This encourages
+                * larger chains to be found in order to complete the levels
+                */
+               var chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
+               var modifiedScore = chainModifier * colorChainTree.nodeCount;
+               console.log("Chain modifier is " + chainModifier);
+
+               _this2.score += modifiedScore;
+               _this2.pointsLeft -= modifiedScore;
 
                if (_this2.pointsLeft < 1) {
                   // trigger next level by increasing
