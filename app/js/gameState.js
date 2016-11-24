@@ -29,7 +29,6 @@ class GameState extends Phaser.State {
 	   this.movesLeft = 4;
 	   this.pointsLeft = 5;
 	   this.playerName = "Alex";
-	   this.levelScore = 0;
 	   this.score = 0;
 	   this.gameStarted = false;
 	   this.loadingScreen = null;
@@ -95,7 +94,6 @@ class GameState extends Phaser.State {
       this.initBlocks();
 
       // To add text elements to the game
-      this.levelScore = 0;
       this.pointsLeft = this.level.getPoints();
       this.movesLeft = this.level.getMoves();
       $("#update-points").html(this.score);
@@ -189,13 +187,20 @@ class GameState extends Phaser.State {
       });
 
 
-      /* Create the color tree, and add the source sprite from the click
+      /* 
+       * Create the color tree, and add the source sprite from the click
        * as the root node. Then add it to the search queue to begin populating
        * the color chain tree.
        */
       let colorChainTree = new ColorTree();
       colorChainTree.root = new ColorNode(sprite);
       let searchQueue = [colorChainTree.root];
+
+      /*
+       * Represents the difference a block needs to be in order to have
+       * a valid place in the chain. This could be delta left, right, up
+       * or down.
+       */
       let delta = this.level.getBlockSize() + this.PADDING;
 
 
@@ -270,11 +275,16 @@ class GameState extends Phaser.State {
             node.data.inputEnabled = false;
          });
 
-         // More complex score chaining system when later levels introduced
-         console.log("node count is " + colorChainTree.nodeCount);
-         this.score += colorChainTree.nodeCount;
-         this.levelScore += colorChainTree.nodeCount;
-         this.pointsLeft -= this.levelScore;
+         /*
+          * Chain modifier multiplies the points as the chains gets larger. This encourages
+          * larger chains to be found in order to complete the levels
+          */
+         let chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
+         let modifiedScore = chainModifier * colorChainTree.nodeCount;
+         console.log("Chain modifier is " + chainModifier);
+
+         this.score += modifiedScore;
+         this.pointsLeft -= modifiedScore;
 
          if(this.pointsLeft < 1) {
             // trigger next level by increasing
