@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/jfV2pSC.png" width="800px">
+<img src="http://i.imgur.com/QWTyTsK.png" width="900px">
 
 ## [Try it out the game here!](https://www.alexmdodge.ca/games/grid-grind/app/) </h1>
 ## Table of Contents
