@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/WSyzRU2.png" width="800px">
+<img src="http://i.imgur.com/jfV2pSC.png" width="800px">
 
 ## Table of Contents
 * [Game Info](#game) <br>
