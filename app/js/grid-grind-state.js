@@ -18,7 +18,7 @@
 import {Level} from './levels.js';
 import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
 
-class GameState extends Phaser.State {
+class GridGrind extends Phaser.State {
 
 	constructor() {
 		super();

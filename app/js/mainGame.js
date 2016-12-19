@@ -277,9 +277,11 @@ var ColorTree = exports.ColorTree = function () {
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var _gameState = require('./gameState.js');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _gameState2 = _interopRequireDefault(_gameState);
+var _gridGrindState = require('./grid-grind-state.js');
+
+var _gridGrindState2 = _interopRequireDefault(_gridGrindState);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -322,17 +324,37 @@ var Game = function (_Phaser$Game) {
 
     var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, 400, 400, Phaser.AUTO, 'game-container', null));
 
-    _this.state.add('GameState', _gameState2.default, false);
-    _this.state.start('GameState');
+    _this.state.add('GridGrind', _gridGrindState2.default, false);
+    _this.state.start('GridGrind');
     return _this;
   }
+
+  /** 
+   * Triggers the tutorial where players can choose to skip it or go through
+   * each slide. 
+   */
+
+
+  _createClass(Game, [{
+    key: 'startTutorial',
+    value: function startTutorial() {}
+
+    /**
+     * Triggers the start of the game and configure initial data when the user clicks
+     * to begin the game.
+     */
+
+  }, {
+    key: 'startGame',
+    value: function startGame() {}
+  }]);
 
   return Game;
 }(Phaser.Game);
 
 new Game();
 
-},{"./gameState.js":3}],3:[function(require,module,exports){
+},{"./grid-grind-state.js":3}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -368,13 +390,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-var GameState = function (_Phaser$State) {
-   _inherits(GameState, _Phaser$State);
+var GridGrind = function (_Phaser$State) {
+   _inherits(GridGrind, _Phaser$State);
 
-   function GameState() {
-      _classCallCheck(this, GameState);
+   function GridGrind() {
+      _classCallCheck(this, GridGrind);
 
-      var _this = _possibleConstructorReturn(this, (GameState.__proto__ || Object.getPrototypeOf(GameState)).call(this));
+      var _this = _possibleConstructorReturn(this, (GridGrind.__proto__ || Object.getPrototypeOf(GridGrind)).call(this));
 
       _this.blocks = null;
       _this.level = null;
@@ -399,7 +421,7 @@ var GameState = function (_Phaser$State) {
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-   _createClass(GameState, [{
+   _createClass(GridGrind, [{
       key: 'preload',
       value: function preload() {
          // Scales the game to the screen size
@@ -698,7 +720,7 @@ var GameState = function (_Phaser$State) {
       }
    }]);
 
-   return GameState;
+   return GridGrind;
 }(Phaser.State);
 
 exports.default = GameState;

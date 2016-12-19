@@ -16,7 +16,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-import GameState from './gameState.js';
+import GridGrind from './grid-grind-state.js';
 
 class Game extends Phaser.Game {
 
@@ -31,8 +31,23 @@ class Game extends Phaser.Game {
     */
    constructor() {
       super(400, 400, Phaser.AUTO, 'game-container', null);
-      this.state.add('GameState', GameState, false);
-      this.state.start('GameState');
+      this.state.add('GridGrind', GridGrind, false);
+      this.state.start('GridGrind');
+   }
+
+   /** 
+    * Triggers the tutorial where players can choose to skip it or go through
+    * each slide. 
+    */
+    startTutorial() {
+
+    }
+
+   /**
+    * Triggers the start of the game and configure initial data when the user clicks
+    * to begin the game.
+    */
+   startGame() {
    }
 }
 

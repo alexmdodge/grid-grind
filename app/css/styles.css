@@ -1,5 +1,6 @@
+/* Global Styles */
 html {
-   font-family: "Courier New", Courier, monospace;
+   font-family:  'Fjalla One', Helvetica, sans-serif;
    box-sizing: border-box;
    background-color: #eee;
    width: 100%;
@@ -18,10 +19,53 @@ html {
    margin: 30px auto;
    padding: 10px;
 }
+/* End Global Styles */
 
+/* Introduction */
+.intro-container {
+	width: 40%;
+	margin: 20vh auto 0;
+	position: relative;
+}
+
+.gg-field-label {
+	display: inline-block;
+	background-color: rgba(44, 94, 170,1);
+	position: absolute;
+	font-size: 2em;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 20px 10px;
+	margin-top: 20px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.gg-field-input {
+	width: 100%;
+	font-size: 2em;
+	text-align: center;
+	margin: 10px auto;
+	padding: 10px;
+	outline: none;
+	color: white;
+	background-color: #2E7AEC;
+	border: 5px solid rgba(44, 94, 170,1);
+	border-radius: 5px;
+}
+
+.intro-logo-src {
+	width: 100%;
+}
+
+/* End Introduction */
+
+/* User Interface */
 .user-interface {
 	width: 800px;
 	margin: 0 auto;
+	display: block;
 }
 
 .help-icon {
@@ -165,3 +209,4 @@ html {
 	padding: 5px;
 	width: 640px;
 }
+/* End User Interface */
