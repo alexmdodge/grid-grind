@@ -1,79 +1,70 @@
 <!doctype HTML>
-
 <html lang="en">
-   <head>
-      <title> GridGrind | The Random Puzzle Game </title>
-      <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-      <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
-      <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-      <link rel="stylesheet" type="text/css" href="./css/font-awesome.css" />
-   </head>
 
-   <body id="my-canvas">
-     <div class="intro-container">
-       <div class="intro-logo">
-         <img src="./img/gg-header-logo.png" alt="Grid Grind Logo Title" class="intro-logo-src">
-       </div>
+<head>
+  <title> GridGrind | The Random Puzzle Game </title>
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="./css/font-awesome.css" />
+</head>
 
-       <div class="intro-name">
-         <label for="gg-player-name" class="gg-field-label">
-           Name
-         </label>
-         <input type="text" id="gg-player-name" class="gg-field-input">
-       </div>
+<body id="my-canvas">
+  <div class="intro-container">
 
-       <div class="gg-button">
-         Play
-       </div>
-     </div>
+    <div class="intro-logo">
+      <img src="./img/gg-header-logo.png" alt="Grid Grind Logo Title" class="intro-logo-src">
+    </div>
 
-      <div class="user-interface">
-         <div class="top-menu">
+    <div class="intro-name">
+      <input type="text" id="gg-player-name" placeholder="Player Name" class="gg-field-input">
+    </div>
 
-            <div class="row">
-               <span id="top-menu-avatar" class="fa fa-user"></span>
+    <div class="gg-button">
+      Play
+    </div>
+  </div>
 
-               <h3 class="top-menu-title"><span id="player-name">Player Name Here</span></h3>
-
-               <div class="player-row">
-                  <h6 class="top-menu-total">Total Points
-                     <i class="fa fa-diamond"></i>
-                     <span id="update-points">0</span>
-                  </h6>
-                  <h6 class="top-menu-moves">Moves Left
-                     <i class="fa fa-heart"></i>
-                     <span id="update-moves-left">3</span>
-                  </h6>
-               </div>
-            </div>
-
-
-            <div class="level-row">
-               <h6 class="top-menu-current">Level
-                  <i class="fa fa-star"></i>
-                  <span id="update-level">1</span>
-               </h6>
-               <h6 class="top-menu-left">Next Level
-                  <i class="fa fa-level-up"></i>
-                  <span id="update-points-left">9</span>
-               </h6>
-            </div>
-
-            <div class="top-menu-progress">
-               <div class="progress-bar">
-                  <span id="progress-bar-done"></span>
-               </div>
-            </div>
-         </div>
-
-         <div class="left-side-menu">
-            <h1 class="help-icon"><i class="fa fa-cube"></i></h1>
-            <h3 class="left-side-menu-title">Block Order</h3>
-            <small class="left-side-menu-description">
+  <div class="user-interface">
+    <div class="top-menu">
+      <div class="row">
+        <span id="top-menu-avatar" class="fa fa-user"></span>
+        <h3 class="top-menu-title"><span id="player-name">Player Name Here</span></h3>
+        <div class="player-row">
+          <h6 class="top-menu-total">Total Points
+            <i class="fa fa-diamond"></i>
+            <span id="update-points">0</span>
+          </h6>
+          <h6 class="top-menu-moves">Moves Left
+            <i class="fa fa-heart"></i>
+            <span id="update-moves-left">3</span>
+          </h6>
+        </div>
+      </div>
+      <div class="level-row">
+        <h6 class="top-menu-current">Level
+          <i class="fa fa-star"></i>
+          <span id="update-level">1</span>
+        </h6>
+        <h6 class="top-menu-left">Next Level
+          <i class="fa fa-level-up"></i>
+          <span id="update-points-left">9</span>
+        </h6>
+      </div>
+      <div class="top-menu-progress">
+        <div class="progress-bar">
+          <span id="progress-bar-done"></span>
+        </div>
+      </div>
+    </div>
+    <div class="left-side-menu">
+      <h1 class="help-icon"><i class="fa fa-cube"></i></h1>
+      <h3 class="left-side-menu-title">Block Order</h3>
+      <small class="left-side-menu-description">
                When you click a square it will change color. The order of the colors is
                shown below. You will need to think ahead to find the best pattern series.
             </small>
-               <!--
+      <!--
                Blue    #5f8ffd
                Green   #69fe5e
                Red     #ff5c5c
@@ -81,35 +72,31 @@
                Orange  #fcca60
                Yellow  #f7fc60
                -->
-
-            <div class="color-order">
-               <span class="help-block blue fa fa-angle-right" style="background-color: #5f8ffd;"></span>
-               <span class="help-block green fa fa-angle-right" style="background-color: #69fe5e;"></span>
-               <span class="help-block red fa fa-angle-right" style="background-color: #ff5c5c;"></span>
-               <span class="help-block purple fa fa-angle-right" style="background-color: #d560fc;"></span>
-               <span class="help-block orange fa fa-angle-right" style="background-color: #fcca60;"></span>
-               <span class="help-block yellow fa fa-angle-right" style="background-color: #f7fc60;"></span>
-            </div>
-         </div>
-
-         <div class="right-side-menu">
-            <h1 class="help-icon">?</h1>
-            <h3 class="right-side-menu-title">How to Play</h3>
-            <small class="right-side-menu-description">
+      <div class="color-order">
+        <span class="help-block blue fa fa-angle-right" style="background-color: #5f8ffd;"></span>
+        <span class="help-block green fa fa-angle-right" style="background-color: #69fe5e;"></span>
+        <span class="help-block red fa fa-angle-right" style="background-color: #ff5c5c;"></span>
+        <span class="help-block purple fa fa-angle-right" style="background-color: #d560fc;"></span>
+        <span class="help-block orange fa fa-angle-right" style="background-color: #fcca60;"></span>
+        <span class="help-block yellow fa fa-angle-right" style="background-color: #f7fc60;"></span>
+      </div>
+    </div>
+    <div class="right-side-menu">
+      <h1 class="help-icon">?</h1>
+      <h3 class="right-side-menu-title">How to Play</h3>
+      <small class="right-side-menu-description">
                Click the blocks to change their color. If you connect at least 3 colors in a row you
                score points. Any combination other than diagonals connect. The longer the chain the more
                points you get.
             </small>
-         </div>
+    </div>
+  </div>
 
-      </div>
+  <div id="game-container">
+    <script src="./js/vendor/jquery.min.js"></script>
+    <script src="./js/vendor/phaser.min.js"></script>
+    <script src="./js/mainGame.js"></script>
+  </div>
+</body>
 
-      <div id="game-container">
-         <script src="./js/vendor/jquery.min.js"></script>
-         <script src="./js/vendor/phaser.min.js"></script>
-         <script src="./js/mainGame.js"></script>
-      </div>
-   </body>
 </html>
-
-

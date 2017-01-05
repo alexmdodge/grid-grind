@@ -1,10 +1,13 @@
 /* Global Styles */
 html {
    font-family:  'Fjalla One', Helvetica, sans-serif;
-   box-sizing: border-box;
    background-color: #eee;
    width: 100%;
    height: 100%;
+}
+
+* {
+	box-sizing: border-box;
 }
 
 .float-right { float: right; }
@@ -13,6 +16,11 @@ html {
 	display: block;
 	padding: 0;
 	margin: 0;
+}
+
+.user-interface,
+.game-container > canvas {
+	display: none;
 }
 
 .game-container > canvas {
@@ -24,35 +32,67 @@ html {
 /* Introduction */
 .intro-container {
 	width: 40%;
-	margin: 20vh auto 0;
+	margin: 18vh auto 0;
+	position: relative;
+}
+
+.intro-name {
 	position: relative;
 }
 
 .gg-field-label {
+	color: #fff;
 	display: inline-block;
-	background-color: rgba(44, 94, 170,1);
+	background-color: rgba(46, 122, 236,0.7);
 	position: absolute;
-	font-size: 2em;
+	font-size: 1em;
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: bold;
-	padding: 20px 10px;
+	padding: 10px 10px;
 	margin-top: 20px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	border-radius: 5px;
+	top: -13px;
 }
 
 .gg-field-input {
+	color: rgba(46, 122, 236,0.7);
 	width: 100%;
 	font-size: 2em;
+	font-weight: bold;
+	text-transform: uppercase;
 	text-align: center;
-	margin: 10px auto;
+	margin: 50px auto 10px;
 	padding: 10px;
 	outline: none;
-	color: white;
-	background-color: #2E7AEC;
-	border: 5px solid rgba(44, 94, 170,1);
+	background-color: rgba(46, 122, 236,0.1);
+	border: 5px solid rgba(46, 122, 236,0.5);
 	border-radius: 5px;
+}
+
+.gg-field-input:focus {
+	border: 5px solid rgba(46, 122, 236,0.7);
+}
+
+.gg-button {
+	color: rgba(75, 189, 75, 1);
+	cursor: pointer;
+	width: 100%;
+	padding: 10px;
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+	background-color: rgba(75, 189, 75, 0);
+	border: 5px solid rgba(75, 189, 75, 1);
+	border-radius: 5px;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+}
+
+.gg-button:hover {
+	transition: all 0.2s ease-in-out;
+	color: white;
+	background-color: rgba(75, 189, 75, 1);
 }
 
 .intro-logo-src {
@@ -65,7 +105,7 @@ html {
 .user-interface {
 	width: 800px;
 	margin: 0 auto;
-	display: block;
+	display: none;
 }
 
 .help-icon {
