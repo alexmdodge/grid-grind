@@ -18,7 +18,7 @@
 import {Level} from './levels.js';
 import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
 
-class GridGrind extends Phaser.State {
+export default class GridGrind extends Phaser.State {
 
 	constructor() {
 		super();
@@ -46,12 +46,13 @@ class GridGrind extends Phaser.State {
 
    preload() {
       // Scales the game to the screen size
-      //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      //game.scale.pageAlignHorizontally = true;
-      //game.scale.pageAlignVertically = true;
+      // game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      // game.scale.pageAlignHorizontally = true;
+      // game.scale.pageAlignVertically = true;
       this.game.stage.backgroundColor = '#eee';
 
-      /* Spritesheets for various components. Note the blocks are
+      /** 
+       * Spritesheets for various components. Note the blocks are
        * going to be removed and generated. If you wanted to load a
        * button in the example is below.
        *
@@ -332,5 +333,3 @@ class GridGrind extends Phaser.State {
    }
 
 }
-
-export default GameState;

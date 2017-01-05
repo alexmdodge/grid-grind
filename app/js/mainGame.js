@@ -310,7 +310,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Game = function (_Phaser$Game) {
   _inherits(Game, _Phaser$Game);
 
-  /*
+  /**
    * The game object initializes each piece.
    *
    * Game(width, height, renderer, phaser state objects)
@@ -351,8 +351,6 @@ var Game = function (_Phaser$Game) {
 
   return Game;
 }(Phaser.Game);
-
-new Game();
 
 },{"./grid-grind-state.js":3}],3:[function(require,module,exports){
 'use strict';
@@ -425,12 +423,13 @@ var GridGrind = function (_Phaser$State) {
       key: 'preload',
       value: function preload() {
          // Scales the game to the screen size
-         //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-         //game.scale.pageAlignHorizontally = true;
-         //game.scale.pageAlignVertically = true;
+         // game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+         // game.scale.pageAlignHorizontally = true;
+         // game.scale.pageAlignVertically = true;
          this.game.stage.backgroundColor = '#eee';
 
-         /* Spritesheets for various components. Note the blocks are
+         /** 
+          * Spritesheets for various components. Note the blocks are
           * going to be removed and generated. If you wanted to load a
           * button in the example is below.
           *
@@ -723,7 +722,7 @@ var GridGrind = function (_Phaser$State) {
    return GridGrind;
 }(Phaser.State);
 
-exports.default = GameState;
+exports.default = GridGrind;
 
 },{"./colorTree.js":1,"./levels.js":4}],4:[function(require,module,exports){
 "use strict";
