@@ -18,7 +18,7 @@
 import {Level} from './levels.js';
 import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
 
-export default class GridGrind extends Phaser.State {
+export class GridGrind extends Phaser.State {
 
 	constructor() {
 		super();
@@ -333,3 +333,5 @@ export default class GridGrind extends Phaser.State {
    }
 
 }
+
+export default GridGrind;

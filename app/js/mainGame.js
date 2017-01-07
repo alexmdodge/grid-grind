@@ -277,7 +277,10 @@ var ColorTree = exports.ColorTree = function () {
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Game = undefined;
 
 var _gridGrindState = require('./grid-grind-state.js');
 
@@ -307,7 +310,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-var Game = function (_Phaser$Game) {
+var Game = exports.Game = function (_Phaser$Game) {
   _inherits(Game, _Phaser$Game);
 
   /**
@@ -329,26 +332,6 @@ var Game = function (_Phaser$Game) {
     return _this;
   }
 
-  /** 
-   * Triggers the tutorial where players can choose to skip it or go through
-   * each slide. 
-   */
-
-
-  _createClass(Game, [{
-    key: 'startTutorial',
-    value: function startTutorial() {}
-
-    /**
-     * Triggers the start of the game and configure initial data when the user clicks
-     * to begin the game.
-     */
-
-  }, {
-    key: 'startGame',
-    value: function startGame() {}
-  }]);
-
   return Game;
 }(Phaser.Game);
 
@@ -358,6 +341,7 @@ var Game = function (_Phaser$Game) {
 Object.defineProperty(exports, "__esModule", {
    value: true
 });
+exports.GridGrind = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -388,7 +372,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-var GridGrind = function (_Phaser$State) {
+var GridGrind = exports.GridGrind = function (_Phaser$State) {
    _inherits(GridGrind, _Phaser$State);
 
    function GridGrind() {
@@ -724,7 +708,127 @@ var GridGrind = function (_Phaser$State) {
 
 exports.default = GridGrind;
 
-},{"./colorTree.js":1,"./levels.js":4}],4:[function(require,module,exports){
+},{"./colorTree.js":1,"./levels.js":5}],4:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _game = require('./game');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var _ggGame, _ggNav;
+
+var Navigation = function () {
+  function Navigation(playerName) {
+    _classCallCheck(this, Navigation);
+
+    this.playerName = playerName;
+    this.currentStep = 0;
+  }
+
+  /**
+   * Navigates to the next tutorial slide. Checks if first time in
+   * tutorial and adjusts screen accordingly.
+   */
+
+
+  _createClass(Navigation, [{
+    key: 'nextSlide',
+    value: function nextSlide() {
+      if (this.currentStep === 0) {
+        $('.gg-tutorial').fadeIn('fast');
+
+        this.currentStep++;
+        $('.gg-tutorial-slide' + this.currentStep).delay(800).fadeIn('fast');
+      } else {
+        this.currentStep++;
+        $('.gg-tutorial-slide' + (this.currentStep - 1)).fadeOut('fast');
+        $('.gg-tutorial-slide' + this.currentStep).delay(250).fadeIn('fast');
+      }
+    }
+
+    /**
+     * Navigates to the previous tutorial slide. Allows you to go back to
+     * the main introduction screen so you can change your name before 
+     * starting the game.
+     */
+
+  }, {
+    key: 'prevSlide',
+    value: function prevSlide() {
+      if (this.currentStep - 1 === 0) {
+        $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast');
+        $('.gg-tutorial').delay(500).fadeOut('fast');
+        this.currentStep--;
+      } else {
+        this.currentStep--;
+        $('.gg-tutorial-slide' + (this.currentStep + 1)).fadeOut('fast');
+        $('.gg-tutorial-slide' + this.currentStep).delay(250).fadeIn('fast');
+      }
+    }
+
+    /**
+     * Navigates to the final slide. Is triggered when the player chooses
+     * to skip the tutorial.
+     */
+
+  }, {
+    key: 'finalSlide',
+    value: function finalSlide() {
+      var _this = this;
+
+      $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast', function () {
+        _this.currentStep = 4;
+      });
+      $('.gg-tutorial-slide4').delay(250).fadeIn('fast');
+    }
+  }, {
+    key: 'startGame',
+    value: function startGame() {
+      $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast');
+      $('.gg-tutorial').delay(250).fadeOut('fast');
+      $('.gg-intro').delay(500).fadeOut('fast');
+      $('.gg-user-interface').delay(750).fadeIn('fast');
+      $('.game-container').delay(750).fadeIn('fast', function () {
+        new _game.Game();
+      });
+    }
+  }]);
+
+  return Navigation;
+}();
+
+/**
+ * Program is driven from this function. Begins once player
+ * navigates through the tutorial, or skips it.
+ */
+
+
+$(document).ready(function () {
+  $('.gg-intro-button').click(function () {
+    _ggNav = new Navigation($('.gg-field-input').val());
+    _ggNav.nextSlide();
+  });
+
+  $('.gg-button-next').click(function () {
+    _ggNav.nextSlide();
+  });
+
+  $('.gg-button-back').click(function () {
+    _ggNav.prevSlide();
+  });
+
+  $('.gg-skip-tutorial').click(function () {
+    _ggNav.finalSlide();
+  });
+
+  $('.gg-button-start').click(function () {
+    _ggNav.startGame();
+  });
+});
+
+},{"./game":2}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -858,5 +962,5 @@ var Level = exports.Level = function () {
 	return Level;
 }();
 
-},{}]},{},[2])
+},{}]},{},[4])
 //# sourceMappingURL=mainGame.js.map

@@ -1,8 +1,9 @@
 @import './variables';
 
 .gg-tutorial {
+  box-sizing: border-box;
   background-color: rgba(0,0,0,0.2);
-  display: block;
+  display: none;
   position: absolute;
   top: 0;
   z-index: 10;
@@ -34,6 +35,7 @@
     border-top: 5px solid #ccc;
     border-bottom: 5px solid #ccc;
     background-color: #fff;
+    display: none;
     margin: 0 auto;
     top: 10vh;
     left: 0;

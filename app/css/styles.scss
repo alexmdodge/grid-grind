@@ -9,7 +9,7 @@ html {
 
 * {
   font-family: $primary-body-font;
-	box-sizing: border-box;
+
 }
 
 * > h1, * > h2, * > h3 {
@@ -53,11 +53,11 @@ html {
 }
 
 .gg-user-interface,
-.game-container > canvas {
+#game-container > canvas {
 	display: none;
 }
 
-.game-container > canvas {
+#game-container > canvas {
    margin: 30px auto;
    padding: 10px;
 }
