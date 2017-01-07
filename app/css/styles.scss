@@ -1,0 +1,66 @@
+/* Global Styles */
+html {
+   background-color: #eee;
+   width: 100%;
+   height: 100%;
+}
+
+* {
+  font-family: 'Fjalla One', Helvetica, sans-serif;
+	box-sizing: border-box;
+}
+
+.float-right { float: right; }
+.float-left { float: left; }
+.row {
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+.gg-link {
+	font-weight: bold;
+	outline: none;
+	text-decoration: none;
+	color: inherit;
+	text-transform: uppercase;
+	border-bottom: 0px solid #888;
+
+	&:focus, &:visited, &:active, &:link {
+		color: inherit;
+	}
+
+	&:hover {
+		border-bottom: 2px solid #888;
+	}
+}
+
+.gg-user-interface,
+.game-container > canvas {
+	display: none;
+}
+
+.game-container > canvas {
+   margin: 30px auto;
+   padding: 10px;
+}
+/* End Global Styles */
+
+/* Introduction View */
+@import './gg-introduction';
+
+/* Tutorial View */
+@import './gg-tutorial';
+
+/* User Interface */
+@import './gg-user-interface';
+
+footer {
+	color: #bbb;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	padding: 20px;
+	text-align: center;
+	width: 100%;
+}

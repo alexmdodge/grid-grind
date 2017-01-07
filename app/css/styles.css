@@ -1,254 +1,239 @@
 /* Global Styles */
 html {
-   background-color: #eee;
-   width: 100%;
-   height: 100%;
-}
+  background-color: #eee;
+  width: 100%;
+  height: 100%; }
 
 * {
-  font-family:  'Fjalla One', Helvetica, sans-serif;
-	box-sizing: border-box;
-}
+  font-family: 'Fjalla One', Helvetica, sans-serif;
+  box-sizing: border-box; }
 
-.float-right { float: right; }
-.float-left { float: left; }
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
 .row {
-	display: block;
-	padding: 0;
-	margin: 0;
-}
+  display: block;
+  padding: 0;
+  margin: 0; }
+
+.gg-link {
+  font-weight: bold;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
+  border-bottom: 0px solid #888; }
+  .gg-link:focus, .gg-link:visited, .gg-link:active, .gg-link:link {
+    color: inherit; }
+  .gg-link:hover {
+    border-bottom: 2px solid #888; }
 
 .gg-user-interface,
 .game-container > canvas {
-	display: none;
-}
+  display: none; }
 
 .game-container > canvas {
-   margin: 30px auto;
-   padding: 10px;
-}
-/* End Global Styles */
+  margin: 30px auto;
+  padding: 10px; }
 
+/* End Global Styles */
+/* Introduction View */
 /* Introduction */
 .gg-intro {
-	width: 40%;
-	margin: 18vh auto 0;
-	position: relative;
-}
+  width: 40%;
+  margin: 18vh auto 0;
+  position: relative; }
+  .gg-intro-name {
+    position: relative; }
+  .gg-intro .gg-field-label,
+  .gg-intro .gg-field-input {
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-align: center; }
+  .gg-intro .gg-field-label {
+    color: #fff;
+    display: inline-block;
+    background-color: rgba(46, 122, 236, 0.7);
+    position: absolute;
+    font-size: 1em;
+    padding: 10px 10px;
+    margin-top: 20px;
+    top: -13px; }
+  .gg-intro .gg-field-input {
+    color: rgba(46, 122, 236, 0.7);
+    width: 100%;
+    font-size: 2em;
+    margin: 50px auto 10px;
+    padding: 10px;
+    outline: none;
+    background-color: rgba(46, 122, 236, 0.1);
+    border: 5px solid rgba(46, 122, 236, 0.5); }
+    .gg-intro .gg-field-input:focus {
+      border: 5px solid rgba(46, 122, 236, 0.9); }
+  .gg-intro .gg-button {
+    color: #4bbd4b;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(75, 189, 75, 0);
+    border: 5px solid #4bbd4b;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out; }
+    .gg-intro .gg-button:hover {
+      transition: all 0.2s ease-in-out;
+      color: white;
+      background-color: #4bbd4b; }
+  .gg-intro .gg-intro-logo-src {
+    width: 100%; }
 
-.gg-intro-name {
-	position: relative;
-}
-
-.gg-field-label {
-	color: #fff;
-	display: inline-block;
-	background-color: rgba(46, 122, 236,0.7);
-	position: absolute;
-	font-size: 1em;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: bold;
-	padding: 10px 10px;
-	margin-top: 20px;
-	border-radius: 5px;
-	top: -13px;
-}
-
-.gg-field-input {
-	color: rgba(46, 122, 236,0.7);
-	width: 100%;
-	font-size: 2em;
-	font-weight: bold;
-	text-transform: uppercase;
-	text-align: center;
-	margin: 50px auto 10px;
-	padding: 10px;
-	outline: none;
-	background-color: rgba(46, 122, 236,0.1);
-	border: 5px solid rgba(46, 122, 236,0.5);
-	border-radius: 5px;
-}
-
-.gg-field-input:focus {
-	border: 5px solid rgba(46, 122, 236,0.7);
-}
-
-.gg-button {
-	color: rgba(75, 189, 75, 1);
-	cursor: pointer;
-	width: 100%;
-	padding: 10px;
-	font-size: 2em;
-	font-weight: bold;
-	text-align: center;
-	background-color: rgba(75, 189, 75, 0);
-	border: 5px solid rgba(75, 189, 75, 1);
-	border-radius: 5px;
-	text-transform: uppercase;
-	transition: all 0.2s ease-in-out;
-}
-
-.gg-button:hover {
-	transition: all 0.2s ease-in-out;
-	color: white;
-	background-color: rgba(75, 189, 75, 1);
-}
-
-.gg-intro-logo-src {
-	width: 100%;
-}
-
-/* End Introduction */
-
-/* Tutorial */
-
+/* Tutorial View */
 /* User Interface */
 .gg-user-interface {
-	width: 800px;
-	margin: 0 auto;
-	display: none;
-}
+  width: 800px;
+  margin: 0 auto;
+  display: none; }
 
 .help-icon {
-	color: #888;
-	font-size: 250%;
-	font-weight: bold;
-	padding: 11px 9px 9px 11px;
-	vertical-align: center;
-	background-color: #bbb;
-	border-radius: 100%;
-	border: 1px solid #777;
-	margin: -50px auto 15px;
-	text-align: center;
-	width: 38px;
-}
+  color: #888;
+  font-size: 250%;
+  font-weight: bold;
+  padding: 11px 9px 9px 11px;
+  vertical-align: center;
+  background-color: #bbb;
+  border-radius: 100%;
+  border: 1px solid #777;
+  margin: -50px auto 15px;
+  text-align: center;
+  width: 38px; }
 
 .right-side-menu {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-	float: right;
-	text-align: center;
-	width: 150px;
-	font-size: 90%;
-	padding: 20px 20px 40px;
-	margin: 40px 0px 0px 0px;
-}
+  background-color: #ddd;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  float: right;
+  text-align: center;
+  width: 150px;
+  font-size: 90%;
+  padding: 20px 20px 40px;
+  margin: 40px 0px 0px 0px; }
 
 .left-side-menu {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-	float: left;
-	text-align: center;
-	width: 150px;
-	font-size: 90%;
-	padding: 20px 20px 30px;
-	margin: 40px 10px 0px 0px;
-}
+  background-color: #ddd;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  float: left;
+  text-align: center;
+  width: 150px;
+  font-size: 90%;
+  padding: 20px 20px 30px;
+  margin: 40px 10px 0px 0px; }
 
 .right-side-menu-title,
-.left-side-menu-title, {
-	width: 80%;
-	margin: 0 auto 10px;
-	padding: 10px;
-	text-align: center;
-	border: 1px dashed #777;
-}
+.left-side-menu-title {
+  width: 80%;
+  margin: 0 auto 10px;
+  padding: 10px;
+  text-align: center;
+  border: 1px dashed #777; }
 
 .color-order {
-	padding-top: 15px;
-}
+  padding-top: 15px; }
 
 .help-block {
-	width: 15px;
-	height: 15px;
-	display: inline-block;
-	border: 1px solid #555;
-}
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  border: 1px solid #555; }
 
 .top-menu {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-	padding: 10px;
-	margin-bottom: 10px;
-}
+  background-color: #ddd;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px; }
 
 .top-menu-title {
-	display: inline-block;
-	padding: 0;
-	margin: 10px;
-}
+  display: inline-block;
+  padding: 0;
+  margin: 10px; }
 
 #top-menu-avatar {
-	float: left;
-	color: #888;
-	width: 85px;
-	height: 70px;
-	background-color: #bbb;
-	border: 1px solid #777;
-	border-radius: 100%;
-	text-align: center;
-	padding-top: 16px;
-	font-size: 50px;
-	margin: 0px 20px 10px 10px;
-}
+  float: left;
+  color: #888;
+  width: 85px;
+  height: 70px;
+  background-color: #bbb;
+  border: 1px solid #777;
+  border-radius: 100%;
+  text-align: center;
+  padding-top: 16px;
+  font-size: 50px;
+  margin: 0px 20px 10px 10px; }
 
 .top-menu-total,
 .top-menu-moves {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
-	width: 145px;
-}
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 145px; }
+
 .top-menu-current,
 .top-menu-left {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
-	width: 250px;
-}
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 250px; }
 
 .top-menu-left {
-	text-align: right;
-	padding-left: 50px;
-}
+  text-align: right;
+  padding-left: 50px; }
 
 .player-row {
-	text-align: center;
-	width: 300px;
-	padding: 10px;
-	display: inline-block;
-	/*background-color: rgba(137,200,110,0.4);*/
-	background-color: #69fe5e;
-	border: 1px solid rgba(137,200,110,1);
-	
-	border-radius: 3px;
-}
+  text-align: center;
+  width: 300px;
+  padding: 10px;
+  display: inline-block;
+  /*background-color: rgba(137,200,110,0.4);*/
+  background-color: #69fe5e;
+  border: 1px solid #89c86e;
+  border-radius: 3px; }
 
 .progress-bar {
-	width: 600px;
-	height: 20px;
-	margin-left: 120px;
-	background-color: #ccc;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-}
+  width: 600px;
+  height: 20px;
+  margin-left: 120px;
+  background-color: #ccc;
+  border: 1px solid #bbb;
+  border-radius: 3px; }
 
 #progress-bar-done {
-	display: inline-block;
-	background-color: #69fe5e;
-	border-radius: 3px;
-	height: 20px;
-	z-index: 9999;
-	width: 0%;
-}
+  display: inline-block;
+  background-color: #69fe5e;
+  border-radius: 3px;
+  height: 20px;
+  z-index: 9999;
+  width: 0%; }
 
 .level-row {
-	display: inline-block;
-	padding: 5px;
-	width: 640px;
-}
+  display: inline-block;
+  padding: 5px;
+  width: 640px; }
+
 /* End User Interface */
+footer {
+  color: #bbb;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+  text-align: center;
+  width: 100%; }
+
+/*# sourceMappingURL=styles.css.map */
