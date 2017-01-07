@@ -1,12 +1,12 @@
 /* Global Styles */
 html {
-   font-family:  'Fjalla One', Helvetica, sans-serif;
    background-color: #eee;
    width: 100%;
    height: 100%;
 }
 
 * {
+  font-family:  'Fjalla One', Helvetica, sans-serif;
 	box-sizing: border-box;
 }
 
@@ -18,7 +18,7 @@ html {
 	margin: 0;
 }
 
-.user-interface,
+.gg-user-interface,
 .game-container > canvas {
 	display: none;
 }
@@ -30,13 +30,13 @@ html {
 /* End Global Styles */
 
 /* Introduction */
-.intro-container {
+.gg-intro {
 	width: 40%;
 	margin: 18vh auto 0;
 	position: relative;
 }
 
-.intro-name {
+.gg-intro-name {
 	position: relative;
 }
 
@@ -95,14 +95,16 @@ html {
 	background-color: rgba(75, 189, 75, 1);
 }
 
-.intro-logo-src {
+.gg-intro-logo-src {
 	width: 100%;
 }
 
 /* End Introduction */
 
+/* Tutorial */
+
 /* User Interface */
-.user-interface {
+.gg-user-interface {
 	width: 800px;
 	margin: 0 auto;
 	display: none;
