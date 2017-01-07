@@ -1,4 +1,10 @@
+@import './variables';
+
 /* Introduction */
+.gg-intro > * {
+  font-family: $primary-font;
+}
+
 .gg-intro {
 	width: 40%;
 	margin: 18vh auto 0;
@@ -25,6 +31,7 @@
   }
 
   .gg-field-input {
+    font-family: $primary-font;
     color: rgba(46, 122, 236,0.7);
     width: 100%;
     font-size: 2em;
@@ -37,7 +44,7 @@
     &:focus { border: 5px solid rgba(46, 122, 236,0.9); }
   }
 
-  .gg-button {
+  .gg-intro-button {
     color: rgba(75, 189, 75, 1);
     cursor: pointer;
     width: 100%;
@@ -57,7 +64,7 @@
       background-color: rgba(75, 189, 75, 1);
     }
   }
-
+  
   .gg-intro-logo-src {
     width: 100%;
   }

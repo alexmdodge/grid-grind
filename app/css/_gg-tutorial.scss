@@ -1,0 +1,100 @@
+@import './variables';
+
+.gg-tutorial {
+  background-color: rgba(0,0,0,0.2);
+  display: block;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+
+  .gg-skip-tutorial {
+    border-bottom: 2px solid rgba(0,0,0,0);
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    font-family: $primary-font;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+
+    &:hover { 
+      border-bottom: 2px solid #888;
+    }
+  }
+
+  .gg-tutorial-slide1,
+  .gg-tutorial-slide2,
+  .gg-tutorial-slide3,
+  .gg-tutorial-slide4 {
+    position: absolute;
+    border-radius: 10px;
+    border-top: 5px solid #ccc;
+    border-bottom: 5px solid #ccc;
+    background-color: #fff;
+    margin: 0 auto;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
+    text-align: center;
+    width: 80%;
+
+    p { font-size: 1.3em;}
+  }
+
+  img {
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  h1, h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .gg-button-back,
+  .gg-button-next,
+  .gg-button-start {
+    background-color: #eee;
+    display: block;
+    color: white;
+    margin: 10px;
+    font-size: 1em;
+    border: none;
+    width: 20%;
+  }
+
+  .gg-button-back {
+    float: left;
+    &:hover { background-color: lighten($primary-blue,5); }
+    &:active { background-color: darken($primary-blue,5); }
+  }
+
+  .gg-button-next {
+    float: right;
+    &:hover { background-color: lighten($primary-green,5); }
+    &:active { background-color: darken($primary-green,5); }
+  }
+
+  .gg-button-start {
+    background-color: lighten($primary-green,100);
+    color: $primary-green;
+    border: 5px solid $primary-green;
+    font-family: $primary-font;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 80px auto;
+    padding: 20px;
+    width: 50%;
+    transition: all 0.2s ease-in-out;
+
+    &:hover { 
+      background-color: $primary-green; 
+      color: white;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

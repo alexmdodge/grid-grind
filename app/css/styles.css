@@ -5,8 +5,11 @@ html {
   height: 100%; }
 
 * {
-  font-family: 'Fjalla One', Helvetica, sans-serif;
+  font-family: "Open Sans", sans-serif;
   box-sizing: border-box; }
+
+* > h1, * > h2, * > h3 {
+  font-family: "Fjalla One", Helvetica, sans-serif; }
 
 .float-right {
   float: right; }
@@ -18,6 +21,15 @@ html {
   display: block;
   padding: 0;
   margin: 0; }
+
+.gg-button {
+  font-family: "Fjalla One", Helvetica, sans-serif;
+  cursor: pointer;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  text-transform: uppercase; }
 
 .gg-link {
   font-weight: bold;
@@ -42,6 +54,9 @@ html {
 /* End Global Styles */
 /* Introduction View */
 /* Introduction */
+.gg-intro > * {
+  font-family: "Fjalla One", Helvetica, sans-serif; }
+
 .gg-intro {
   width: 40%;
   margin: 18vh auto 0;
@@ -63,6 +78,7 @@ html {
     margin-top: 20px;
     top: -13px; }
   .gg-intro .gg-field-input {
+    font-family: "Fjalla One", Helvetica, sans-serif;
     color: rgba(46, 122, 236, 0.7);
     width: 100%;
     font-size: 2em;
@@ -73,7 +89,7 @@ html {
     border: 5px solid rgba(46, 122, 236, 0.5); }
     .gg-intro .gg-field-input:focus {
       border: 5px solid rgba(46, 122, 236, 0.9); }
-  .gg-intro .gg-button {
+  .gg-intro .gg-intro-button {
     color: #4bbd4b;
     cursor: pointer;
     width: 100%;
@@ -86,7 +102,7 @@ html {
     border-radius: 5px;
     text-transform: uppercase;
     transition: all 0.2s ease-in-out; }
-    .gg-intro .gg-button:hover {
+    .gg-intro .gg-intro-button:hover {
       transition: all 0.2s ease-in-out;
       color: white;
       background-color: #4bbd4b; }
@@ -94,6 +110,91 @@ html {
     width: 100%; }
 
 /* Tutorial View */
+.gg-tutorial {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: block;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh; }
+  .gg-tutorial .gg-skip-tutorial {
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    font-family: "Fjalla One", Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase; }
+    .gg-tutorial .gg-skip-tutorial:hover {
+      border-bottom: 2px solid #888; }
+  .gg-tutorial .gg-tutorial-slide1,
+  .gg-tutorial .gg-tutorial-slide2,
+  .gg-tutorial .gg-tutorial-slide3,
+  .gg-tutorial .gg-tutorial-slide4 {
+    position: absolute;
+    border-radius: 10px;
+    border-top: 5px solid #ccc;
+    border-bottom: 5px solid #ccc;
+    background-color: #fff;
+    margin: 0 auto;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
+    text-align: center;
+    width: 80%; }
+    .gg-tutorial .gg-tutorial-slide1 p,
+    .gg-tutorial .gg-tutorial-slide2 p,
+    .gg-tutorial .gg-tutorial-slide3 p,
+    .gg-tutorial .gg-tutorial-slide4 p {
+      font-size: 1.3em; }
+  .gg-tutorial img {
+    width: 40%;
+    margin: 0 auto; }
+  .gg-tutorial h1, .gg-tutorial h2 {
+    text-transform: uppercase;
+    font-weight: bold; }
+  .gg-tutorial .gg-button-back,
+  .gg-tutorial .gg-button-next,
+  .gg-tutorial .gg-button-start {
+    background-color: #eee;
+    display: block;
+    color: white;
+    margin: 10px;
+    font-size: 1em;
+    border: none;
+    width: 20%; }
+  .gg-tutorial .gg-button-back {
+    float: left; }
+    .gg-tutorial .gg-button-back:hover {
+      background-color: #4589ee; }
+    .gg-tutorial .gg-button-back:active {
+      background-color: #176bea; }
+  .gg-tutorial .gg-button-next {
+    float: right; }
+    .gg-tutorial .gg-button-next:hover {
+      background-color: #5ec45e; }
+    .gg-tutorial .gg-button-next:active {
+      background-color: #40af40; }
+  .gg-tutorial .gg-button-start {
+    background-color: white;
+    color: #4bbd4b;
+    border: 5px solid #4bbd4b;
+    font-family: "Fjalla One", Helvetica, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 80px auto;
+    padding: 20px;
+    width: 50%;
+    transition: all 0.2s ease-in-out; }
+    .gg-tutorial .gg-button-start:hover {
+      background-color: #4bbd4b;
+      color: white;
+      transition: all 0.2s ease-in-out; }
+
 /* User Interface */
 .gg-user-interface {
   width: 800px;
@@ -228,6 +329,7 @@ html {
 
 /* End User Interface */
 footer {
+  font-family: "Fjalla One", Helvetica, sans-serif;
   color: #bbb;
   display: block;
   position: absolute;
