@@ -15,14 +15,17 @@
     cursor: pointer;
     position: absolute;
     right: 40px;
-    top: 20px;
+    top: 15px;
     font-family: $primary-font;
     font-weight: bold;
+    font-size: 1.6em;
     color: white;
     text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
 
     &:hover { 
-      border-bottom: 2px solid #888;
+      color: darken(white,10);
+      transition: all 0.2s ease-in-out;
     }
   }
 
@@ -60,25 +63,29 @@
   .gg-button-back,
   .gg-button-next,
   .gg-button-start {
-    background-color: #eee;
     display: block;
-    color: white;
+    color: #eee;
     margin: 10px;
-    font-size: 1em;
+    font-size: 1.8em;
     border: none;
-    width: 20%;
   }
 
   .gg-button-back {
     float: left;
-    &:hover { background-color: lighten($primary-blue,5); }
-    &:active { background-color: darken($primary-blue,5); }
+    transition: all 0.1s ease-in-out;
+    &:hover { 
+      transition: all 0.1s ease-in-out;
+      color: lighten($primary-blue,5);
+    }
   }
 
   .gg-button-next {
     float: right;
-    &:hover { background-color: lighten($primary-green,5); }
-    &:active { background-color: darken($primary-green,5); }
+    transition: all 0.1s ease-in-out;
+    &:hover {
+      transition: all 0.1s ease-in-out;
+      color: lighten($primary-green,5);
+    }
   }
 
   .gg-button-start {

@@ -40,15 +40,12 @@ html {
   .gg-link:focus, .gg-link:visited, .gg-link:active, .gg-link:link {
     color: inherit; }
   .gg-link:hover {
-    border-bottom: 2px solid #888; }
+    color: #888; }
 
-.gg-user-interface,
-#game-container > canvas {
-  display: none; }
-
-#game-container > canvas {
-  margin: 30px auto;
-  padding: 10px; }
+.gg-hide-game {
+  display: none !important; }
+  .gg-hide-game canvas {
+    display: none !important; }
 
 /* End Global Styles */
 /* Introduction View */
@@ -66,7 +63,6 @@ html {
   .gg-intro .gg-field-label,
   .gg-intro .gg-field-input {
     border-radius: 5px;
-    text-transform: uppercase;
     text-align: center; }
   .gg-intro .gg-field-label {
     color: #fff;
@@ -76,6 +72,7 @@ html {
     font-size: 1em;
     padding: 10px 10px;
     margin-top: 20px;
+    text-transform: uppercase;
     top: -13px; }
   .gg-intro .gg-field-input {
     font-family: "Fjalla One", Helvetica, sans-serif;
@@ -124,13 +121,16 @@ html {
     cursor: pointer;
     position: absolute;
     right: 40px;
-    top: 20px;
+    top: 15px;
     font-family: "Fjalla One", Helvetica, sans-serif;
     font-weight: bold;
+    font-size: 1.6em;
     color: white;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out; }
     .gg-tutorial .gg-skip-tutorial:hover {
-      border-bottom: 2px solid #888; }
+      color: #e6e6e6;
+      transition: all 0.2s ease-in-out; }
   .gg-tutorial .gg-tutorial-slide1,
   .gg-tutorial .gg-tutorial-slide2,
   .gg-tutorial .gg-tutorial-slide3,
@@ -162,25 +162,23 @@ html {
   .gg-tutorial .gg-button-back,
   .gg-tutorial .gg-button-next,
   .gg-tutorial .gg-button-start {
-    background-color: #eee;
     display: block;
-    color: white;
+    color: #eee;
     margin: 10px;
-    font-size: 1em;
-    border: none;
-    width: 20%; }
+    font-size: 1.8em;
+    border: none; }
   .gg-tutorial .gg-button-back {
-    float: left; }
+    float: left;
+    transition: all 0.1s ease-in-out; }
     .gg-tutorial .gg-button-back:hover {
-      background-color: #4589ee; }
-    .gg-tutorial .gg-button-back:active {
-      background-color: #176bea; }
+      transition: all 0.1s ease-in-out;
+      color: #4589ee; }
   .gg-tutorial .gg-button-next {
-    float: right; }
+    float: right;
+    transition: all 0.1s ease-in-out; }
     .gg-tutorial .gg-button-next:hover {
-      background-color: #5ec45e; }
-    .gg-tutorial .gg-button-next:active {
-      background-color: #40af40; }
+      transition: all 0.1s ease-in-out;
+      color: #5ec45e; }
   .gg-tutorial .gg-button-start {
     background-color: white;
     color: #4bbd4b;
@@ -200,8 +198,7 @@ html {
 /* User Interface */
 .gg-user-interface {
   width: 800px;
-  margin: 0 auto;
-  display: none; }
+  margin: 0 auto; }
 
 .help-icon {
   color: #888;
@@ -336,8 +333,23 @@ footer {
   display: block;
   position: absolute;
   bottom: 0;
-  padding: 20px;
+  padding: 20px 0px 10px;
   text-align: center;
   width: 100%; }
+  footer .gg-footer-github,
+  footer .gg-footer-paypal {
+    font-size: 1.2em;
+    text-decoration: none;
+    outline: none;
+    color: #bbb; }
+    footer .gg-footer-github:active, footer .gg-footer-github:link, footer .gg-footer-github:visited,
+    footer .gg-footer-paypal:active,
+    footer .gg-footer-paypal:link,
+    footer .gg-footer-paypal:visited {
+      color: #bbb; }
+  footer .gg-footer-github:hover {
+    color: #333; }
+  footer .gg-footer-paypal:hover {
+    color: #0A87C1; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -48,19 +48,15 @@ html {
 	}
 
 	&:hover {
-		border-bottom: 2px solid #888;
+		color: #888;
 	}
 }
 
-.gg-user-interface,
-#game-container > canvas {
-	display: none;
+.gg-hide-game {
+	display: none !important;
+	canvas { display: none !important; }
 }
 
-#game-container > canvas {
-   margin: 30px auto;
-   padding: 10px;
-}
 /* End Global Styles */
 
 /* Introduction View */
@@ -78,7 +74,28 @@ footer {
 	display: block;
 	position: absolute;
 	bottom: 0;
-	padding: 20px;
+	padding: 20px 0px 10px;
 	text-align: center;
 	width: 100%;
+
+
+	.gg-footer-github,
+	.gg-footer-paypal {
+		font-size: 1.2em;
+		text-decoration: none;
+		outline: none;
+		color: #bbb;
+
+		&:active, &:link, &:visited {
+			color: #bbb;
+		}
+	}
+
+	.gg-footer-github {
+		&:hover { color: #333;}
+	}
+
+	.gg-footer-paypal {
+		&:hover { color: #0A87C1;}
+	}
 }
