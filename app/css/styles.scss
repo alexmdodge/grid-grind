@@ -2,14 +2,10 @@
 
 /* Global Styles */
 html {
+   font-family: $primary-body-font;
    background-color: #eee;
    width: 100%;
    height: 100%;
-}
-
-* {
-  font-family: $primary-body-font;
-
 }
 
 * > h1, * > h2, * > h3 {
