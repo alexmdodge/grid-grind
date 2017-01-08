@@ -67,13 +67,13 @@ var gulp   = require("gulp"),
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 gulp.task('test-scripts', function() {
-   var bundleStream = browserify("./app/js/index.js",{debug: true})
+   var bundleStream = browserify("./app/js/game.js",{debug: true})
     .transform("babelify",{presets: ["es2015"]})
     .bundle();
 
    bundleStream
       .pipe(exorcist('app/js/mainGame.js.map'))
-      .pipe(source('app/js/index.js'))
+      .pipe(source('app/js/game.js'))
       .pipe(rename('mainGame.js'))
       .pipe(gulp.dest('app/js/'))
       .pipe(plumber())
