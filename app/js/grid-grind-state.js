@@ -16,6 +16,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 import {Level} from './levels.js';
+import {_ggPlayerName} from './game.js';
 import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
 
 export class GridGrind extends Phaser.State {
@@ -59,7 +60,6 @@ export class GridGrind extends Phaser.State {
        * this.game.load.spritesheet('button', '../img/button.png', 120, 40);
        */
       this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
-      this.game.load.spritesheet('logo', '../img/grid-grind-logo.png', 1000, 653);
       this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
    }
 
