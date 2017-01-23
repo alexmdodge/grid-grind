@@ -1,0 +1,51 @@
+/* Global Styles */
+html {
+   font-family: $primary-body-font;
+   background-color: #eee;
+
+}
+
+* > h1, * > h2, * > h3 {
+	font-family: $primary-font;
+}
+
+.float-right { float: right; }
+.float-left { float: left; }
+.row {
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+.gg-button {
+	font-family: $primary-font;
+	cursor: pointer;
+	padding: 10px;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 5px;
+	text-transform: uppercase;
+}
+
+
+.gg-link {
+	font-weight: bold;
+	outline: none;
+	text-decoration: none;
+	color: inherit;
+	text-transform: uppercase;
+	border-bottom: 0px solid #888;
+
+	&:focus, &:visited, &:active, &:link {
+		color: inherit;
+	}
+
+	&:hover {
+		color: #888;
+	}
+}
+
+.gg-hide-game {
+	display: none !important;
+	canvas { display: none !important; }
+}

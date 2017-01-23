@@ -1,9 +1,8 @@
+/* General Styles for Application */
 /* Global Styles */
 html {
   font-family: "Open Sans", sans-serif;
-  background-color: #eee;
-  width: 100%;
-  height: 100%; }
+  background-color: #eee; }
 
 * > h1, * > h2, * > h3 {
   font-family: "Fjalla One", Helvetica, sans-serif; }
@@ -45,7 +44,6 @@ html {
   .gg-hide-game canvas {
     display: none !important; }
 
-/* End Global Styles */
 /* Introduction View */
 /* Introduction */
 .gg-intro > * {
@@ -194,126 +192,87 @@ html {
       transition: all 0.2s ease-in-out; }
 
 /* User Interface */
-.gg-user-interface {
-  width: 800px;
+.gg-progress-bar {
+  width: 600px;
+  height: 45px;
+  background-color: #888;
+  border: 5px solid #444;
+  border-radius: 3px;
+  position: relative;
+  display: block;
+  margin: 15px auto; }
+  .gg-progress-bar #progress-bar-done {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #5F8FFD;
+    border-radius: 3px;
+    height: 45px;
+    z-index: 10;
+    width: 0; }
+  .gg-progress-bar .gg-progress-title {
+    position: relative;
+    color: #eee;
+    width: 100%;
+    text-align: center;
+    margin: 8px 0px;
+    z-index: 20; }
+
+.gg-moves-left,
+.gg-current-level,
+.gg-total-points,
+.gg-help-icon,
+.gg-moves-left {
+  color: #333;
+  position: fixed; }
+
+.gg-moves-left {
+  right: 30px;
+  top: 10px; }
+
+.gg-current-level {
+  bottom: 10px;
+  left: 30px; }
+
+.gg-help-icon {
+  position: fixed;
+  background-color: #ccc;
+  border: 2px solid #aaa;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  bottom: 0px;
+  right: 30px; }
+  .gg-help-icon span {
+    position: absolute;
+    left: 16px;
+    top: 6px; }
+
+.gg-help-menu {
+  display: none; }
+
+.gg-total-points {
+  left: 30px;
+  top: 10px; }
+
+.gg-block-order {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0 auto; }
 
-.help-icon {
-  color: #888;
-  font-size: 250%;
-  font-weight: bold;
-  padding: 11px 9px 9px 11px;
-  vertical-align: center;
-  background-color: #bbb;
-  border-radius: 100%;
-  border: 1px solid #777;
-  margin: -50px auto 15px;
-  text-align: center;
-  width: 45px; }
+/* Game Board */
+#gg-game-container {
+  display: block;
+  margin: 0 auto !important; }
+  #gg-game-container canvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto; }
 
-.right-side-menu {
-  background-color: #ddd;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  float: right;
-  text-align: center;
-  width: 150px;
-  font-size: 90%;
-  padding: 20px 20px 40px;
-  margin: 40px 0px 0px 0px; }
-
-.left-side-menu {
-  background-color: #ddd;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  float: left;
-  text-align: center;
-  width: 150px;
-  font-size: 90%;
-  padding: 20px 20px 30px;
-  margin: 40px 10px 0px 0px; }
-
-.right-side-menu-title,
-.left-side-menu-title {
-  width: 80%;
-  margin: 0 auto 10px;
-  padding: 10px;
-  text-align: center;
-  text-transform: uppercase;
-  border: 1px dashed #777; }
-
-.color-order {
-  padding-top: 15px; }
-
-.help-block {
-  width: 15px;
-  height: 15px;
-  display: inline-block;
-  border: 1px solid #555; }
-
-.top-menu {
-  background-color: #ddd;
-  border: 5px solid #aaa;
-  border-radius: 3px;
-  padding: 10px;
-  margin: 0 auto 10px;
-  width: 50%; }
-  .top-menu .top-menu-title {
-    font-family: "Fjalla One", Helvetica, sans-serif;
-    padding: 0;
-    margin: 0;
-    text-align: center; }
-
-.top-menu-total,
-.top-menu-moves {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-  width: 145px; }
-
-.top-menu-current,
-.top-menu-left {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-  width: 250px; }
-
-.top-menu-left {
-  text-align: right;
-  padding-left: 50px; }
-
-.player-row {
-  text-align: center;
-  width: 300px;
-  padding: 10px;
-  display: inline-block;
-  /*background-color: rgba(137,200,110,0.4);*/
-  background-color: #69fe5e;
-  border: 1px solid #89c86e;
-  border-radius: 3px; }
-
-.progress-bar {
-  width: 600px;
-  height: 20px;
-  margin-left: 120px;
-  background-color: #ccc;
-  border: 1px solid #bbb;
-  border-radius: 3px; }
-
-#progress-bar-done {
-  display: inline-block;
-  background-color: #69fe5e;
-  border-radius: 3px;
-  height: 20px;
-  z-index: 9999;
-  width: 0%; }
-
-.level-row {
-  display: inline-block;
-  padding: 5px;
-  width: 640px; }
-
-/* End User Interface */
+/* Footer */
 footer {
   font-family: "Fjalla One", Helvetica, sans-serif;
   color: #bbb;

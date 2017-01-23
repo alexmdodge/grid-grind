@@ -1,59 +1,7 @@
 @import './variables';
 
-/* Global Styles */
-html {
-   font-family: $primary-body-font;
-   background-color: #eee;
-   width: 100%;
-   height: 100%;
-}
-
-* > h1, * > h2, * > h3 {
-	font-family: $primary-font;
-}
-
-.float-right { float: right; }
-.float-left { float: left; }
-.row {
-	display: block;
-	padding: 0;
-	margin: 0;
-}
-
-.gg-button {
-	font-family: $primary-font;
-	cursor: pointer;
-	padding: 10px;
-	font-weight: bold;
-	text-align: center;
-	border-radius: 5px;
-	text-transform: uppercase;
-}
-
-
-.gg-link {
-	font-weight: bold;
-	outline: none;
-	text-decoration: none;
-	color: inherit;
-	text-transform: uppercase;
-	border-bottom: 0px solid #888;
-
-	&:focus, &:visited, &:active, &:link {
-		color: inherit;
-	}
-
-	&:hover {
-		color: #888;
-	}
-}
-
-.gg-hide-game {
-	display: none !important;
-	canvas { display: none !important; }
-}
-
-/* End Global Styles */
+/* General Styles for Application */
+@import './gg-global';
 
 /* Introduction View */
 @import './gg-introduction';
@@ -64,34 +12,8 @@ html {
 /* User Interface */
 @import './gg-user-interface';
 
-footer {
-	font-family: $primary-font;
-	color: #bbb;
-	display: block;
-	position: absolute;
-	bottom: 0;
-	padding: 20px 0px 10px;
-	text-align: center;
-	width: 100%;
+/* Game Board */
+@import './gg-game';
 
-
-	.gg-footer-github,
-	.gg-footer-paypal {
-		font-size: 1.2em;
-		text-decoration: none;
-		outline: none;
-		color: #bbb;
-
-		&:active, &:link, &:visited {
-			color: #bbb;
-		}
-	}
-
-	.gg-footer-github {
-		&:hover { color: #333;}
-	}
-
-	.gg-footer-paypal {
-		&:hover { color: #0A87C1;}
-	}
-}
+/* Footer */
+@import './gg-footer';

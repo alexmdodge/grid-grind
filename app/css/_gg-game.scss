@@ -1,0 +1,11 @@
+#gg-game-container {
+  display: block;
+  margin: 0 auto !important;
+
+  canvas { 
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}

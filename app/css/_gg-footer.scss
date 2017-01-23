@@ -1,0 +1,31 @@
+footer {
+	font-family: $primary-font;
+	color: #bbb;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	padding: 20px 0px 10px;
+	text-align: center;
+	width: 100%;
+
+
+	.gg-footer-github,
+	.gg-footer-paypal {
+		font-size: 1.2em;
+		text-decoration: none;
+		outline: none;
+		color: #bbb;
+
+		&:active, &:link, &:visited {
+			color: #bbb;
+		}
+	}
+
+	.gg-footer-github {
+		&:hover { color: #333;}
+	}
+
+	.gg-footer-paypal {
+		&:hover { color: #0A87C1;}
+	}
+}
