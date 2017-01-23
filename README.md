@@ -1,6 +1,6 @@
 <img src="http://i.imgur.com/QWTyTsK.png" width="900px">
 
-## [Try it out the game here!](https://www.alexmdodge.ca/games/grid-grind/app/) </h1>
+## [Try it out here!](https://www.alexmdodge.ca/games/grid-grind/app/) </h1>
 ## Table of Contents
 * [Game Info](#game) <br>
 * [Usage](#usage) <br>
