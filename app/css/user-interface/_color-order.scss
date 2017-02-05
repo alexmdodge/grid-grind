@@ -1,7 +1,57 @@
 .gg-block-order {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 0 20%;
+  
+  &-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ccc;
+    color: #333;
+    border: 3px solid #bbb;
+    border-radius: 3px;
+    padding: 5px 15px;
+    margin: 0 5px 15px;
+  }
+
+  .help-block {
+    border: 3px solid #888;
+    border-radius: 3px;
+    padding: 3px 10px 3px;
+    font-size: 150%;
+    margin: 0 5px 15px;
+    font-weight: bold;
+  }
+
+  .blue { 
+    $color-blue: #5f8ffd;
+    color: darken($color-blue, 30);
+    background-color: $color-blue;
+  }
+  .red { 
+    $color-red: #ff5c5c;
+    color: darken($color-red, 30);
+    background-color: $color-red;
+  }
+  .green { 
+    $color-green: #69fe5e;
+    color: darken($color-green, 30);
+    background-color: $color-green;
+  }
+  .purple { 
+    $color-purple: #d560fc;
+    color: darken($color-purple, 30);
+    background-color: $color-purple;
+  }
+  .orange { 
+    $color-orange: #fcca60;
+    color: darken($color-orange, 30);
+    background-color: $color-orange;
+  }
+  .yellow { 
+    $color-yellow: #f7fc60;
+    color: darken($color-yellow, 30);
+    background-color: $color-yellow;
+  }
 }
