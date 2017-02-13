@@ -335,6 +335,15 @@ var Game = function (_Phaser$Game) {
 
     _this.state.add('GridGrind', _gridGrindState2.default, false);
     _this.state.start('GridGrind');
+
+    _this.WebFontConfig = {
+      active: function active() {
+        game.time.events.add(Phaser.Timer.SECOND, createText, this);
+      },
+      google: {
+        families: ['Fjalla One']
+      }
+    };
     return _this;
   }
 
@@ -505,6 +514,8 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
       _this.level = null;
       _this.currentLevel = 1;
       _this.PADDING = 5;
+      _this.levelText = 'Level ';
+      _this.levelTextStyle;
       _this.movesLeft = 4;
       _this.pointsLeft = 5;
       _this.playerName = "Alex";
@@ -527,11 +538,8 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
    _createClass(GridGrind, [{
       key: 'preload',
       value: function preload() {
-         // Scales the game to the screen size
-         // game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-         // game.scale.pageAlignHorizontally = true;
-         // game.scale.pageAlignVertically = true;
          this.game.stage.backgroundColor = '#eee';
+         this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
          /** 
           * Spritesheets for various components. Note the blocks are
@@ -565,16 +573,25 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
    }, {
       key: 'create',
       value: function create() {
-         // To use physics with certain objects use this syntax
-         // game.physics.startSystem(Phaser.Physics.ARCADE);
-         // game.physics.enable(ball, Phaser.Physics.ARCADE);
-
          // Cleans out all previous objects
          this.game.world.removeAll(true);
 
          // Draws the block objects on the screen for each frame
          // Draws from a randomized array of the original sprite colours
          this.initBlocks();
+
+         this.levelTextStyle = {
+            font: 'Fjalla One',
+            fontSize: 55,
+            fill: '#333333',
+            align: 'center'
+         };
+
+         this.levelText = this.game.add.text(this.game.world.centerX, this.game.world.centerY - 50, this.levelText + this.currentLevel, this.levelTextStyle);
+         this.levelText.anchor.setTo(0.5, 0.5);
+
+         // Show the level intro text, as well as the start button
+         //this.levelText.alpha = 1;
 
          // To add text elements to the game
          this.pointsLeft = this.level.getPoints();

@@ -37,6 +37,13 @@ class Game extends Phaser.Game {
     super(400, 400, Phaser.AUTO, 'gg-game-container', null);
     this.state.add('GridGrind', GridGrind, false);
     this.state.start('GridGrind');
+
+    this.WebFontConfig = {
+      active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+      google: {
+        families: ['Fjalla One']
+      }
+    };
   }
 }
 
