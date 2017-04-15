@@ -420,6 +420,7 @@ var Navigation = function () {
       $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast');
       $('.gg-tutorial').delay(250).fadeOut('fast');
       $('.gg-intro').delay(500).fadeOut('fast', function () {
+        var ggGame = new Game();
         $('.gg-user-interface').removeClass('gg-hide-game');
         $('#gg-game-container').removeClass('gg-hide-game');
         exports._ggPlayerName = _ggPlayerName = $('.gg-field-input').val();
@@ -461,8 +462,6 @@ $(document).ready(function () {
   });
 });
 
-new Game();
-
 },{"./grid-grind-state.js":3}],3:[function(require,module,exports){
 'use strict';
 
@@ -495,7 +494,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
  *
  *                              Author : Alex Dodge
- *                       Last Modified : October 23, 2016
+ *                       Last Modified : April 14, 2017
  *                             License : MIT
  *
  *
@@ -526,14 +525,15 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
    }
 
    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-   *
-   *                               preload()
-   *
-   * Used to load assets and also setup the features of the game. In this case
-   * the background color is set, the page is scaled, and the sprites are loaded
-   * into the game.
-   *
-   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+     *
+     *                               preload()
+     *
+     * Used to load assets and also setup the features of the game. In this case
+     * the background color is set, the page is scaled, and the sprites are loaded
+     * into the game.
+     *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
    _createClass(GridGrind, [{
       key: 'preload',
@@ -545,8 +545,6 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
           * Spritesheets for various components. Note the blocks are
           * going to be removed and generated. If you wanted to load a
           * button in the example is below.
-          *
-          * this.game.load.spritesheet('button', '../img/button.png', 120, 40);
           */
          this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
          this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
@@ -562,36 +560,33 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
        *
        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-      //create() {
-      //this.loadingScreen = this.game.add.group();
-
-      //this.game.add.sprite(this.game.world.width/2-125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25,0.25);
-      //this.game.add.button(this.game.world.width/2-150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
-      //this.game.add.button(this.game.world.width/2-150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
-      //}
-
    }, {
       key: 'create',
       value: function create() {
+         var _this2 = this;
+
          // Cleans out all previous objects
          this.game.world.removeAll(true);
 
-         // Draws the block objects on the screen for each frame
-         // Draws from a randomized array of the original sprite colours
-         this.initBlocks();
-
          this.levelTextStyle = {
             font: 'Fjalla One',
-            fontSize: 55,
-            fill: '#333333',
+            fontSize: 80,
+            fill: '#333',
             align: 'center'
          };
 
-         this.levelText = this.game.add.text(this.game.world.centerX, this.game.world.centerY - 50, this.levelText + this.currentLevel, this.levelTextStyle);
+         this.levelText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.levelText + this.currentLevel, this.levelTextStyle);
          this.levelText.anchor.setTo(0.5, 0.5);
+         this.levelText.alpha = 0;
+         this.game.add.tween(this.levelText).to({ alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
 
          // Show the level intro text, as well as the start button
-         //this.levelText.alpha = 1;
+         setTimeout(function () {
+            _this2.game.add.tween(_this2.levelText).to({ alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+            // Draws the block objects on the screen for each frame
+            // Draws from a randomized array of the original sprite colours
+            _this2.initBlocks();
+         }, 1000);
 
          // To add text elements to the game
          this.pointsLeft = this.level.getPoints();
@@ -608,7 +603,7 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
        *
        *                                  update()
        *
-       * Called on every frame, this is reponsible for the actual interactions with
+       * Called on every frame, this is responsible for the actual interactions with
        * the game. In this case this function listens for players to click on the
        * blocks. When it detects input, it triggers the block update and chain search
        * function. These generate
@@ -631,6 +626,8 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
    }, {
       key: 'initBlocks',
       value: function initBlocks() {
+         var _this3 = this;
+
          /* * * * * * * * * * *
           *  Color Reference  *
           * * * * * * * * * * *
@@ -643,10 +640,10 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          */
 
          // Create a reference sprite to be passed into the current level
-         var referenceSrite = this.game.add.sprite(0, 0, 'blocks');
-         referenceSrite.visible = false;
+         var referenceSprite = this.game.add.sprite(0, 0, 'blocks');
+         referenceSprite.visible = false;
 
-         this.level = new _levels.Level(this.currentLevel, this.game.width, referenceSrite.width);
+         this.level = new _levels.Level(this.currentLevel, this.game.width, referenceSprite.width);
          var blockSize = this.level.getBlockSize();
          var gridSize = this.level.getGridSize();
          var blockScale = this.level.getBlockScale();
@@ -654,34 +651,40 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          this.blocks = this.game.add.group();
 
          for (var row = 0; row < gridSize; row++) {
+            var _loop = function _loop(col) {
 
-            for (var col = 0; col < gridSize; col++) {
+               var blockX = col * (blockSize + _this3.PADDING);
+               var blockY = row * (blockSize + _this3.PADDING);
 
-               var blockX = col * (blockSize + this.PADDING);
-               var blockY = row * (blockSize + this.PADDING);
-
-               var newBlock = this.game.add.sprite(blockX, blockY, 'blocks');
+               var newBlock = _this3.game.add.sprite(blockX, blockY, 'blocks');
                newBlock.alpha = 0;
 
-               // Fades in block when added
-               this.game.add.tween(newBlock).to({ alpha: 1 }, 800, Phaser.Easing.Linear.None, true);
-               var newRandPos = Math.floor(Math.random() * 6);
-               newBlock.frame = newRandPos;
+               // Fades in block randomly when added
+               var fadeRandom = 1200 * Math.random() + 400;
+               setTimeout(function () {
+                  _this3.game.add.tween(newBlock).to({ alpha: 1 }, 400, Phaser.Easing.Linear.None, true);
+                  var newRandPos = Math.floor(Math.random() * 6);
+                  newBlock.frame = newRandPos;
 
-               // Will be level.getBlockSize / newBlock.width
-               newBlock.scale.setTo(blockScale, blockScale);
+                  // Will be level.getBlockSize / newBlock.width
+                  newBlock.scale.setTo(blockScale, blockScale);
 
-               // Allows the block to listen to events
-               newBlock.inputEnabled = true;
-               newBlock.events.onInputDown.add(this.blockDown, this);
-               this.blocks.add(newBlock);
+                  // Allows the block to listen to events
+                  newBlock.inputEnabled = true;
+                  newBlock.events.onInputDown.add(_this3.blockDown, _this3);
+                  _this3.blocks.add(newBlock);
+               }, fadeRandom);
+            };
+
+            for (var col = 0; col < gridSize; col++) {
+               _loop(col);
             }
          }
       }
    }, {
       key: 'checkColorChain',
       value: function checkColorChain(sprite) {
-         var _this2 = this;
+         var _this4 = this;
 
          // Find all blocks that share the same color and store them as child nodes
          // store the parent node when it has same position
@@ -770,41 +773,49 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          } // End of color tree population
 
          if (colorChainTree.nodeCount > 2) {
-            (function () {
-               var self = _this2;
-               // Traverses the tree, fades out linked elements, and sets the input so they can
-               // no longer be accessed
-               colorChainTree.traverseBFS(function (node) {
-                  // For flashing blocks
-                  // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true);
-                  self.game.add.tween(node.data).to({ alpha: 0 }, 800, Phaser.Easing.Linear.None, true);
-                  node.data.inputEnabled = false;
+            // Traverses the tree, fades out linked elements, and sets the input so they can
+            // no longer be accessed
+            colorChainTree.traverseBFS(function (node) {
+               // For flashing blocks
+               _this4.game.add.tween(node.data).to({ alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
+               node.data.inputEnabled = false;
+            });
+
+            /*
+             * Chain modifier multiplies the points as the chains gets larger. This encourages
+             * larger chains to be found in order to complete the levels
+             */
+            var chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
+            var modifiedScore = chainModifier * colorChainTree.nodeCount;
+            console.log("Chain modifier is " + chainModifier);
+
+            this.score += modifiedScore;
+            this.pointsLeft -= modifiedScore;
+
+            if (this.pointsLeft < 1) {
+               // trigger next level by increasing
+               this.currentLevel++;
+               $('#progress-bar-done').animate({ width: '100%' });
+               $('#progress-bar-done').animate({ width: '0%' });
+               $('#update-level').html(this.currentLevel);
+
+               // Fade out each block individually
+               this.blocks.forEach(function (block) {
+                  var fadeRandom = 1200 * Math.random() + 400;
+                  setTimeout(function () {
+                     _this4.game.add.tween(block).to({ alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
+                  }, fadeRandom);
                });
 
-               /*
-                * Chain modifier multiplies the points as the chains gets larger. This encourages
-                * larger chains to be found in order to complete the levels
-                */
-               var chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
-               var modifiedScore = chainModifier * colorChainTree.nodeCount;
-               console.log("Chain modifier is " + chainModifier);
-
-               _this2.score += modifiedScore;
-               _this2.pointsLeft -= modifiedScore;
-
-               if (_this2.pointsLeft < 1) {
-                  // trigger next level by increasing
-                  _this2.currentLevel++;
-                  $('#progress-bar-done').animate({ width: '100%' });
-                  $('#progress-bar-done').animate({ width: '0%' });
-                  $('#update-level').html(_this2.currentLevel);
-                  _this2.create();
-               } else {
-                  $("#update-points").html(_this2.score);
-                  $("#update-points-left").html(_this2.pointsLeft);
-                  _this2.gainExp();
-               }
-            })();
+               // The longest block fadeout is 1600ms
+               setTimeout(function () {
+                  _this4.create();
+               }, 2000);
+            } else {
+               $("#update-points").html(this.score);
+               $("#update-points-left").html(this.pointsLeft);
+               this.gainExp();
+            }
          }
       }
    }, {
