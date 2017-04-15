@@ -29,6 +29,8 @@ export class GridGrind extends Phaser.State {
     this.PADDING = 5;
     this.levelText = 'Level ';
     this.levelTextStyle;
+    this.endText = 'Game Over';
+    this.endTextStyle = null;
     this.movesLeft = 4;
     this.pointsLeft = 5;
     this.playerName = "Alex";
@@ -344,7 +346,44 @@ export class GridGrind extends Phaser.State {
          this.pointsLeft = this.level.getPoints();
          this.movesLeft = this.level.getMoves();
          $('#progress-bar-done').animate({ width: '0%' });
-         this.create();
+
+          // Fade out each block individually
+          this.blocks.forEach((block) => {
+              let fadeRandom = (1200 * Math.random()) + 400;
+              setTimeout(() => {
+                this.game.add.tween(block).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
+              }, fadeRandom);
+          })
+
+         this.endTextStyle = {
+            font: 'Fjalla One',
+            fontSize: 80,
+            fill: '#333', 
+            align: 'center', 
+          };
+
+          this.endText = this.game.add.text(
+            this.game.world.centerX, 
+            this.game.world.centerY, 
+            this.endText,
+            this.endTextStyle,
+          );
+          this.endText.anchor.setTo(0.5,0.5);
+          this.endText.alpha = 0;
+          this.game.add.tween(this.endText).to( { alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
+
+          // Show the level intro text, as well as the start button
+          setTimeout(() => {
+            this.game.add.tween(this.endText).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+            // Draws the block objects on the screen for each frame
+            // Draws from a randomized array of the original sprite colours
+            this.initBlocks();
+          }, 2000);
+
+          // The longest block fadeout is 1600ms
+          setTimeout(() => {
+            this.create();
+          }, 2500);
       }
    }
 

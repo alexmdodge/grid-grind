@@ -515,6 +515,8 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
       _this.PADDING = 5;
       _this.levelText = 'Level ';
       _this.levelTextStyle;
+      _this.endText = 'Game Over';
+      _this.endTextStyle = null;
       _this.movesLeft = 4;
       _this.pointsLeft = 5;
       _this.playerName = "Alex";
@@ -829,6 +831,8 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
    }, {
       key: 'blockDown',
       value: function blockDown(sprite) {
+         var _this5 = this;
+
          if (this.movesLeft > 1) {
 
             // Rotate the sprite frame
@@ -846,7 +850,39 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
             this.pointsLeft = this.level.getPoints();
             this.movesLeft = this.level.getMoves();
             $('#progress-bar-done').animate({ width: '0%' });
-            this.create();
+
+            // Fade out each block individually
+            this.blocks.forEach(function (block) {
+               var fadeRandom = 1200 * Math.random() + 400;
+               setTimeout(function () {
+                  _this5.game.add.tween(block).to({ alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
+               }, fadeRandom);
+            });
+
+            this.endTextStyle = {
+               font: 'Fjalla One',
+               fontSize: 80,
+               fill: '#333',
+               align: 'center'
+            };
+
+            this.endText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.endText, this.endTextStyle);
+            this.endText.anchor.setTo(0.5, 0.5);
+            this.endText.alpha = 0;
+            this.game.add.tween(this.endText).to({ alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
+
+            // Show the level intro text, as well as the start button
+            setTimeout(function () {
+               _this5.game.add.tween(_this5.endText).to({ alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+               // Draws the block objects on the screen for each frame
+               // Draws from a randomized array of the original sprite colours
+               _this5.initBlocks();
+            }, 2000);
+
+            // The longest block fadeout is 1600ms
+            setTimeout(function () {
+               _this5.create();
+            }, 2500);
          }
       }
    }]);
