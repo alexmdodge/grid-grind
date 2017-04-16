@@ -27,16 +27,18 @@ export class GridGrind extends Phaser.State {
     this.level = null;
     this.currentLevel = 1;
     this.PADDING = 5;
-    this.levelText = 'Level ';
-    this.levelTextStyle;
-    this.endText = 'Game Over';
-    this.endTextStyle = null;
     this.movesLeft = 4;
     this.pointsLeft = 5;
     this.playerName = "Alex";
     this.score = 0;
     this.gameStarted = false;
     this.loadingScreen = null;
+
+    // Text variables
+    this.levelText;
+    this.levelTextStyle;
+    this.endText;
+    this.endTextStyle;
 	}
 
 	 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -52,13 +54,8 @@ export class GridGrind extends Phaser.State {
       this.game.stage.backgroundColor = '#eee';
       this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
-      /** 
-       * Spritesheets for various components. Note the blocks are
-       * going to be removed and generated. If you wanted to load a
-       * button in the example is below.
-       */
+      // Load spritesheets
       this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
-      this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
    }
 
 
@@ -75,17 +72,24 @@ export class GridGrind extends Phaser.State {
       // Cleans out all previous objects
       this.game.world.removeAll(true);
 
+      // Create a reference sprite to be passed into the current level
+      let referenceSprite = this.game.add.sprite(0,0,'blocks');
+      referenceSprite.visible = false;
+
+      // Generate level object based on difficulty
+      this.level = new Level(this.currentLevel, this.game.width, referenceSprite.width);
+
+      // Setup level text indicator
       this.levelTextStyle = {
         font: 'Fjalla One',
         fontSize: 80,
         fill: '#333', 
         align: 'center', 
       };
-
       this.levelText = this.game.add.text(
         this.game.world.centerX, 
         this.game.world.centerY, 
-        this.levelText + this.currentLevel,
+        'Level ' + this.currentLevel,
         this.levelTextStyle
       );
       this.levelText.anchor.setTo(0.5,0.5);
@@ -106,7 +110,7 @@ export class GridGrind extends Phaser.State {
       $("#update-points").html(this.score);
       $("#update-moves-left").html(this.movesLeft);
       $("#player-name").html(this.playerName);
-      $("#update-points-left").html(this.pointsLeft);
+      $('#update-points-total').html(this.pointsLeft);
 
       this.gameStarted = true;
    }
@@ -144,12 +148,6 @@ export class GridGrind extends Phaser.State {
          Purple  #d560fc
          Yellow  #f7fc60
       */
-
-      // Create a reference sprite to be passed into the current level
-      let referenceSprite = this.game.add.sprite(0,0,'blocks');
-      referenceSprite.visible = false;
-
-      this.level = new Level(this.currentLevel, this.game.width, referenceSprite.width);
       let blockSize = this.level.getBlockSize();
       let gridSize = this.level.getGridSize();
       let blockScale = this.level.getBlockScale();
@@ -311,11 +309,12 @@ export class GridGrind extends Phaser.State {
 
             // The longest block fadeout is 1600ms
             setTimeout(() => {
+              this.levelText.destroy();
               this.create();
             }, 2000);
          } else {
             $("#update-points").html(this.score);
-            $("#update-points-left").html(this.pointsLeft);
+            $("#update-points-left").html(modifiedScore);
             this.gainExp();
          }
       }
@@ -365,7 +364,7 @@ export class GridGrind extends Phaser.State {
           this.endText = this.game.add.text(
             this.game.world.centerX, 
             this.game.world.centerY, 
-            this.endText,
+            'Game Over',
             this.endTextStyle,
           );
           this.endText.anchor.setTo(0.5,0.5);
@@ -375,13 +374,11 @@ export class GridGrind extends Phaser.State {
           // Show the level intro text, as well as the start button
           setTimeout(() => {
             this.game.add.tween(this.endText).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
-            // Draws the block objects on the screen for each frame
-            // Draws from a randomized array of the original sprite colours
-            this.initBlocks();
           }, 2000);
 
           // The longest block fadeout is 1600ms
           setTimeout(() => {
+            this.endText.destroy();
             this.create();
           }, 2500);
       }

@@ -513,16 +513,18 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
       _this.level = null;
       _this.currentLevel = 1;
       _this.PADDING = 5;
-      _this.levelText = 'Level ';
-      _this.levelTextStyle;
-      _this.endText = 'Game Over';
-      _this.endTextStyle = null;
       _this.movesLeft = 4;
       _this.pointsLeft = 5;
       _this.playerName = "Alex";
       _this.score = 0;
       _this.gameStarted = false;
       _this.loadingScreen = null;
+
+      // Text variables
+      _this.levelText;
+      _this.levelTextStyle;
+      _this.endText;
+      _this.endTextStyle;
       return _this;
    }
 
@@ -543,13 +545,8 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          this.game.stage.backgroundColor = '#eee';
          this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
-         /** 
-          * Spritesheets for various components. Note the blocks are
-          * going to be removed and generated. If you wanted to load a
-          * button in the example is below.
-          */
+         // Load spritesheets
          this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
-         this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
       }
 
       /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -570,14 +567,21 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          // Cleans out all previous objects
          this.game.world.removeAll(true);
 
+         // Create a reference sprite to be passed into the current level
+         var referenceSprite = this.game.add.sprite(0, 0, 'blocks');
+         referenceSprite.visible = false;
+
+         // Generate level object based on difficulty
+         this.level = new _levels.Level(this.currentLevel, this.game.width, referenceSprite.width);
+
+         // Setup level text indicator
          this.levelTextStyle = {
             font: 'Fjalla One',
             fontSize: 80,
             fill: '#333',
             align: 'center'
          };
-
-         this.levelText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.levelText + this.currentLevel, this.levelTextStyle);
+         this.levelText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Level ' + this.currentLevel, this.levelTextStyle);
          this.levelText.anchor.setTo(0.5, 0.5);
          this.levelText.alpha = 0;
          this.game.add.tween(this.levelText).to({ alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
@@ -596,7 +600,7 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          $("#update-points").html(this.score);
          $("#update-moves-left").html(this.movesLeft);
          $("#player-name").html(this.playerName);
-         $("#update-points-left").html(this.pointsLeft);
+         $('#update-points-total').html(this.pointsLeft);
 
          this.gameStarted = true;
       }
@@ -640,12 +644,6 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
             Purple  #d560fc
             Yellow  #f7fc60
          */
-
-         // Create a reference sprite to be passed into the current level
-         var referenceSprite = this.game.add.sprite(0, 0, 'blocks');
-         referenceSprite.visible = false;
-
-         this.level = new _levels.Level(this.currentLevel, this.game.width, referenceSprite.width);
          var blockSize = this.level.getBlockSize();
          var gridSize = this.level.getGridSize();
          var blockScale = this.level.getBlockScale();
@@ -811,11 +809,12 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
 
                // The longest block fadeout is 1600ms
                setTimeout(function () {
+                  _this4.levelText.destroy();
                   _this4.create();
                }, 2000);
             } else {
                $("#update-points").html(this.score);
-               $("#update-points-left").html(this.pointsLeft);
+               $("#update-points-left").html(modifiedScore);
                this.gainExp();
             }
          }
@@ -866,7 +865,7 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
                align: 'center'
             };
 
-            this.endText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.endText, this.endTextStyle);
+            this.endText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Game Over', this.endTextStyle);
             this.endText.anchor.setTo(0.5, 0.5);
             this.endText.alpha = 0;
             this.game.add.tween(this.endText).to({ alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
@@ -874,13 +873,11 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
             // Show the level intro text, as well as the start button
             setTimeout(function () {
                _this5.game.add.tween(_this5.endText).to({ alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
-               // Draws the block objects on the screen for each frame
-               // Draws from a randomized array of the original sprite colours
-               _this5.initBlocks();
             }, 2000);
 
             // The longest block fadeout is 1600ms
             setTimeout(function () {
+               _this5.endText.destroy();
                _this5.create();
             }, 2500);
          }
