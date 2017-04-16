@@ -10,7 +10,7 @@
  *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
  *
  *                              Author : Alex Dodge
- *                       Last Modified : October 23, 2016
+ *                       Last Modified : April 14, 2017
  *                             License : MIT
  *
  *
@@ -27,17 +27,21 @@ export class GridGrind extends Phaser.State {
     this.level = null;
     this.currentLevel = 1;
     this.PADDING = 5;
-    this.levelText = 'Level ';
-    this.levelTextStyle;
     this.movesLeft = 4;
     this.pointsLeft = 5;
     this.playerName = "Alex";
     this.score = 0;
     this.gameStarted = false;
     this.loadingScreen = null;
+
+    // Text variables
+    this.levelText;
+    this.levelTextStyle;
+    this.endText;
+    this.endTextStyle;
 	}
 
-	   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     *
     *                               preload()
     *
@@ -46,20 +50,12 @@ export class GridGrind extends Phaser.State {
     * into the game.
     *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
    preload() {
       this.game.stage.backgroundColor = '#eee';
       this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
-      /** 
-       * Spritesheets for various components. Note the blocks are
-       * going to be removed and generated. If you wanted to load a
-       * button in the example is below.
-       *
-       * this.game.load.spritesheet('button', '../img/button.png', 120, 40);
-       */
+      // Load spritesheets
       this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
-      this.game.load.spritesheet('buttons', '../img/buttons.png', 600, 100);
    }
 
 
@@ -72,41 +68,41 @@ export class GridGrind extends Phaser.State {
     * and the text fields are setup.
     *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-   //create() {
-      //this.loadingScreen = this.game.add.group();
-
-      //this.game.add.sprite(this.game.world.width/2-125, 50, 'logo', 0, this.loadingScreen).scale.set(0.25,0.25);
-      //this.game.add.button(this.game.world.width/2-150, 250, 'buttons', this.initGame(), this, 0, 0, 0, this.loadingScreen).scale.set(0.5, 0.5);
-      //this.game.add.button(this.game.world.width/2-150, 325, 'buttons', this.initGame(), this, 1, 1, 1, this.loadingScreen).scale.set(0.5, 0.5);
-   //}
-
    create() {
       // Cleans out all previous objects
       this.game.world.removeAll(true);
 
+      // Create a reference sprite to be passed into the current level
+      let referenceSprite = this.game.add.sprite(0,0,'blocks');
+      referenceSprite.visible = false;
 
-      // Draws the block objects on the screen for each frame
-      // Draws from a randomized array of the original sprite colours
-      this.initBlocks();
+      // Generate level object based on difficulty
+      this.level = new Level(this.currentLevel, this.game.width, referenceSprite.width);
 
+      // Setup level text indicator
       this.levelTextStyle = {
         font: 'Fjalla One',
-        fontSize: 55,
-        fill: '#333333', 
-        align: 'center' 
+        fontSize: 80,
+        fill: '#333', 
+        align: 'center', 
       };
-
       this.levelText = this.game.add.text(
         this.game.world.centerX, 
-        this.game.world.centerY - 50, 
-        this.levelText + this.currentLevel,
+        this.game.world.centerY, 
+        'Level ' + this.currentLevel,
         this.levelTextStyle
       );
       this.levelText.anchor.setTo(0.5,0.5);
+      this.levelText.alpha = 0;
+      this.game.add.tween(this.levelText).to( { alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
 
       // Show the level intro text, as well as the start button
-      //this.levelText.alpha = 1;
+      setTimeout(() => {
+        this.game.add.tween(this.levelText).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+        // Draws the block objects on the screen for each frame
+        // Draws from a randomized array of the original sprite colours
+        this.initBlocks();
+      }, 1000);
 
       // To add text elements to the game
       this.pointsLeft = this.level.getPoints();
@@ -114,7 +110,7 @@ export class GridGrind extends Phaser.State {
       $("#update-points").html(this.score);
       $("#update-moves-left").html(this.movesLeft);
       $("#player-name").html(this.playerName);
-      $("#update-points-left").html(this.pointsLeft);
+      $('#update-points-total').html(this.pointsLeft);
 
       this.gameStarted = true;
    }
@@ -123,7 +119,7 @@ export class GridGrind extends Phaser.State {
     *
     *                                  update()
     *
-    * Called on every frame, this is reponsible for the actual interactions with
+    * Called on every frame, this is responsible for the actual interactions with
     * the game. In this case this function listens for players to click on the
     * blocks. When it detects input, it triggers the block update and chain search
     * function. These generate
@@ -152,12 +148,6 @@ export class GridGrind extends Phaser.State {
          Purple  #d560fc
          Yellow  #f7fc60
       */
-
-      // Create a reference sprite to be passed into the current level
-      let referenceSrite = this.game.add.sprite(0,0,'blocks');
-      referenceSrite.visible = false;
-
-      this.level = new Level(this.currentLevel, this.game.width, referenceSrite.width);
       let blockSize = this.level.getBlockSize();
       let gridSize = this.level.getGridSize();
       let blockScale = this.level.getBlockScale();
@@ -174,18 +164,21 @@ export class GridGrind extends Phaser.State {
             let newBlock = this.game.add.sprite(blockX, blockY, 'blocks');
             newBlock.alpha = 0;
 
-            // Fades in block when added
-            this.game.add.tween(newBlock).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true);
-            let newRandPos = Math.floor(Math.random()*6);
-            newBlock.frame = newRandPos;
+            // Fades in block randomly when added
+            let fadeRandom = (1200 * Math.random()) + 400;
+            setTimeout(() => {
+              this.game.add.tween(newBlock).to( { alpha: 1 }, 400, Phaser.Easing.Linear.None, true);
+              let newRandPos = Math.floor(Math.random()*6);
+              newBlock.frame = newRandPos;
 
-            // Will be level.getBlockSize / newBlock.width
-            newBlock.scale.setTo(blockScale, blockScale);
+              // Will be level.getBlockSize / newBlock.width
+              newBlock.scale.setTo(blockScale, blockScale);
 
-            // Allows the block to listen to events
-            newBlock.inputEnabled = true;
-            newBlock.events.onInputDown.add(this.blockDown, this);
-            this.blocks.add(newBlock);
+              // Allows the block to listen to events
+              newBlock.inputEnabled = true;
+              newBlock.events.onInputDown.add(this.blockDown, this);
+              this.blocks.add(newBlock);
+            }, fadeRandom);
          }
       }
    }
@@ -280,13 +273,11 @@ export class GridGrind extends Phaser.State {
       } // End of color tree population
 
       if(colorChainTree.nodeCount > 2) {
-      	let self = this;
          // Traverses the tree, fades out linked elements, and sets the input so they can
          // no longer be accessed
-         colorChainTree.traverseBFS(function(node) {
+         colorChainTree.traverseBFS((node) => {
             // For flashing blocks
-            // game.add.tween(node.data).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true, 0, 200, true);
-            self.game.add.tween(node.data).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true);
+            this.game.add.tween(node.data).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
             node.data.inputEnabled = false;
          });
 
@@ -307,11 +298,23 @@ export class GridGrind extends Phaser.State {
             $('#progress-bar-done').animate({ width: '100%' });
             $('#progress-bar-done').animate({ width: '0%' });
             $('#update-level').html(this.currentLevel);
-            this.create();
 
+            // Fade out each block individually
+            this.blocks.forEach((block) => {
+               let fadeRandom = (1200 * Math.random()) + 400;
+                setTimeout(() => {
+                  this.game.add.tween(block).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
+                }, fadeRandom);
+            })
+
+            // The longest block fadeout is 1600ms
+            setTimeout(() => {
+              this.levelText.destroy();
+              this.create();
+            }, 2000);
          } else {
             $("#update-points").html(this.score);
-            $("#update-points-left").html(this.pointsLeft);
+            $("#update-points-left").html(modifiedScore);
             this.gainExp();
          }
       }
@@ -342,7 +345,42 @@ export class GridGrind extends Phaser.State {
          this.pointsLeft = this.level.getPoints();
          this.movesLeft = this.level.getMoves();
          $('#progress-bar-done').animate({ width: '0%' });
-         this.create();
+
+          // Fade out each block individually
+          this.blocks.forEach((block) => {
+              let fadeRandom = (1200 * Math.random()) + 400;
+              setTimeout(() => {
+                this.game.add.tween(block).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
+              }, fadeRandom);
+          })
+
+         this.endTextStyle = {
+            font: 'Fjalla One',
+            fontSize: 80,
+            fill: '#333', 
+            align: 'center', 
+          };
+
+          this.endText = this.game.add.text(
+            this.game.world.centerX, 
+            this.game.world.centerY, 
+            'Game Over',
+            this.endTextStyle,
+          );
+          this.endText.anchor.setTo(0.5,0.5);
+          this.endText.alpha = 0;
+          this.game.add.tween(this.endText).to( { alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
+
+          // Show the level intro text, as well as the start button
+          setTimeout(() => {
+            this.game.add.tween(this.endText).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+          }, 2000);
+
+          // The longest block fadeout is 1600ms
+          setTimeout(() => {
+            this.endText.destroy();
+            this.create();
+          }, 2500);
       }
    }
 

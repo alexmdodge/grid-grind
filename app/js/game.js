@@ -82,7 +82,7 @@ class Navigation {
       $('.gg-tutorial').delay(500).fadeOut('fast');
       this.currentStep--;
     } else {
-      this.currentStep--
+      this.currentStep--;
       $('.gg-tutorial-slide' + (this.currentStep + 1) ).fadeOut('fast');
       $('.gg-tutorial-slide' + this.currentStep).delay(250).fadeIn('fast');
     }
@@ -103,6 +103,7 @@ class Navigation {
       $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast');
       $('.gg-tutorial').delay(250).fadeOut('fast');
       $('.gg-intro').delay(500).fadeOut('fast', () => {
+        let ggGame = new Game();
         $('.gg-user-interface').removeClass('gg-hide-game');
         $('#gg-game-container').removeClass('gg-hide-game');
         _ggPlayerName = $('.gg-field-input').val();
@@ -137,6 +138,4 @@ $(document).ready( () => {
   $('.gg-button-start').click( () => {
     _ggNavigation.startGame();
   })
-})
-
-new Game();
+});
