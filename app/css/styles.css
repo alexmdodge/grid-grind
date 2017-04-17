@@ -1,167 +1,334 @@
+/* General Styles for Application */
+/* Global Styles */
 html {
-   font-family: "Courier New", Courier, monospace;
-   box-sizing: border-box;
-   background-color: #eee;
-   width: 100%;
-   height: 100%;
-}
+  font-family: "Open Sans", sans-serif;
+  background-color: #eee; }
 
-.float-right { float: right; }
-.float-left { float: left; }
+* > h1, * > h2, * > h3 {
+  font-family: "Fjalla One", Helvetica, sans-serif; }
+
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
 .row {
-	display: block;
-	padding: 0;
-	margin: 0;
-}
+  display: block;
+  padding: 0;
+  margin: 0; }
 
-.game-container > canvas {
-   margin: 30px auto;
-   padding: 10px;
-}
+.gg-button {
+  font-family: "Fjalla One", Helvetica, sans-serif;
+  cursor: pointer;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  text-transform: uppercase; }
 
-.user-interface {
-	width: 800px;
-	margin: 0 auto;
-}
+.gg-link {
+  font-weight: bold;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
+  border-bottom: 0px solid #888; }
+  .gg-link:focus, .gg-link:visited, .gg-link:active, .gg-link:link {
+    color: inherit; }
+  .gg-link:hover {
+    color: #888; }
 
-.help-icon {
-	color: #888;
-	font-size: 250%;
-	font-weight: bold;
-	padding: 11px 9px 9px 11px;
-	vertical-align: center;
-	background-color: #bbb;
-	border-radius: 100%;
-	border: 1px solid #777;
-	margin: -50px auto 15px;
-	text-align: center;
-	width: 38px;
-}
+.gg-hide-game {
+  display: none !important; }
+  .gg-hide-game canvas {
+    display: none !important; }
 
-.right-side-menu {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-	float: right;
-	text-align: center;
-	width: 150px;
-	font-size: 90%;
-	padding: 20px 20px 40px;
-	margin: 40px 0px 0px 0px;
-}
+/* Introduction View */
+/* Introduction */
+.gg-intro > * {
+  font-family: "Fjalla One", Helvetica, sans-serif; }
 
-.left-side-menu {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-	float: left;
-	text-align: center;
-	width: 150px;
-	font-size: 90%;
-	padding: 20px 20px 30px;
-	margin: 40px 10px 0px 0px;
-}
+.gg-intro {
+  box-sizing: border-box;
+  width: 40%;
+  margin: 18vh auto 0;
+  position: relative; }
+  .gg-intro-name {
+    position: relative; }
+  .gg-intro .gg-field-label,
+  .gg-intro .gg-field-input {
+    border-radius: 5px;
+    text-align: center; }
+  .gg-intro .gg-field-label {
+    color: #fff;
+    display: inline-block;
+    background-color: rgba(46, 122, 236, 0.7);
+    position: absolute;
+    font-size: 1em;
+    padding: 10px 10px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    top: -13px; }
+  .gg-intro .gg-field-input {
+    font-family: "Fjalla One", Helvetica, sans-serif;
+    color: rgba(46, 122, 236, 0.7);
+    width: 100%;
+    font-size: 2em;
+    margin: 50px auto 10px;
+    padding: 10px;
+    outline: none;
+    background-color: rgba(46, 122, 236, 0.1);
+    border: 5px solid rgba(46, 122, 236, 0.5); }
+    .gg-intro .gg-field-input:focus {
+      border: 5px solid rgba(46, 122, 236, 0.9); }
+  .gg-intro .gg-intro-button {
+    color: #4bbd4b;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(75, 189, 75, 0);
+    border: 5px solid #4bbd4b;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out; }
+    .gg-intro .gg-intro-button:hover {
+      transition: all 0.2s ease-in-out;
+      color: white;
+      background-color: #4bbd4b; }
+  .gg-intro .gg-intro-logo-src {
+    width: 100%; }
 
-.right-side-menu-title,
-.left-side-menu-title, {
-	width: 80%;
-	margin: 0 auto 10px;
-	padding: 10px;
-	text-align: center;
-	border: 1px dashed #777;
-}
+/* Tutorial View */
+.gg-tutorial {
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh; }
+  .gg-tutorial .gg-skip-tutorial {
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    top: 15px;
+    font-family: "Fjalla One", Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1.6em;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out; }
+    .gg-tutorial .gg-skip-tutorial:hover {
+      color: #e6e6e6;
+      transition: all 0.2s ease-in-out; }
+  .gg-tutorial .gg-tutorial-slide1,
+  .gg-tutorial .gg-tutorial-slide2,
+  .gg-tutorial .gg-tutorial-slide3,
+  .gg-tutorial .gg-tutorial-slide4 {
+    position: absolute;
+    border-radius: 10px;
+    border-top: 5px solid #ccc;
+    border-bottom: 5px solid #ccc;
+    background-color: #fff;
+    display: none;
+    margin: 0 auto;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
+    text-align: center;
+    width: 80%; }
+    .gg-tutorial .gg-tutorial-slide1 p,
+    .gg-tutorial .gg-tutorial-slide2 p,
+    .gg-tutorial .gg-tutorial-slide3 p,
+    .gg-tutorial .gg-tutorial-slide4 p {
+      font-size: 1.3em; }
+  .gg-tutorial img {
+    width: 40%;
+    margin: 0 auto; }
+  .gg-tutorial h1, .gg-tutorial h2 {
+    text-transform: uppercase;
+    font-weight: bold; }
+  .gg-tutorial .gg-button-back,
+  .gg-tutorial .gg-button-next,
+  .gg-tutorial .gg-button-start {
+    display: block;
+    color: #eee;
+    margin: 10px;
+    font-size: 1.8em;
+    border: none; }
+  .gg-tutorial .gg-button-back {
+    float: left;
+    transition: all 0.1s ease-in-out; }
+    .gg-tutorial .gg-button-back:hover {
+      transition: all 0.1s ease-in-out;
+      color: #4589ee; }
+  .gg-tutorial .gg-button-next {
+    float: right;
+    transition: all 0.1s ease-in-out; }
+    .gg-tutorial .gg-button-next:hover {
+      transition: all 0.1s ease-in-out;
+      color: #5ec45e; }
+  .gg-tutorial .gg-button-start {
+    background-color: white;
+    color: #4bbd4b;
+    border: 5px solid #4bbd4b;
+    font-family: "Fjalla One", Helvetica, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 80px auto;
+    padding: 20px;
+    width: 50%;
+    transition: all 0.2s ease-in-out; }
+    .gg-tutorial .gg-button-start:hover {
+      background-color: #4bbd4b;
+      color: white;
+      transition: all 0.2s ease-in-out; }
 
-.color-order {
-	padding-top: 15px;
-}
+/* User Interface */
+.gg-progress-bar {
+  width: 600px;
+  height: 45px;
+  background-color: #888;
+  border: 5px solid #444;
+  border-radius: 3px;
+  position: relative;
+  display: block;
+  margin: 15px auto; }
+  .gg-progress-bar #progress-bar-done {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #5F8FFD;
+    border-radius: 3px;
+    height: 45px;
+    z-index: 10;
+    width: 0; }
+  .gg-progress-bar .gg-progress-title {
+    position: relative;
+    color: #eee;
+    width: 100%;
+    text-align: center;
+    margin: 8px 0px;
+    z-index: 20; }
 
-.help-block {
-	width: 15px;
-	height: 15px;
-	display: inline-block;
-	border: 1px solid #555;
-}
+.gg-moves-left,
+.gg-current-level,
+.gg-total-points,
+.gg-help-icon,
+.gg-moves-left {
+  color: #333;
+  position: fixed; }
 
-.top-menu {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-	padding: 10px;
-	margin-bottom: 10px;
-}
+.gg-moves-left {
+  right: 30px;
+  top: 10px; }
 
-.top-menu-title {
-	display: inline-block;
-	padding: 0;
-	margin: 10px;
-}
+.gg-current-level {
+  bottom: 10px;
+  left: 30px; }
 
-#top-menu-avatar {
-	float: left;
-	color: #888;
-	width: 85px;
-	height: 70px;
-	background-color: #bbb;
-	border: 1px solid #777;
-	border-radius: 100%;
-	text-align: center;
-	padding-top: 16px;
-	font-size: 50px;
-	margin: 0px 20px 10px 10px;
-}
+.gg-help-icon {
+  position: fixed;
+  background-color: #ccc;
+  border: 2px solid #aaa;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  bottom: 0px;
+  right: 30px; }
+  .gg-help-icon span {
+    position: absolute;
+    left: 16px;
+    top: 6px; }
 
-.top-menu-total,
-.top-menu-moves {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
-	width: 145px;
-}
-.top-menu-current,
-.top-menu-left {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
-	width: 250px;
-}
+.gg-help-menu {
+  display: none; }
 
-.top-menu-left {
-	text-align: right;
-	padding-left: 50px;
-}
+.gg-total-points {
+  left: 30px;
+  top: 10px; }
 
-.player-row {
-	text-align: center;
-	width: 300px;
-	padding: 10px;
-	display: inline-block;
-	/*background-color: rgba(137,200,110,0.4);*/
-	background-color: #69fe5e;
-	border: 1px solid rgba(137,200,110,1);
-	
-	border-radius: 3px;
-}
+.gg-block-order {
+  display: flex;
+  justify-content: center;
+  padding: 0 20%; }
+  .gg-block-order-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ccc;
+    color: #333;
+    border: 3px solid #bbb;
+    border-radius: 3px;
+    padding: 5px 15px;
+    margin: 0 5px 15px; }
+  .gg-block-order .help-block {
+    border: 3px solid #888;
+    border-radius: 3px;
+    padding: 3px 10px 3px;
+    font-size: 150%;
+    margin: 0 5px 15px;
+    font-weight: bold; }
+  .gg-block-order .blue {
+    color: #023cc1;
+    background-color: #5f8ffd; }
+  .gg-block-order .red {
+    color: #c20000;
+    background-color: #ff5c5c; }
+  .gg-block-order .green {
+    color: #0ec201;
+    background-color: #69fe5e; }
+  .gg-block-order .purple {
+    color: #9004bf;
+    background-color: #d560fc; }
+  .gg-block-order .orange {
+    color: #bf8304;
+    background-color: #fcca60; }
+  .gg-block-order .yellow {
+    color: #b9bf04;
+    background-color: #f7fc60; }
 
-.progress-bar {
-	width: 600px;
-	height: 20px;
-	margin-left: 120px;
-	background-color: #ccc;
-	border: 1px solid #bbb;
-	border-radius: 3px;
-}
+/* Game Board */
+#gg-game-container {
+  display: block;
+  margin: 0 auto !important; }
+  #gg-game-container canvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto; }
 
-#progress-bar-done {
-	display: inline-block;
-	background-color: #69fe5e;
-	border-radius: 3px;
-	height: 20px;
-	z-index: 9999;
-	width: 0%;
-}
+/* Footer */
+footer {
+  font-family: "Fjalla One", Helvetica, sans-serif;
+  color: #bbb;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  padding: 20px 0px 10px;
+  text-align: center;
+  width: 100%; }
+  footer .gg-footer-github,
+  footer .gg-footer-paypal {
+    font-size: 1.2em;
+    text-decoration: none;
+    outline: none;
+    color: #bbb; }
+    footer .gg-footer-github:active, footer .gg-footer-github:link, footer .gg-footer-github:visited,
+    footer .gg-footer-paypal:active,
+    footer .gg-footer-paypal:link,
+    footer .gg-footer-paypal:visited {
+      color: #bbb; }
+  footer .gg-footer-github:hover {
+    color: #333; }
+  footer .gg-footer-paypal:hover {
+    color: #0A87C1; }
 
-.level-row {
-	display: inline-block;
-	padding: 5px;
-	width: 640px;
-}
+/*# sourceMappingURL=styles.css.map */

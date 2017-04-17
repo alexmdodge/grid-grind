@@ -1,0 +1,70 @@
+/* Introduction */
+.gg-intro > * {
+  font-family: $primary-font;
+}
+
+.gg-intro {
+  box-sizing: border-box;
+	width: 40%;
+	margin: 18vh auto 0;
+	position: relative;
+
+	&-name { position: relative; }
+
+  .gg-field-label,
+  .gg-field-input {
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .gg-field-label {
+    color: #fff;
+    display: inline-block;
+    background-color: rgba(46, 122, 236,0.7);
+    position: absolute;
+    font-size: 1em;
+    padding: 10px 10px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    top: -13px;
+  }
+
+  .gg-field-input {
+    font-family: $primary-font;
+    color: rgba(46, 122, 236,0.7);
+    width: 100%;
+    font-size: 2em;
+    margin: 50px auto 10px;
+    padding: 10px;
+    outline: none;
+    background-color: rgba(46, 122, 236,0.1);
+    border: 5px solid rgba(46, 122, 236,0.5);
+
+    &:focus { border: 5px solid rgba(46, 122, 236,0.9); }
+  }
+
+  .gg-intro-button {
+    color: rgba(75, 189, 75, 1);
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(75, 189, 75, 0);
+    border: 5px solid rgba(75, 189, 75, 1);
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transition: all 0.2s ease-in-out;
+      color: white;
+      background-color: rgba(75, 189, 75, 1);
+    }
+  }
+  
+  .gg-intro-logo-src {
+    width: 100%;
+  }
+}
