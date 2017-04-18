@@ -23,12 +23,14 @@ export class GridGrind extends Phaser.State {
 
 	constructor() {
 		super();
+    this.PADDING = 5;
 		this.blocks = null;
     this.level = null;
     this.currentLevel = 1;
-    this.PADDING = 5;
+    this.currentPoints = 0;
     this.movesLeft = 4;
     this.pointsLeft = 5;
+    this.pointsRequired;
     this.playerName = "Alex";
     this.score = 0;
     this.gameStarted = false;
@@ -85,8 +87,8 @@ export class GridGrind extends Phaser.State {
         align: 'center', 
       };
       this.levelText = this.game.add.text(
-        this.game.world.centerX, 
-        this.game.world.centerY, 
+        Math.round(this.game.world.centerX), 
+        Math.round(this.game.world.centerY), 
         'Level ' + this.currentLevel,
         this.levelTextStyle
       );
@@ -103,13 +105,16 @@ export class GridGrind extends Phaser.State {
       }, 1000);
 
       // To add text elements to the game
-      this.pointsLeft = this.level.getPoints();
+      this.currentPoints = 0;
+      this.pointsRequired = this.level.getPoints();
+      this.pointsLeft = this.pointsRequired;
       this.movesLeft = this.level.getMoves();
       $("#update-points").html(this.score);
       $("#update-moves-left").html(this.movesLeft);
       $("#player-name").html(this.playerName);
       $('#update-points-total').html(this.pointsLeft);
       $('#update-points-left').html('0');
+      $('#update-level').html(this.currentLevel);
 
       this.gameStarted = true;
    }
@@ -134,19 +139,13 @@ export class GridGrind extends Phaser.State {
     * These are responsible for segmenting and organizing the game logic into
     * more manageable chunks.
     *
+    * Colours
+    * Blue #5f8ffd, Orange #fcca60, Green #69fe5e, Red #ff5c5c, Purple #d560fc
+    * Yellow #f7fc60
+    *
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
    initBlocks() {
-      /* * * * * * * * * * *
-       *  Color Reference  *
-       * * * * * * * * * * *
-         Blue    #5f8ffd
-         Orange  #fcca60
-         Green   #69fe5e
-         Red     #ff5c5c
-         Purple  #d560fc
-         Yellow  #f7fc60
-      */
       let blockSize = this.level.getBlockSize();
       let gridSize = this.level.getGridSize();
       let blockScale = this.level.getBlockScale();
@@ -286,17 +285,19 @@ export class GridGrind extends Phaser.State {
           */
          let chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
          let modifiedScore = chainModifier * colorChainTree.nodeCount;
-         console.log("Chain modifier is " + chainModifier);
 
          this.score += modifiedScore;
+         this.currentPoints += modifiedScore;
          this.pointsLeft -= modifiedScore;
+         if (this.currentPoints >= this.pointsRequired) {
+           this.currentPoints = this.pointsRequired;
+         }
 
          if(this.pointsLeft < 1) {
             // trigger next level by increasing
             this.currentLevel++;
             $('#progress-bar-done').animate({ width: '100%' });
-            $('#progress-bar-done').animate({ width: '0%' });
-            $('#update-level').html(this.currentLevel);
+            $('#progress-bar-done').delay(800).animate({ width: '0%' });
 
             // Fade out each block individually
             this.blocks.forEach((block) => {
@@ -313,7 +314,7 @@ export class GridGrind extends Phaser.State {
             }, 2000);
          } else {
             $("#update-points").html(this.score);
-            $("#update-points-left").html(modifiedScore);
+            $("#update-points-left").html(this.currentPoints);
             this.gainExp();
          }
       }

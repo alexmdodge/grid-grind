@@ -509,12 +509,14 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
 
       var _this = _possibleConstructorReturn(this, (GridGrind.__proto__ || Object.getPrototypeOf(GridGrind)).call(this));
 
+      _this.PADDING = 5;
       _this.blocks = null;
       _this.level = null;
       _this.currentLevel = 1;
-      _this.PADDING = 5;
+      _this.currentPoints = 0;
       _this.movesLeft = 4;
       _this.pointsLeft = 5;
+      _this.pointsRequired;
       _this.playerName = "Alex";
       _this.score = 0;
       _this.gameStarted = false;
@@ -579,7 +581,7 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
             fill: '#333',
             align: 'center'
          };
-         this.levelText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Level ' + this.currentLevel, this.levelTextStyle);
+         this.levelText = this.game.add.text(Math.round(this.game.world.centerX), Math.round(this.game.world.centerY), 'Level ' + this.currentLevel, this.levelTextStyle);
          this.levelText.anchor.setTo(0.5, 0.5);
          this.levelText.alpha = 0;
          this.game.add.tween(this.levelText).to({ alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
@@ -593,13 +595,16 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          }, 1000);
 
          // To add text elements to the game
-         this.pointsLeft = this.level.getPoints();
+         this.currentPoints = 0;
+         this.pointsRequired = this.level.getPoints();
+         this.pointsLeft = this.pointsRequired;
          this.movesLeft = this.level.getMoves();
          $("#update-points").html(this.score);
          $("#update-moves-left").html(this.movesLeft);
          $("#player-name").html(this.playerName);
          $('#update-points-total').html(this.pointsLeft);
          $('#update-points-left').html('0');
+         $('#update-level').html(this.currentLevel);
 
          this.gameStarted = true;
       }
@@ -626,6 +631,10 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
        * These are responsible for segmenting and organizing the game logic into
        * more manageable chunks.
        *
+       * Colours
+       * Blue #5f8ffd, Orange #fcca60, Green #69fe5e, Red #ff5c5c, Purple #d560fc
+       * Yellow #f7fc60
+       *
        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
    }, {
@@ -633,16 +642,6 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
       value: function initBlocks() {
          var _this3 = this;
 
-         /* * * * * * * * * * *
-          *  Color Reference  *
-          * * * * * * * * * * *
-            Blue    #5f8ffd
-            Orange  #fcca60
-            Green   #69fe5e
-            Red     #ff5c5c
-            Purple  #d560fc
-            Yellow  #f7fc60
-         */
          var blockSize = this.level.getBlockSize();
          var gridSize = this.level.getGridSize();
          var blockScale = this.level.getBlockScale();
@@ -786,17 +785,19 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
              */
             var chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
             var modifiedScore = chainModifier * colorChainTree.nodeCount;
-            console.log("Chain modifier is " + chainModifier);
 
             this.score += modifiedScore;
+            this.currentPoints += modifiedScore;
             this.pointsLeft -= modifiedScore;
+            if (this.currentPoints >= this.pointsRequired) {
+               this.currentPoints = this.pointsRequired;
+            }
 
             if (this.pointsLeft < 1) {
                // trigger next level by increasing
                this.currentLevel++;
                $('#progress-bar-done').animate({ width: '100%' });
-               $('#progress-bar-done').animate({ width: '0%' });
-               $('#update-level').html(this.currentLevel);
+               $('#progress-bar-done').delay(800).animate({ width: '0%' });
 
                // Fade out each block individually
                this.blocks.forEach(function (block) {
@@ -813,7 +814,7 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
                }, 2000);
             } else {
                $("#update-points").html(this.score);
-               $("#update-points-left").html(modifiedScore);
+               $("#update-points-left").html(this.currentPoints);
                this.gainExp();
             }
          }
