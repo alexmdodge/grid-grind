@@ -53,8 +53,6 @@ export class GridGrind extends Phaser.State {
    preload() {
       this.game.stage.backgroundColor = '#eee';
       this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-
-      // Load spritesheets
       this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
    }
 
@@ -111,6 +109,7 @@ export class GridGrind extends Phaser.State {
       $("#update-moves-left").html(this.movesLeft);
       $("#player-name").html(this.playerName);
       $('#update-points-total').html(this.pointsLeft);
+      $('#update-points-left').html('0');
 
       this.gameStarted = true;
    }

@@ -2,7 +2,7 @@
  *  
  *                              []     [][][] []  [] [][][] []     [][][]
  *  Author: Alex Dodge          []     []     []  [] []     []     []
- *  Date: October 15, 2016      []     [][]   []  [] [][]   []     [][][]
+ *  Date: April 17, 2017        []     [][]   []  [] [][]   []     [][][]
  *  License: MIT                []     []      [][]  []     []         []
  *                              [][][] [][][]   []   [][][] [][][] [][][]
  *
@@ -20,82 +20,83 @@
 
 export class Level {
 
-	/* Constructor */
-	constructor(currentLevel, gameSize, spriteSize) {
-		this.currentLevel = currentLevel;
-		this.gameSize = gameSize;
-		this.spriteSize = spriteSize;
-	}
+  /* Constructor */
+  constructor(currentLevel, gameSize, spriteSize) {
+    this.currentLevel = currentLevel;
+    this.gameSize = gameSize;
+    this.spriteSize = spriteSize;
+  }
 
-	/*
-	 * getGridSize
-	 *
-	 * Retrieves the grid size for the level. The first level is a 3x3 and it increases
-	 * by perfect squares each level, with some levels increasing only point value. The
-	 * pattern for generation will change depending on how quickly the levels can be played.
-	 */
-	getGridSize() {
-		if( this.currentLevel < 1) {
-			return -1; // Indicates level error
-		} else {
-			return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
-		}
-	}
+  /*
+   * getGridSize
+   *
+   * Retrieves the grid size for the level. The first level is a 3x3 and it increases
+   * by perfect squares each level, with some levels increasing only point value. The
+   * pattern for generation will change depending on how quickly the levels can be played.
+   */
+  getGridSize() {
+    if( this.currentLevel < 1) {
+      return -1; // Indicates level error
+    } else {
+      return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
+    }
+  }
 
-	/*
-	 * getMoves
-	 *
-	 * Returns the number of moves available to the player
-	 */
-	getMoves() {
-		if( this.currentLevel < 1) {
-			return -1; // Indicates level error
-		} else {
-			return this.currentLevel * 2 + 5; // Increase by 2, start at 6
-		}
-	}
+  /*
+   * getMoves
+   *
+   * Returns the number of moves available to the player
+   */
+  getMoves() {
+    if( this.currentLevel < 1) {
+      return -1; // Indicates level error
+    } else {
+      return this.currentLevel * 2 + 5; // Increase by 2, start at 6
+    }
+  }
 
-	/*
-	 * getMoves
-	 *
-	 * Returns the number of points to complete the leve
-	 */
-	getPoints() {
-		if( this.currentLevel < 1) {
-			return -1; // Indicates level error
-		} else {
-			return this.currentLevel * this.currentLevel + (3 * this.currentLevel); // Increase by square, start at 4
-		}
-	}
+  /*
+   * getMoves
+   *
+   * Returns the number of points to complete the leve
+   */
+  getPoints() {
+    if( this.currentLevel < 1) {
+      return -1; // Indicates level error
+    } else {
+      // Increase by square, start at 4
+      return this.currentLevel * this.currentLevel + (3 * this.currentLevel);
+    }
+  }
 
-	/*
-	 * getBlockSize
-	 *
-	 * Returns the side length of the block for the current level size.
-	 * First divides the game size into chunks according to the grid size
-	 * then the padding is subtracted from each to account for it in the drawing
-	 * function.
-	 */
-	getBlockSize() {
-		var size = Math.floor( (this.gameSize / this.getGridSize()) - 5); 
+  /*
+   * getBlockSize
+   *
+   * Returns the side length of the block for the current level size.
+   * First divides the game size into chunks according to the grid size
+   * then the padding is subtracted from each to account for it in the drawing
+   * function.
+   */
+  getBlockSize() {
+    var size = Math.floor( (this.gameSize / this.getGridSize()) - 5); 
 
-		if(size < 0) {
-			return -1; // indicates error
-		} else {
-			return size;
-		}
-	}
+    if(size < 0) {
+      return -1; // indicates error
+    } else {
+      return size;
+    }
+  }
 
-	/*
-	 * getBlockScale
-	 *
-	 * The source image for the spritesheet determines the physical pizel size
-	 * of the blocks. This function determines what scale factor is needed for
-	 * the size of the game. Will change dynamically depending of game size, even
-	 * when scaled.
-	 */
-	getBlockScale() {
-		var scale = this.getBlockSize() / this.spriteSize;
-		return scale;
-	}
+  /*
+   * getBlockScale
+   *
+   * The source image for the spritesheet determines the physical pizel size
+   * of the blocks. This function determines what scale factor is needed for
+   * the size of the game. Will change dynamically depending of game size, even
+   * when scaled.
+   */
+  getBlockScale() {
+    var scale = this.getBlockSize() / this.spriteSize;
+    return scale;
+  }
 }

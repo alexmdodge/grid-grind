@@ -306,7 +306,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
  * 
  *                              Author : Alex Dodge
- *                       Last Modified : January 8, 2017
+ *                       Last Modified : April 17, 2017
  *                             License : MIT     
  *
  *
@@ -544,8 +544,6 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
       value: function preload() {
          this.game.stage.backgroundColor = '#eee';
          this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-
-         // Load spritesheets
          this.game.load.spritesheet('blocks', '../img/hr-blocks.png', 100, 100);
       }
 
@@ -601,6 +599,7 @@ var GridGrind = exports.GridGrind = function (_Phaser$State) {
          $("#update-moves-left").html(this.movesLeft);
          $("#player-name").html(this.playerName);
          $('#update-points-total').html(this.pointsLeft);
+         $('#update-points-left').html('0');
 
          this.gameStarted = true;
       }
@@ -893,7 +892,7 @@ exports.default = GridGrind;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -904,7 +903,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *  
  *                              []     [][][] []  [] [][][] []     [][][]
  *  Author: Alex Dodge          []     []     []  [] []     []     []
- *  Date: October 15, 2016      []     [][]   []  [] [][]   []     [][][]
+ *  Date: April 17, 2017        []     [][]   []  [] [][]   []     [][][]
  *  License: MIT                []     []      [][]  []     []         []
  *                              [][][] [][][]   []   [][][] [][][] [][][]
  *
@@ -922,105 +921,106 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Level = exports.Level = function () {
 
-	/* Constructor */
-	function Level(currentLevel, gameSize, spriteSize) {
-		_classCallCheck(this, Level);
+  /* Constructor */
+  function Level(currentLevel, gameSize, spriteSize) {
+    _classCallCheck(this, Level);
 
-		this.currentLevel = currentLevel;
-		this.gameSize = gameSize;
-		this.spriteSize = spriteSize;
-	}
+    this.currentLevel = currentLevel;
+    this.gameSize = gameSize;
+    this.spriteSize = spriteSize;
+  }
 
-	/*
-  * getGridSize
-  *
-  * Retrieves the grid size for the level. The first level is a 3x3 and it increases
-  * by perfect squares each level, with some levels increasing only point value. The
-  * pattern for generation will change depending on how quickly the levels can be played.
-  */
-
-
-	_createClass(Level, [{
-		key: "getGridSize",
-		value: function getGridSize() {
-			if (this.currentLevel < 1) {
-				return -1; // Indicates level error
-			} else {
-				return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
-			}
-		}
-
-		/*
-   * getMoves
+  /*
+   * getGridSize
    *
-   * Returns the number of moves available to the player
+   * Retrieves the grid size for the level. The first level is a 3x3 and it increases
+   * by perfect squares each level, with some levels increasing only point value. The
+   * pattern for generation will change depending on how quickly the levels can be played.
    */
 
-	}, {
-		key: "getMoves",
-		value: function getMoves() {
-			if (this.currentLevel < 1) {
-				return -1; // Indicates level error
-			} else {
-				return this.currentLevel * 2 + 5; // Increase by 2, start at 6
-			}
-		}
 
-		/*
-   * getMoves
-   *
-   * Returns the number of points to complete the leve
-   */
+  _createClass(Level, [{
+    key: "getGridSize",
+    value: function getGridSize() {
+      if (this.currentLevel < 1) {
+        return -1; // Indicates level error
+      } else {
+        return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
+      }
+    }
 
-	}, {
-		key: "getPoints",
-		value: function getPoints() {
-			if (this.currentLevel < 1) {
-				return -1; // Indicates level error
-			} else {
-				return this.currentLevel * this.currentLevel + 3 * this.currentLevel; // Increase by square, start at 4
-			}
-		}
+    /*
+     * getMoves
+     *
+     * Returns the number of moves available to the player
+     */
 
-		/*
-   * getBlockSize
-   *
-   * Returns the side length of the block for the current level size.
-   * First divides the game size into chunks according to the grid size
-   * then the padding is subtracted from each to account for it in the drawing
-   * function.
-   */
+  }, {
+    key: "getMoves",
+    value: function getMoves() {
+      if (this.currentLevel < 1) {
+        return -1; // Indicates level error
+      } else {
+        return this.currentLevel * 2 + 5; // Increase by 2, start at 6
+      }
+    }
 
-	}, {
-		key: "getBlockSize",
-		value: function getBlockSize() {
-			var size = Math.floor(this.gameSize / this.getGridSize() - 5);
+    /*
+     * getMoves
+     *
+     * Returns the number of points to complete the leve
+     */
 
-			if (size < 0) {
-				return -1; // indicates error
-			} else {
-				return size;
-			}
-		}
+  }, {
+    key: "getPoints",
+    value: function getPoints() {
+      if (this.currentLevel < 1) {
+        return -1; // Indicates level error
+      } else {
+        // Increase by square, start at 4
+        return this.currentLevel * this.currentLevel + 3 * this.currentLevel;
+      }
+    }
 
-		/*
-   * getBlockScale
-   *
-   * The source image for the spritesheet determines the physical pizel size
-   * of the blocks. This function determines what scale factor is needed for
-   * the size of the game. Will change dynamically depending of game size, even
-   * when scaled.
-   */
+    /*
+     * getBlockSize
+     *
+     * Returns the side length of the block for the current level size.
+     * First divides the game size into chunks according to the grid size
+     * then the padding is subtracted from each to account for it in the drawing
+     * function.
+     */
 
-	}, {
-		key: "getBlockScale",
-		value: function getBlockScale() {
-			var scale = this.getBlockSize() / this.spriteSize;
-			return scale;
-		}
-	}]);
+  }, {
+    key: "getBlockSize",
+    value: function getBlockSize() {
+      var size = Math.floor(this.gameSize / this.getGridSize() - 5);
 
-	return Level;
+      if (size < 0) {
+        return -1; // indicates error
+      } else {
+        return size;
+      }
+    }
+
+    /*
+     * getBlockScale
+     *
+     * The source image for the spritesheet determines the physical pizel size
+     * of the blocks. This function determines what scale factor is needed for
+     * the size of the game. Will change dynamically depending of game size, even
+     * when scaled.
+     */
+
+  }, {
+    key: "getBlockScale",
+    value: function getBlockScale() {
+      var scale = this.getBlockSize() / this.spriteSize;
+      return scale;
+    }
+  }]);
+
+  return Level;
 }();
 
 },{}]},{},[2])
