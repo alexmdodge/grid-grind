@@ -10,6 +10,7 @@
 	<a name="game" aria-hidden="true" class="anchor"></a>
 	Game Info
 </h2>
+
 ### *How to Play* <img src="http://image.flaticon.com/icons/png/512/25/25400.png" width="20px">
 
 Click any of the color blocks and watch them change to the next color. Use the **help menu** on the side to determine which order the blocks will change in. The idea is that you have to be **careful** in what order you change the blocks as you might trigger a smaller chain and can't beat the level.
