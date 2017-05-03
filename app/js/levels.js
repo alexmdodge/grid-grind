@@ -1,13 +1,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *  
+ *
  *                              []     [][][] []  [] [][][] []     [][][]
  *  Author: Alex Dodge          []     []     []  [] []     []     []
  *  Date: April 17, 2017        []     [][]   []  [] [][]   []     [][][]
  *  License: MIT                []     []      [][]  []     []         []
  *                              [][][] [][][]   []   [][][] [][][] [][][]
  *
- *  The levels object accepts the current level and game size. It then generates 
- *  all of the properties pertaining to that level. They can be retrieved through 
+ *  The levels object accepts the current level and game size. It then generates
+ *  all of the properties pertaining to that level. They can be retrieved through
  *  the following get methods. By dynamically generating levels, each individual
  *  does not have to be constructed, and instead levels will have properties
  *  and attributes extending the levels infinitely if required.
@@ -18,8 +18,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-export class Level {
-
+export default class Level {
   /* Constructor */
   constructor(currentLevel, gameSize, spriteSize) {
     this.currentLevel = currentLevel;
@@ -35,7 +34,7 @@ export class Level {
    * pattern for generation will change depending on how quickly the levels can be played.
    */
   getGridSize() {
-    if( this.currentLevel < 1) {
+    if (this.currentLevel < 1) {
       return -1; // Indicates level error
     } else {
       return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
@@ -48,7 +47,7 @@ export class Level {
    * Returns the number of moves available to the player
    */
   getMoves() {
-    if( this.currentLevel < 1) {
+    if (this.currentLevel < 1) {
       return -1; // Indicates level error
     } else {
       return this.currentLevel * 2 + 5; // Increase by 2, start at 6
@@ -61,7 +60,7 @@ export class Level {
    * Returns the number of points to complete the leve
    */
   getPoints() {
-    if( this.currentLevel < 1) {
+    if (this.currentLevel < 1) {
       return -1; // Indicates level error
     } else {
       // Increase by square, start at 4
@@ -78,9 +77,9 @@ export class Level {
    * function.
    */
   getBlockSize() {
-    var size = Math.floor( (this.gameSize / this.getGridSize()) - 5); 
+    var size = Math.floor((this.gameSize / this.getGridSize()) - 5);
 
-    if(size < 0) {
+    if (size < 0) {
       return -1; // indicates error
     } else {
       return size;
