@@ -12,19 +12,47 @@ module.exports = {
   entry: {
     app: [
       './app/js/game.js',
-      './app/styles/styles.scss'
+      './app/styles/styles.scss',
+      './app/index.html',
     ],
-    vendor: ['jquery', 'phaser']
+    vendor: ['jquery']
   },
 
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'gg-[name].[chunkhash].js',
+    filename: 'gridgrind.[name].js',
   },
 
   module: {
     rules: [
       {
+        // Markup Processing
+        test: /\.html$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].html'
+          }
+        }
+      } , {
+        // Font Processing
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]'
+          }
+        }
+      } , {
+        // Image Processing
+        test: /\.(png|jpg|gif)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'images/[name].[ext]'
+          }
+        } 
+      } , {
         // Stylesheets Processing
         test: /\.s[ac]ss$/,
         use: ExtractTextPlugin.extract({
@@ -39,7 +67,8 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: { 
-              presets: ['env']
+              presets: ['env'],
+              compact: false,
             }
           } , {
             loader: 'eslint-loader',
