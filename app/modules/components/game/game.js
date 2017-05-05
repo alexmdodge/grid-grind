@@ -13,8 +13,6 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-let testTemplate = require('pug-loader!../templates/test.pug');
-console.log(testTemplate({test: 'this is test', url: 'me.com'}));
 import GridGrind from './grid-grind-state.js';
 
 // Global variables for initial navigation and to hold the players name

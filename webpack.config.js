@@ -11,11 +11,11 @@ let inProduction = (process.env.NODE.ENV === 'production');
 /* Main Webpack File */
 module.exports = {
   entry: {
+    vendor: ['jquery'],
     app: [
-      path.resolve(__dirname, 'app/js/game.js'),
+      path.resolve(__dirname, 'app/modules/components/game/game.js'),
       path.resolve(__dirname, 'app/styles/styles.scss'),
     ],
-    vendor: ['jquery']
   },
 
   output: {
@@ -97,7 +97,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'GridGrind | The Random Puzzle Game',
-      template: 'index.pug'
+      template: path.resolve(__dirname, 'app/index.pug'),
     })
   ],
 
