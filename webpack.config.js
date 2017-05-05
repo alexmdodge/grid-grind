@@ -11,9 +11,9 @@ let inProduction = (process.env.NODE.ENV === 'production');
 /* Main Webpack File */
 module.exports = {
   entry: {
-    vendor: ['jquery'],
+    vendor: ['jquery', 'phaser'],
     app: [
-      path.resolve(__dirname, 'app/modules/components/game/game.js'),
+      path.resolve(__dirname, 'app/modules/app.js'),
       path.resolve(__dirname, 'app/styles/styles.scss'),
     ],
   },
@@ -28,7 +28,12 @@ module.exports = {
       {
         // Template Processing
         test: /\.pug?/,
-        loader: 'pug-loader'
+        use: {
+          loader: 'pug-loader',
+          options: {
+            pretty: true,
+          }
+        }
       } , {
         // Font Processing
         test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
@@ -40,7 +45,7 @@ module.exports = {
         }
       } , {
         // Image Processing
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|ico)$/,
         use: {
           loader: 'file-loader',
           options: {
@@ -97,6 +102,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'GridGrind | The Random Puzzle Game',
+      inject: false,
+      hash: true,
       template: path.resolve(__dirname, 'app/index.pug'),
     })
   ],
@@ -113,6 +120,7 @@ module.exports = {
 
     // These can be referenced when including and requiring files
     alias: {
+      App: path.resolve(__dirname, 'app/'),
       Components: path.resolve(__dirname, 'app/modules/components/'),
       Services: path.resolve(__dirname, 'app/modules/services/'),
       Fonts: path.resolve(__dirname, 'app/fonts/'),
