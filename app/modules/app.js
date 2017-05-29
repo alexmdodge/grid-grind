@@ -1,11 +1,19 @@
+import appTemplate from './app.pug';
+import Tutorial from './components//tutorialComponent/tutorial';
+import Utils from './services/utilities';
+
 /**
  * Application entry point. All resources, modules, and templates
  * branch from this point.
  */
-import appTemplate from 'App/modules/app.pug';
-
 class App {
   constructor() {
-    appNode = pug.renderFile(appTemplate);
+    Utils.appendTemplate('gg-app', appTemplate());
+
+    // Initialize all top level components
+    this.tutorial = new Tutorial();
   }
 }
+
+/* Initiate App */
+const gridGrind = new App();

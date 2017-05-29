@@ -111,22 +111,17 @@ module.exports = {
   resolve: {
     // directories where to look for modules
     modules: [
-      "node_modules",
-      path.resolve(__dirname, "app")
+      path.resolve(__dirname),
+      'node_modules'
     ],
 
     // Extensions that are used
-    extensions: [".js", ".json", ".css", ".scss"],
+    extensions: ['.js'],
 
-    // These can be referenced when including and requiring files
+    // Alias for common files
     alias: {
-      App: path.resolve(__dirname, 'app/'),
-      Components: path.resolve(__dirname, 'app/modules/components/'),
       Services: path.resolve(__dirname, 'app/modules/services/'),
-      Fonts: path.resolve(__dirname, 'app/fonts/'),
-      Images: path.resolve(__dirname, 'app/images/'),
-      Styles: path.resolve(__dirname, 'app/styles/'),
-    },
+    }
   }
 };
 
