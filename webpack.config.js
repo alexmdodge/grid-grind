@@ -11,7 +11,7 @@ let inProduction = (process.env.NODE.ENV === 'production');
 /* Main Webpack File */
 module.exports = {
   entry: {
-    vendor: ['jquery', 'phaser'],
+    vendor: ['jquery'],
     app: [
       path.resolve(__dirname, 'app/modules/app.js'),
       path.resolve(__dirname, 'app/styles/styles.scss'),
@@ -20,7 +20,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'gridgrind.[name].js',
+    filename: 'gridgrind.[name].js'
   },
 
   module: {
@@ -49,7 +49,8 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: 'images/[name].[ext]'
+            name: '[name].[ext]',
+            useRelativePath: true
           }
         } 
       } , {

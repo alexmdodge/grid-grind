@@ -13,6 +13,9 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+import 'pixi';
+import 'p2';
+import Phaser from 'phaser';
 import GridGrind from './grid-grind-state.js';
 
 // Global variables for initial navigation and to hold the players name

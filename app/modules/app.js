@@ -1,5 +1,6 @@
 import template from './app.pug';
-import Tutorial from './components//tutorial/tutorial';
+import Tutorial from './components/tutorial/tutorial';
+import Intro from './components/intro/intro';
 import Utils from './services/utilities';
 
 /**
@@ -12,6 +13,7 @@ class App {
 
     // Initialize all top level components
     this.tutorial = new Tutorial();
+    this.intro = new Intro();
   }
 }
 
