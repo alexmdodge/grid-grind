@@ -1,5 +1,5 @@
-import appTemplate from './app.pug';
-import Tutorial from './components//tutorialComponent/tutorial';
+import template from './app.pug';
+import Tutorial from './components//tutorial/tutorial';
 import Utils from './services/utilities';
 
 /**
@@ -8,7 +8,7 @@ import Utils from './services/utilities';
  */
 class App {
   constructor() {
-    Utils.appendTemplate('gg-app', appTemplate());
+    Utils.appendTemplate('gg-app', template());
 
     // Initialize all top level components
     this.tutorial = new Tutorial();
