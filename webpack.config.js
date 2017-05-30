@@ -1,7 +1,6 @@
 let webpack = require('webpack');
 let path = require('path');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let CleanWebpackPlugin = require('clean-webpack-plugin');
 let StringReplacePlugin = require("string-replace-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -44,16 +43,6 @@ module.exports = {
           }
         }
       } , {
-        // Image Processing
-        test: /\.(png|jpg|gif|ico)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            useRelativePath: true
-          }
-        } 
-      } , {
         // Stylesheets Processing
         test: /\.s[ac]ss$/,
         use: ExtractTextPlugin.extract({
@@ -95,11 +84,6 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(require("./package.json").version)
-    }),
-    new CleanWebpackPlugin(['dist'], {
-      root: __dirname,
-      verbose: true,
-      dry: false,
     }),
     new HtmlWebpackPlugin({
       title: 'GridGrind | The Random Puzzle Game',

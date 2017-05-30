@@ -1,18 +1,17 @@
 //- Intro screen with start and game logo
-div(class="gg-intro")
-  div(class="gg-intro__logo")
-    img(
-      src=require('app/images/gg-header-logo.png')
-      alt="Grid Grind Logo Title" 
-      class="gg-intro__logo-src"
-    )
+div(class="intro__logo")
+  img(
+    src='/assets/images/gg-header-logo.png'
+    alt="Grid Grind Logo Title" 
+    class="intro__logo-src"
+  )
 
-  div(class="gg-intro__name")
-    input(
-      type="text" 
-      id="gg-player__name" 
-      placeholder="ENTER NAME"
-      class="gg-field__input"
-    )
+div(class="intro__name")
+  input(
+    type="text" 
+    id="player__name" 
+    placeholder="ENTER NAME"
+    class="field__input"
+  )
 
-  div(class="gg-intro__button") Play
+div(class="intro__button") Play

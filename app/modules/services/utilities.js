@@ -14,7 +14,7 @@ export default class Utils {
    *
    * @memberof Utils
    */
-  static appendTemplate(container, template) {
+  static append(container, template) {
     let containerNode;
 
     if (container.indexOf('.') > -1) {

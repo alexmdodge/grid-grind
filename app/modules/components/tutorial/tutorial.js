@@ -1,6 +1,5 @@
 import template from './tutorial.pug';
 import './tutorial.scss';
-import Utils from '../../services/utilities';
 
 /**
  * Application entry point. All resources, modules, and templates
@@ -8,6 +7,10 @@ import Utils from '../../services/utilities';
  */
 export default class Tutorial {
   constructor() {
-    Utils.appendTemplate('.js-gg-tutorial', template());
+    this.template = template();
+  }
+
+  getTemplate() {
+    return this.template;
   }
 }

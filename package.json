@@ -4,9 +4,12 @@
   "description": "My personal site built using a variety of tools. Used as a portfolio and a way to show a variety of project examples",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \"http-server dist -p 9090\" \"npm run build:dev -- --watch\"",
+    "start": "concurrently \"http-server dist -p 9090\" \"npm run build:dev -- --watch\" \"npm run build:static\"",
     "build:dev": "NODE_ENV=dev webpack",
     "build:production": "NODE_ENV=production webpack",
+    "build:static": "npm run clean:dist && npm run copy:assets",
+    "clean:dist": "rm -rf ./dist && mkdir ./dist",
+    "copy:assets": "cp -r ./app/assets ./dist/",
     "test": "mocha -w -R spec --require babel-register ./test/gridGrindTest.js"
   },
   "author": "Alex Dodge",

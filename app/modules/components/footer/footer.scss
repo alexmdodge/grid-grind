@@ -1,3 +1,5 @@
+@import '../../../styles/_variables.scss';
+
 footer {
 	font-family: $primary-font;
 	color: #bbb;
@@ -9,8 +11,8 @@ footer {
 	width: 100%;
 
 
-	.gg-footer-github,
-	.gg-footer-paypal {
+	.footer-github,
+	.footer-paypal {
 		font-size: 1.2em;
 		text-decoration: none;
 		outline: none;
@@ -21,11 +23,11 @@ footer {
 		}
 	}
 
-	.gg-footer-github {
+	.footer-github {
 		&:hover { color: #333;}
 	}
 
-	.gg-footer-paypal {
+	.footer-paypal {
 		&:hover { color: #0A87C1;}
 	}
 }

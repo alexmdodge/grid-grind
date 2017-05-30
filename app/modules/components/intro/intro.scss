@@ -1,11 +1,11 @@
 @import '../../../styles/_variables.scss';
 
 /* Introduction */
-.gg-intro > * {
+.intro > * {
   font-family: $primary-font;
 }
 
-.gg-intro {
+.intro {
   box-sizing: border-box;
   width: 40%;
   margin: 18vh auto 0;
@@ -13,13 +13,13 @@
 
   &__name { position: relative; }
 
-  .gg-field__label,
-  .gg-field__input {
+  .field__label,
+  .field__input {
     border-radius: 5px;
     text-align: center;
   }
 
-  .gg-field__label {
+  .field__label {
     color: #fff;
     display: inline-block;
     background-color: rgba(46, 122, 236,0.7);
@@ -31,7 +31,7 @@
     top: -13px;
   }
 
-  .gg-field__input {
+  .field__input {
     font-family: $primary-font;
     color: rgba(46, 122, 236,0.7);
     width: 100%;
@@ -45,7 +45,7 @@
     &:focus { border: 5px solid rgba(46, 122, 236,0.9); }
   }
 
-  .gg-intro__button {
+  .intro__button {
     color: rgba(75, 189, 75, 1);
     cursor: pointer;
     width: 100%;
@@ -66,12 +66,12 @@
     }
   }
   
-  .gg-intro__logo-src {
+  .intro__logo-src {
     width: 100%;
   }
 }
 
-.gg-button {
+.button {
   font-family: $primary-font;
   cursor: pointer;
   padding: 10px;
