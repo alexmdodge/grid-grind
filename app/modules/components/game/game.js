@@ -1,21 +1,21 @@
-/* jshint esversion: 6 */
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- *              
+ *
  *    [][][]  [][][] [][][] [][][]    [][][]  [][][] [][][] []    [] [][][]
  *    []      []  []   []   []   []   []      []  []   []   [][]  [] []   []
  *    [] [][] [][]     []   []   []   [] [][] [][]     []   [] [] [] []   []
  *    []  []  [] []    []   []   []   []  []  [] []    []   []  [][] []   []
  *    [][][]  []  [] [][][] [][][]    [][][]  []  [] [][][] []    [] [][][]
- * 
+ *
  *                              Author : Alex Dodge
  *                       Last Modified : April 17, 2017
- *                             License : MIT     
+ *                             License : MIT
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+import 'pixi';
+import 'p2';
+import Phaser from 'phaser';
 import GridGrind from './grid-grind-state.js';
 
 // Global variables for initial navigation and to hold the players name
@@ -73,7 +73,7 @@ class Navigation {
 
   /**
    * Navigates to the previous tutorial slide. Allows you to go back to
-   * the main introduction screen so you can change your name before 
+   * the main introduction screen so you can change your name before
    * starting the game.
    */
   prevSlide() {

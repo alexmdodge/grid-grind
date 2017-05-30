@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "pug": true
+  },
+  "rules": {
+    "no-unused-vars": ["error", { 
+      "varsIgnorePattern": "gridGrind"  
+    }]
+  }
+}
