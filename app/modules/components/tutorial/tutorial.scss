@@ -10,7 +10,7 @@
   width: 100%;
   height: 100vh;
 
-  .skip-tutorial {
+  &__skip {
     border-bottom: 2px solid rgba(0,0,0,0);
     cursor: pointer;
     position: absolute;
@@ -59,10 +59,12 @@
     text-transform: uppercase;
     font-weight: bold;
   }
+}
 
-  .button-back,
-  .button-next,
-  .button-start {
+.button {
+  display: none;
+
+  &--back, &--next, &--start {
     display: block;
     color: #eee;
     margin: 10px;
@@ -70,8 +72,10 @@
     border: none;
   }
 
-  .button-back {
-    float: left;
+  &--back {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     transition: all 0.1s ease-in-out;
     &:hover { 
       transition: all 0.1s ease-in-out;
@@ -79,8 +83,10 @@
     }
   }
 
-  .button-next {
-    float: right;
+  &--next {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     transition: all 0.1s ease-in-out;
     &:hover {
       transition: all 0.1s ease-in-out;
@@ -88,7 +94,7 @@
     }
   }
 
-  .button-start {
+  &--start {
     background-color: lighten($primary-green,100);
     color: $primary-green;
     border: 5px solid $primary-green;

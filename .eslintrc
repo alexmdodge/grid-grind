@@ -7,6 +7,8 @@
     "pug": true
   },
   "rules": {
+    "arrow-body-style": ["error", "never"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-vars": ["error", { 
       "varsIgnorePattern": "gridGrind"  
     }]

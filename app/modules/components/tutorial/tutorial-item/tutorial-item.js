@@ -1,5 +1,3 @@
-extends tutorial.pug
-
 div(class="gg-selection-container")
   div(class="gg-button gg-button-back")
     i(class="fa fa-arrow-circle-left") Back

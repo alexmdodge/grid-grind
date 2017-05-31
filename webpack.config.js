@@ -34,15 +34,6 @@ module.exports = {
           }
         }
       } , {
-        // Font Processing
-        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]'
-          }
-        }
-      } , {
         // Stylesheets Processing
         test: /\.s[ac]ss$/,
         use: ExtractTextPlugin.extract({
@@ -57,22 +48,13 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: { 
-              presets: ['env'],
+              presets: ['env', 'react', 'stage-1'],
               compact: false,
             }
           } , {
             loader: 'eslint-loader',
           }
         ]
-      } , {
-        // Image processing
-        test: /\.(png|svg|jpg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: 'images/[name].[ext]'
-          }
-        }],
       }
     ]
   },
@@ -101,7 +83,7 @@ module.exports = {
     ],
 
     // Extensions that are used
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
 
     // Alias for common files
     alias: {
