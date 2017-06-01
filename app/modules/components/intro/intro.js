@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './intro.scss';
 
 /**
@@ -9,7 +10,7 @@ export default class Intro extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'Enter player name',
+      name: '',
     };
   }
 
@@ -28,16 +29,21 @@ export default class Intro extends Component {
           <input
             value={this.state.name}
             onChange={event => this.setState({ name: event.target.value })}
+            placeholder="Enter player name"
             type="text"
             id="player__name"
             className="intro__input"
           />
         </div>
 
-        <button className="intro__button">
+        <button onClick={this.props.startTutorial} className="intro__button">
           Play
         </button>
       </div>
     );
   }
 }
+
+Intro.propTypes = {
+  startTutorial: PropTypes.func.isRequired,
+};
