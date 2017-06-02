@@ -13,14 +13,13 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-import 'pixi';
-import 'p2';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Phaser from 'phaser';
-import GridGrind from './grid-grind-state.js';
-
-// Global variables for initial navigation and to hold the players name
-export var _ggPlayerName;
-var _ggNavigation;
+import GameUI from './game-ui/game-ui';
+import Footer from '../footer/footer';
+import GridGrind from './game-state';
+import './game.scss';
 
 class Game extends Phaser.Game {
 
@@ -39,103 +38,39 @@ class Game extends Phaser.Game {
     this.state.start('GridGrind');
 
     this.WebFontConfig = {
-      active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+      active() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
       google: {
-        families: ['Fjalla One']
-      }
+        families: ['Fjalla One'],
+      },
     };
   }
 }
 
-
-class Navigation {
-  constructor(playerName) {
-    this.playerName = playerName;
-    this.currentStep = 0;
+export default class GameContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      score: 0,
+    };
   }
 
-  /**
-   * Navigates to the next tutorial slide. Checks if first time in
-   * tutorial and adjusts screen accordingly.
-   */
-  nextSlide() {
-    if (this.currentStep === 0) {
-      $('.gg-tutorial').fadeIn('fast');
-
-      this.currentStep++;
-      $('.gg-tutorial-slide' + this.currentStep).delay(800).fadeIn('fast');
-    } else {
-      this.currentStep++;
-      $('.gg-tutorial-slide' + (this.currentStep - 1) ).fadeOut('fast');
-      $('.gg-tutorial-slide' + this.currentStep).delay(250).fadeIn('fast');
+  componentDidMount() {
+    if (this.props.gameActive) {
+      this.gg = new Game();
     }
   }
 
-  /**
-   * Navigates to the previous tutorial slide. Allows you to go back to
-   * the main introduction screen so you can change your name before
-   * starting the game.
-   */
-  prevSlide() {
-    if (this.currentStep - 1 === 0) {
-      $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast');
-      $('.gg-tutorial').delay(500).fadeOut('fast');
-      this.currentStep--;
-    } else {
-      this.currentStep--;
-      $('.gg-tutorial-slide' + (this.currentStep + 1) ).fadeOut('fast');
-      $('.gg-tutorial-slide' + this.currentStep).delay(250).fadeIn('fast');
-    }
-  }
-
-  /**
-   * Navigates to the final slide. Is triggered when the player chooses
-   * to skip the tutorial.
-   */
-  finalSlide() {
-      $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast', () => {
-        this.currentStep = 4;
-      });
-      $('.gg-tutorial-slide4').delay(250).fadeIn('fast');
-  }
-
-  startGame() {
-      $('.gg-tutorial-slide' + this.currentStep).fadeOut('fast');
-      $('.gg-tutorial').delay(250).fadeOut('fast');
-      $('.gg-intro').delay(500).fadeOut('fast', () => {
-        let ggGame = new Game();
-        $('.gg-user-interface').removeClass('gg-hide-game');
-        $('#gg-game-container').removeClass('gg-hide-game');
-        _ggPlayerName = $('.gg-field-input').val();
-      });
+  render() {
+    return (
+      <div>
+        <GameUI />
+        <div id="gg-game-container" />
+        <Footer />
+      </div>
+    );
   }
 }
 
-/**
- * Program is driven from this function. Begins once player
- * navigates through the tutorial, or skips it.
- */
-$(document).ready( () => {
-  $('#gg-game-container').addClass('gg-hide-game');
-
-  $('.gg-intro-button').click( () => {
-    _ggNavigation = new Navigation( $('.gg-field-input').val() );
-    _ggNavigation.nextSlide();
-  })
-
-  $('.gg-button-next').click( () => {
-    _ggNavigation.nextSlide();
-  })
-
-  $('.gg-button-back').click( () => {
-    _ggNavigation.prevSlide();
-  })
-
-  $('.gg-skip-tutorial').click( () => {
-    _ggNavigation.finalSlide();
-  })
-
-  $('.gg-button-start').click( () => {
-    _ggNavigation.startGame();
-  })
-});
+GameContainer.propTypes = {
+  gameActive: PropTypes.bool.isRequired,
+};

@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Tutorial from './components/tutorial/tutorial';
 import Intro from './components/intro/intro';
-// import Utils from './services/utilities';
-// import Footer from './components/footer/footer';
+import Game from './components/game/game';
 
 /**
  * Application entry point. All resources, modules, and templates
@@ -17,6 +16,7 @@ class App extends Component {
       gameActive: false,
       tutorialOpen: false,
     };
+    this.startGame = this.startGame.bind(this);
   }
 
   startGame() {
@@ -29,11 +29,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Intro startTutorial={() => this.setState({ tutorialOpen: true })} />
+        <Intro
+          introActive={!this.state.gameActive}
+          startTutorial={() => this.setState({ tutorialOpen: true })}
+        />
         <Tutorial
           isOpen={this.state.tutorialOpen}
           closeTutorial={() => this.setState({ tutorialOpen: false })}
-          startGame={() => this.setState({ gameActive: true })}
+          startGame={this.startGame}
+        />
+        <Game
+          gameActive={this.gameActive}
         />
       </div>
     );

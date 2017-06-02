@@ -18,29 +18,21 @@ export default class Tutorial extends Component {
   }
 
   prevSlide() {
-    if (this.state.slide < 0) {
+    const slide = this.state.slide - 1;
+    if (slide < 0) {
       this.setState({
         slide: 0,
       });
       this.props.closeTutorial();
     } else {
-      this.setState({
-        slide: this.state.slide - 1,
-      });
+      this.setState({ slide });
     }
   }
 
   nextSlide() {
-    if (this.slide > 4) {
-      this.setState({
-        slide: 0,
-      });
-      this.props.closeTutorial();
-    } else {
-      this.setState({
-        slide: this.state.slide + 1,
-      });
-    }
+    this.setState({
+      slide: this.state.slide + 1,
+    });
   }
 
   renderBodyClass() {
@@ -51,8 +43,15 @@ export default class Tutorial extends Component {
   }
 
   renderStartClass() {
-    if (this.state.slide === 4) {
-      return 'button__start--hidden';
+    if (this.state.slide !== 3) {
+      return 'tut-button__start--hidden';
+    }
+    return '';
+  }
+
+  renderEndClass() {
+    if (this.state.slide === 3) {
+      return 'tut-button__next--hidden';
     }
     return '';
   }
@@ -78,7 +77,7 @@ export default class Tutorial extends Component {
           </button>
           <button
             onClick={this.nextSlide}
-            className="tut-button tut-button__next"
+            className={`tut-button tut-button__next ${this.renderEndClass()}`}
           >
             Next <i className="fa fa-arrow-circle-right" />
           </button>

@@ -47,11 +47,17 @@
     height: 100%;
 
     p { font-size: 1.3em;}
+
+    div {
+      width: 80%;
+    }
   }
 
-  img {
-    width: 40%;
+  &__img {
     margin: 0 auto;
+    img {
+      width: 60%;
+    }
   }
 
   h1, h2 {
@@ -94,22 +100,35 @@
     }
   }
 
+  &__next--hidden {
+    display: none;
+  }
+
   &__start {
-    background-color: lighten($primary-green,100);
-    color: $primary-green;
-    border: 5px solid $primary-green;
+    background-color: lighten($primary-blue,100);
+    color: $primary-blue;
+    border: 5px solid $primary-blue;
+    border-radius: 5px;
+    bottom: 140px;
     font-family: $primary-font;
     font-size: 2em;
     font-weight: bold;
-    margin: 80px auto;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
     padding: 20px;
     width: 50%;
+    transform: translateX(-50%);
     transition: all 0.2s ease-in-out;
 
     &:hover { 
-      background-color: $primary-green; 
+      background-color: $primary-blue; 
       color: white;
       transition: all 0.2s ease-in-out;
     }
+  }
+
+  &__start--hidden {
+    display: none;
   }
 }

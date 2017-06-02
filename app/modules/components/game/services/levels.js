@@ -36,9 +36,8 @@ export default class Level {
   getGridSize() {
     if (this.currentLevel < 1) {
       return -1; // Indicates level error
-    } else {
-      return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
     }
+    return this.currentLevel + 2; // If level 1, 3 blocks per row, 3 columns
   }
 
   /*
@@ -49,23 +48,21 @@ export default class Level {
   getMoves() {
     if (this.currentLevel < 1) {
       return -1; // Indicates level error
-    } else {
-      return this.currentLevel * 2 + 5; // Increase by 2, start at 6
     }
+    return (this.currentLevel * 2) + 5; // Increase by 2, start at 6
   }
 
   /*
    * getMoves
    *
-   * Returns the number of points to complete the leve
+   * Returns the number of points to complete the level
    */
   getPoints() {
     if (this.currentLevel < 1) {
       return -1; // Indicates level error
-    } else {
-      // Increase by square, start at 4
-      return this.currentLevel * this.currentLevel + (3 * this.currentLevel);
     }
+    // Increase by square, start at 4
+    return (this.currentLevel * this.currentLevel) + (3 * this.currentLevel);
   }
 
   /*
@@ -77,13 +74,12 @@ export default class Level {
    * function.
    */
   getBlockSize() {
-    var size = Math.floor((this.gameSize / this.getGridSize()) - 5);
+    const size = Math.floor((this.gameSize / this.getGridSize()) - 5);
 
     if (size < 0) {
       return -1; // indicates error
-    } else {
-      return size;
     }
+    return size;
   }
 
   /*
@@ -95,7 +91,6 @@ export default class Level {
    * when scaled.
    */
   getBlockScale() {
-    var scale = this.getBlockSize() / this.spriteSize;
-    return scale;
+    return (this.getBlockSize() / this.spriteSize);
   }
 }

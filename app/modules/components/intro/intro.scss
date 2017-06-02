@@ -8,6 +8,9 @@
   align-items: center;
   height: 100vh;
 
+  &--hidden {
+    display: none;
+  }
   &__name {
     width: 50%;
     position: relative;

@@ -4,10 +4,12 @@
     "browser": true
   },
   "globals": {
-    "pug": true
+    "pug": true,
+    "Phaser": true,
+    "$": true
   },
   "rules": {
-    "arrow-body-style": ["error", "never"],
+    "arrow-body-style": ["error", "as-needed"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-vars": ["error", { 
       "varsIgnorePattern": "gridGrind"  

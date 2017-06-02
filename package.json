@@ -40,7 +40,6 @@
     "jquery": "^3.2.1",
     "mocha": "^3.1.2",
     "node-sass": "^4.5.2",
-    "phaser": "^2.6.2",
     "pug": "^2.0.0-rc.1",
     "pug-loader": "^2.3.0",
     "sass-loader": "^6.0.3",
@@ -55,6 +54,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "phaser": "^2.6.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
