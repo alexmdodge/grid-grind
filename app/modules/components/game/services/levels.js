@@ -49,7 +49,7 @@ export default class Level {
     if (this.currentLevel < 1) {
       return -1; // Indicates level error
     }
-    return (this.currentLevel * 2) + 5; // Increase by 2, start at 6
+    return this.currentLevel + 5; // Increase by 2, start at 6
   }
 
   /*

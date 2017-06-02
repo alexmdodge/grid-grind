@@ -1,30 +1,29 @@
 .gg-progress-bar {
-	width: 600px;
-	height: 45px;
-	background-color: #888;
-	border: 5px solid #444;
-	border-radius: 3px;
-	position: relative;
-	display: block;
-	margin: 15px auto;
+  width: 600px;
+  background-color: #888;
+  border: 5px solid #444;
+  border-radius: 3px;
+  position: relative;
+  display: block;
+  margin: 15px auto;
 
-	#progress-bar-done {
-		position: absolute;
-		left: 0;
-		top: 0;
-		background-color: #5F8FFD;
-		border-radius: 3px;
-		height: 45px;
-		z-index: 10;
-		width: 0;
-	}
+  #progress-bar-done {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    background-color: #5F8FFD;
+    border-radius: 2px;
+    height: 45px;
+    z-index: 10;
+    width: 0;
+  }
 
-	.gg-progress-title {
-		position: relative;
-		color: #eee;
-		width: 100%;
-		text-align: center;
-		margin: 8px 0px;
-		z-index: 20;
-	}
+  .gg-progress-title {
+    position: relative;
+    color: #eee;
+    width: 100%;
+    text-align: center;
+    margin: 8px 0px;
+    z-index: 20;
+  }
 }

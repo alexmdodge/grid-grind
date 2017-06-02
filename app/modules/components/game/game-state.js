@@ -52,7 +52,7 @@ export default class GridGrind extends Phaser.State {
   preload() {
     this.game.stage.backgroundColor = '#eeeeee';
     this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-    this.game.load.spritesheet('blocks', './images/hr-blocks.png', 100, 100);
+    this.game.load.spritesheet('blocks', '/assets/images/hr-blocks.png', 100, 100);
   }
 
 

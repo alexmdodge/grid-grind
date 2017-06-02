@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Footer from '../footer/footer';
 import './intro.scss';
 
 /**
@@ -47,7 +46,6 @@ export default class Intro extends Component {
         <button onClick={this.props.startTutorial} className="intro__button">
           Play
         </button>
-        <Footer />
       </div>
     );
   }

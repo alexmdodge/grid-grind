@@ -6,6 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /* Build Variables */
 let inProduction = (process.env.NODE.ENV === 'production');
+const PHASER_DIR = path.join(__dirname, '/node_modules/phaser/');
 
 /* Main Webpack File */
 module.exports = {
@@ -25,6 +26,24 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /pixi\.js$/,
+        use: [{
+          loader: 'expose-loader',
+          options: 'PIXI',
+        }],
+      }, {
+        test: /phaser-split\.js$/,
+        use: [{
+          loader: 'expose-loader',
+          options: 'Phaser',
+        }],
+      }, {
+        test: /p2\.js$/,
+        use: [{
+          loader: 'expose-loader',
+          options: 'p2',
+        }],
+      }, {
         // Template Processing
         test: /\.pug?/,
         use: {
@@ -33,7 +52,7 @@ module.exports = {
             pretty: true,
           }
         }
-      } , {
+      }, {
         // Stylesheets Processing
         test: /\.s[ac]ss$/,
         use: ExtractTextPlugin.extract({
@@ -87,6 +106,9 @@ module.exports = {
 
     // Alias for common files
     alias: {
+      phaser: path.join(PHASER_DIR, 'build/custom/phaser-split.js'),
+      pixi: path.join(PHASER_DIR, 'build/custom/pixi.js'),
+      p2: path.join(PHASER_DIR, 'build/custom/p2.js'),
       Services: path.resolve(__dirname, 'app/modules/services/'),
     }
   }

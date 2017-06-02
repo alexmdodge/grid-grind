@@ -9,3 +9,8 @@
     margin: 0 auto;
   }
 }
+
+.gg-game--hidden {
+  display: none !important;
+  canvas { display: none !important; }
+}

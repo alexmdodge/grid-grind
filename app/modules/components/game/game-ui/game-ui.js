@@ -2,7 +2,7 @@ import React from 'react';
 import './game-ui.scss';
 
 const GameUI = () => (
-  <div className="gg-user-interface gg-hide-game">
+  <div className="gg-user-interface">
     <h2 className="gg-moves-left">
       <span id="update-moves-left">3</span>
       <i className="fa fa-heart" />

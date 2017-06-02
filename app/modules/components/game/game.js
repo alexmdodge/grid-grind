@@ -13,11 +13,12 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+import 'pixi';
+import 'p2';
+import 'phaser';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Phaser from 'phaser';
 import GameUI from './game-ui/game-ui';
-import Footer from '../footer/footer';
 import GridGrind from './game-state';
 import './game.scss';
 
@@ -37,12 +38,12 @@ class Game extends Phaser.Game {
     this.state.add('GridGrind', GridGrind, false);
     this.state.start('GridGrind');
 
-    this.WebFontConfig = {
-      active() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
-      google: {
-        families: ['Fjalla One'],
-      },
-    };
+    // this.WebFontConfig = {
+    //   active() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+    //   google: {
+    //     families: ['Fjalla One'],
+    //   },
+    // };
   }
 }
 
@@ -54,18 +55,19 @@ export default class GameContainer extends Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.gameActive) {
+  renderActive() {
+    if (!this.props.gameActive) {
       this.gg = new Game();
+      return 'gg-game--hidden';
     }
+    return '';
   }
 
   render() {
     return (
-      <div>
+      <div className={`gg-game ${this.renderActive()}`}>
         <GameUI />
         <div id="gg-game-container" />
-        <Footer />
       </div>
     );
   }

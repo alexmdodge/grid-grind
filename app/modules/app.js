@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Tutorial from './components/tutorial/tutorial';
 import Intro from './components/intro/intro';
-import Game from './components/game/game';
+import GameContainer from './components/game/game';
 
 /**
  * Application entry point. All resources, modules, and templates
@@ -38,8 +38,8 @@ class App extends Component {
           closeTutorial={() => this.setState({ tutorialOpen: false })}
           startGame={this.startGame}
         />
-        <Game
-          gameActive={this.gameActive}
+        <GameContainer
+          gameActive={this.state.gameActive}
         />
       </div>
     );
