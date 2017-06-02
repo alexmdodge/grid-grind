@@ -1,6 +1,6 @@
 {
   "name": "alexmdodge",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "My personal site built using a variety of tools. Used as a portfolio and a way to show a variety of project examples",
   "main": "app.js",
   "scripts": {

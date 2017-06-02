@@ -10,7 +10,7 @@
 	<a name="game" aria-hidden="true" class="anchor"></a>
 	Game Info
 </h2>
-### Version 0.9.0
+### Version 1.0.0
 
 ### *How to Play* <img src="http://image.flaticon.com/icons/png/512/25/25400.png" width="20px">
 
