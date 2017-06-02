@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  *
@@ -230,27 +231,19 @@ export default class GridGrind extends Phaser.State {
          */
 
         if (!allSameColors[i].matched) {
-          // Right Tile Check
-          if (node.data.x + delta === allSameColors[i].tile.x &&
-            node.data.y === allSameColors[i].tile.y) {
-            toAdd = true;
-          }
+          const rightCheck = (node.data.x + delta === allSameColors[i].tile.x);
+          const leftCheck = (node.data.x - delta === allSameColors[i].tile.x);
+          const upCheck = (node.data.y - delta === allSameColors[i].tile.y);
+          const downCheck = (node.data.y + delta === allSameColors[i].tile.y);
 
-          // Left Tile Check
-          else if (node.data.x - delta === allSameColors[i].tile.x &&
-            node.data.y === allSameColors[i].tile.y) {
+          // Check tiles in each direction for matching chain
+          if (rightCheck && node.data.y === allSameColors[i].tile.y) {
             toAdd = true;
-          }
-
-          // Up Tile Check
-          else if (node.data.y - delta === allSameColors[i].tile.y &&
-            node.data.x === allSameColors[i].tile.x) {
+          } else if (leftCheck && node.data.y === allSameColors[i].tile.y) {
             toAdd = true;
-          }
-
-          // Down Tile Check
-          else if (node.data.y + delta === allSameColors[i].tile.y &&
-            node.data.x === allSameColors[i].tile.x) {
+          } else if (upCheck && node.data.x === allSameColors[i].tile.x) {
+            toAdd = true;
+          } else if (downCheck && node.data.x === allSameColors[i].tile.x) {
             toAdd = true;
           }
 

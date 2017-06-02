@@ -1,3 +1,4 @@
+/* eslint import/no-unresolved: [2, { ignore: ['pixi|p2$'] }] */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  *
@@ -13,8 +14,8 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-import 'pixi';
-import 'p2';
+import 'pixi';  // eslint-disable-line import/no-extraneous-dependencies
+import 'p2';  // eslint-disable-line import/no-extraneous-dependencies
 import 'phaser';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
