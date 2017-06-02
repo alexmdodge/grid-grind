@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"http-server dist -p 9090\" \"npm run build:dev -- --watch\" \"npm run build:static\"",
     "build:dev": "NODE_ENV=dev webpack",
-    "build:production": "NODE_ENV=production webpack",
+    "build:production": "npm run build:static && NODE_ENV=production webpack",
     "build:static": "npm run clean:dist && npm run copy:assets",
     "clean:dist": "rm -rf ./dist && mkdir ./dist",
     "copy:assets": "cp -r ./app/assets ./dist/",
