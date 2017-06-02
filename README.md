@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/QWTyTsK.png" width="900px">
+<img src="http://i.imgur.com/2yJsAYx.png" width="900px">
 
 ## [Try it out here!](https://www.alexmdodge.ca/games/grid-grind/app/) </h1>
 ## Table of Contents
@@ -10,6 +10,7 @@
 	<a name="game" aria-hidden="true" class="anchor"></a>
 	Game Info
 </h2>
+
 ### Version 1.0.0
 
 ### *How to Play* <img src="http://image.flaticon.com/icons/png/512/25/25400.png" width="20px">
