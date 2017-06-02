@@ -5,7 +5,7 @@ let StringReplacePlugin = require("string-replace-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /* Build Variables */
-let inProduction = (process.env.NODE.ENV === 'production');
+let inProduction = (process.env.NODE_ENV === 'production');
 const PHASER_DIR = path.join(__dirname, '/node_modules/phaser/');
 
 /* Main Webpack File */
