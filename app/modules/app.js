@@ -1,28 +1,49 @@
-import template from './app.pug';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
 import Tutorial from './components/tutorial/tutorial';
 import Intro from './components/intro/intro';
-import Utils from './services/utilities';
-import Footer from './components/footer/footer';
+import GameContainer from './components/game/game';
 
 /**
  * Application entry point. All resources, modules, and templates
  * branch from this point.
  */
-class App {
+class App extends Component {
   constructor() {
-    // Initialize all top level components
-    this.tutorial = new Tutorial();
-    this.intro = new Intro();
-    this.footer = new Footer();
+    super();
+    this.state = {
+      gameActive: false,
+      tutorialOpen: false,
+    };
+    this.startGame = this.startGame.bind(this);
+  }
 
-    Utils.append('gg-app', template({
-      tutorial: this.tutorial.getTemplate(),
-      intro: this.intro.getTemplate(),
-      footer: this.footer.getTemplate(),
-    }));
+  startGame() {
+    this.setState({
+      gameActive: true,
+      tutorialOpen: false,
+    });
+  }
 
+  render() {
+    return (
+      <div>
+        <Intro
+          introActive={!this.state.gameActive}
+          startTutorial={() => this.setState({ tutorialOpen: true })}
+        />
+        <Tutorial
+          isOpen={this.state.tutorialOpen}
+          closeTutorial={() => this.setState({ tutorialOpen: false })}
+          startGame={this.startGame}
+        />
+        <GameContainer
+          gameActive={this.state.gameActive}
+        />
+      </div>
+    );
   }
 }
 
-/* Initiate App */
-const gridGrind = new App();
+ReactDOM.render(<App />, document.getElementById('gg-app'));

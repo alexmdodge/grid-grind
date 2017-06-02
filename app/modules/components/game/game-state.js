@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  *
@@ -13,11 +14,10 @@
  *
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-import {Level} from './levels.js';
-import {_ggPlayerName} from './game.js';
-import {ColorNode, ColorTree, ColorNodeContainer} from './colorTree.js';
+import Level from './services/levels';
+import { ColorNode, ColorTree, ColorNodeContainer } from './services/colorTree';
 
-export class GridGrind extends Phaser.State {
+export default class GridGrind extends Phaser.State {
 
   constructor() {
     super();
@@ -28,17 +28,17 @@ export class GridGrind extends Phaser.State {
     this.currentPoints = 0;
     this.movesLeft = 4;
     this.pointsLeft = 5;
-    this.pointsRequired;
-    this.playerName = "Alex";
+    this.pointsRequired = null;
+    this.playerName = 'Alex';
     this.score = 0;
     this.gameStarted = false;
     this.loadingScreen = null;
 
     // Text variables
-    this.levelText;
-    this.levelTextStyle;
-    this.endText;
-    this.endTextStyle;
+    this.levelText = null;
+    this.levelTextStyle = null;
+    this.endText = null;
+    this.endTextStyle = null;
   }
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -51,9 +51,9 @@ export class GridGrind extends Phaser.State {
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   preload() {
-    this.game.stage.backgroundColor = '#eee';
+    this.game.stage.backgroundColor = '#eeeeee';
     this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-    this.game.load.spritesheet('blocks', './images/hr-blocks.png', 100, 100);
+    this.game.load.spritesheet('blocks', '/assets/images/hr-blocks.png', 100, 100);
   }
 
 
@@ -71,7 +71,7 @@ export class GridGrind extends Phaser.State {
     this.game.world.removeAll(true);
 
     // Create a reference sprite to be passed into the current level
-    let referenceSprite = this.game.add.sprite(0, 0, 'blocks');
+    const referenceSprite = this.game.add.sprite(0, 0, 'blocks');
     referenceSprite.visible = false;
 
     // Generate level object based on difficulty
@@ -87,19 +87,19 @@ export class GridGrind extends Phaser.State {
     this.levelText = this.game.add.text(
       Math.round(this.game.world.centerX),
       Math.round(this.game.world.centerY),
-      'Level ' + this.currentLevel,
-      this.levelTextStyle
+      `Level ${this.currentLevel}`,
+      this.levelTextStyle,
     );
     this.levelText.anchor.setTo(0.5, 0.5);
     this.levelText.alpha = 0;
     this.game.add.tween(this.levelText).to({
-      alpha: 1
+      alpha: 1,
     }, 300, Phaser.Easing.Linear.None, true);
 
     // Show the level intro text, as well as the start button
     setTimeout(() => {
       this.game.add.tween(this.levelText).to({
-        alpha: 0
+        alpha: 0,
       }, 300, Phaser.Easing.Linear.None, true);
       // Draws the block objects on the screen for each frame
       // Draws from a randomized array of the original sprite colours
@@ -111,9 +111,9 @@ export class GridGrind extends Phaser.State {
     this.pointsRequired = this.level.getPoints();
     this.pointsLeft = this.pointsRequired;
     this.movesLeft = this.level.getMoves();
-    $("#update-points").html(this.score);
-    $("#update-moves-left").html(this.movesLeft);
-    $("#player-name").html(this.playerName);
+    $('#update-points').html(this.score);
+    $('#update-moves-left').html(this.movesLeft);
+    $('#player-name').html(this.playerName);
     $('#update-points-total').html(this.pointsLeft);
     $('#update-points-left').html('0');
     $('#update-level').html(this.currentLevel);
@@ -131,7 +131,7 @@ export class GridGrind extends Phaser.State {
    * function. These generate
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  update() {}
+  static update() {}
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
    *
@@ -147,29 +147,27 @@ export class GridGrind extends Phaser.State {
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   initBlocks() {
-    let blockSize = this.level.getBlockSize();
-    let gridSize = this.level.getGridSize();
-    let blockScale = this.level.getBlockScale();
+    const blockSize = this.level.getBlockSize();
+    const gridSize = this.level.getGridSize();
+    const blockScale = this.level.getBlockScale();
 
     this.blocks = this.game.add.group();
 
-    for (let row = 0; row < gridSize; row++) {
+    for (let row = 0; row < gridSize; row += 1) {
+      for (let col = 0; col < gridSize; col += 1) {
+        const blockX = (col * (blockSize + this.PADDING));
+        const blockY = (row * (blockSize + this.PADDING));
 
-      for (let col = 0; col < gridSize; col++) {
-
-        let blockX = (col * (blockSize + this.PADDING));
-        let blockY = (row * (blockSize + this.PADDING));
-
-        let newBlock = this.game.add.sprite(blockX, blockY, 'blocks');
+        const newBlock = this.game.add.sprite(blockX, blockY, 'blocks');
         newBlock.alpha = 0;
 
         // Fades in block randomly when added
-        let fadeRandom = (1200 * Math.random()) + 400;
+        const fadeRandom = (1200 * Math.random()) + 400;
         setTimeout(() => {
           this.game.add.tween(newBlock).to({
-            alpha: 1
+            alpha: 1,
           }, 400, Phaser.Easing.Linear.None, true);
-          let newRandPos = Math.floor(Math.random() * 6);
+          const newRandPos = Math.floor(Math.random() * 6);
           newBlock.frame = newRandPos;
 
           // Will be level.getBlockSize / newBlock.width
@@ -187,9 +185,9 @@ export class GridGrind extends Phaser.State {
   checkColorChain(sprite) {
     // Find all blocks that share the same color and store them as child nodes
     // store the parent node when it has same position
-    let allSameColors = [];
+    const allSameColors = [];
 
-    this.blocks.forEach(function (block) {
+    this.blocks.forEach((block) => {
       if (sprite.frame === block.frame) {
         allSameColors.push(new ColorNodeContainer(block));
       }
@@ -201,26 +199,24 @@ export class GridGrind extends Phaser.State {
      * as the root node. Then add it to the search queue to begin populating
      * the color chain tree.
      */
-    let colorChainTree = new ColorTree();
+    const colorChainTree = new ColorTree();
     colorChainTree.root = new ColorNode(sprite);
-    let searchQueue = [colorChainTree.root];
+    const searchQueue = [colorChainTree.root];
 
     /*
      * Represents the difference a block needs to be in order to have
      * a valid place in the chain. This could be delta left, right, up
      * or down.
      */
-    let delta = this.level.getBlockSize() + this.PADDING;
+    const delta = this.level.getBlockSize() + this.PADDING;
 
 
     // Executes until there are no longer nodes to check and add
     while (searchQueue.length) {
-
-      let node = searchQueue.shift();
+      const node = searchQueue.shift();
       let toAdd = false;
 
-      for (var i = 0; i < allSameColors.length; i++) {
-
+      for (let i = 0; i < allSameColors.length; i += 1) {
         /*
          * This statement first checks if the node has already been matched
          * to ensure no duplicate nodes are added.
@@ -235,24 +231,19 @@ export class GridGrind extends Phaser.State {
          */
 
         if (!allSameColors[i].matched) {
+          const rightCheck = (node.data.x + delta === allSameColors[i].tile.x);
+          const leftCheck = (node.data.x - delta === allSameColors[i].tile.x);
+          const upCheck = (node.data.y - delta === allSameColors[i].tile.y);
+          const downCheck = (node.data.y + delta === allSameColors[i].tile.y);
 
-          // Right Tile Check
-          if (node.data.x + delta == allSameColors[i].tile.x && node.data.y == allSameColors[i].tile.y) {
+          // Check tiles in each direction for matching chain
+          if (rightCheck && node.data.y === allSameColors[i].tile.y) {
             toAdd = true;
-          }
-
-          // Left Tile Check
-          else if (node.data.x - delta == allSameColors[i].tile.x && node.data.y == allSameColors[i].tile.y) {
+          } else if (leftCheck && node.data.y === allSameColors[i].tile.y) {
             toAdd = true;
-          }
-
-          // Up Tile Check
-          else if (node.data.y - delta == allSameColors[i].tile.y && node.data.x == allSameColors[i].tile.x) {
+          } else if (upCheck && node.data.x === allSameColors[i].tile.x) {
             toAdd = true;
-          }
-
-          // Down Tile Check
-          else if (node.data.y + delta == allSameColors[i].tile.y && node.data.x == allSameColors[i].tile.x) {
+          } else if (downCheck && node.data.x === allSameColors[i].tile.x) {
             toAdd = true;
           }
 
@@ -262,10 +253,10 @@ export class GridGrind extends Phaser.State {
           if (toAdd && allSameColors[i].tile.alpha !== 0) {
             allSameColors[i].matched = true;
 
-            let newConnect = new ColorNode(allSameColors[i].tile);
+            const newConnect = new ColorNode(allSameColors[i].tile);
             node.children.push(newConnect);
             searchQueue.push(newConnect);
-            colorChainTree.nodeCount++;
+            colorChainTree.nodeCount += 1;
 
             toAdd = false;
           }
@@ -279,7 +270,7 @@ export class GridGrind extends Phaser.State {
       colorChainTree.traverseBFS((node) => {
         // For flashing blocks
         this.game.add.tween(node.data).to({
-          alpha: 0
+          alpha: 0,
         }, 400, Phaser.Easing.Linear.None, true);
         node.data.inputEnabled = false;
       });
@@ -288,8 +279,8 @@ export class GridGrind extends Phaser.State {
        * Chain modifier multiplies the points as the chains gets larger. This encourages
        * larger chains to be found in order to complete the levels
        */
-      let chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
-      let modifiedScore = chainModifier * colorChainTree.nodeCount;
+      const chainModifier = Math.ceil(colorChainTree.nodeCount / 3);
+      const modifiedScore = chainModifier * colorChainTree.nodeCount;
 
       this.score += modifiedScore;
       this.currentPoints += modifiedScore;
@@ -300,23 +291,23 @@ export class GridGrind extends Phaser.State {
 
       if (this.pointsLeft < 1) {
         // trigger next level by increasing
-        this.currentLevel++;
+        this.currentLevel += 1;
         $('#progress-bar-done').animate({
-          width: '100%'
+          width: '100%',
         });
         $('#progress-bar-done').delay(800).animate({
-          width: '0%'
+          width: '0%',
         });
 
         // Fade out each block individually
         this.blocks.forEach((block) => {
-          let fadeRandom = (1200 * Math.random()) + 400;
+          const fadeRandom = (1200 * Math.random()) + 400;
           setTimeout(() => {
             this.game.add.tween(block).to({
-              alpha: 0
+              alpha: 0,
             }, 400, Phaser.Easing.Linear.None, true);
           }, fadeRandom);
-        })
+        });
 
         // The longest block fadeout is 1600ms
         setTimeout(() => {
@@ -324,27 +315,27 @@ export class GridGrind extends Phaser.State {
           this.create();
         }, 2000);
       } else {
-        $("#update-points").html(this.score);
-        $("#update-points-left").html(this.currentPoints);
+        $('#update-points').html(this.score);
+        $('#update-points-left').html(this.currentPoints);
         this.gainExp();
       }
     }
   }
 
   gainExp() {
-    let progressWidth = Math.floor(100 * ((this.level.getPoints() - this.pointsLeft) / this.level.getPoints())) + '%';
+    const progressPoints = this.level.getPoints() - this.pointsLeft;
+    const progressWidth = Math.floor(100 * ((progressPoints) / this.level.getPoints()));
     $('#progress-bar-done').animate({
-      width: progressWidth
+      width: `${progressWidth}%`,
     });
   }
 
   blockDown(sprite) {
     if (this.movesLeft > 1) {
-
       // Rotate the sprite frame
       sprite.frame = (sprite.frame + 1) % 6;
-      this.movesLeft--;
-      $("#update-moves-left").html(this.movesLeft);
+      this.movesLeft -= 1;
+      $('#update-moves-left').html(this.movesLeft);
 
       // Take the current sprite which holds information
       // about position and color and use to check proximity
@@ -356,18 +347,18 @@ export class GridGrind extends Phaser.State {
       this.pointsLeft = this.level.getPoints();
       this.movesLeft = this.level.getMoves();
       $('#progress-bar-done').animate({
-        width: '0%'
+        width: '0%',
       });
 
       // Fade out each block individually
       this.blocks.forEach((block) => {
-        let fadeRandom = (1200 * Math.random()) + 400;
+        const fadeRandom = (1200 * Math.random()) + 400;
         setTimeout(() => {
           this.game.add.tween(block).to({
-            alpha: 0
+            alpha: 0,
           }, 400, Phaser.Easing.Linear.None, true);
         }, fadeRandom);
-      })
+      });
 
       this.endTextStyle = {
         font: 'Fjalla One',
@@ -385,13 +376,13 @@ export class GridGrind extends Phaser.State {
       this.endText.anchor.setTo(0.5, 0.5);
       this.endText.alpha = 0;
       this.game.add.tween(this.endText).to({
-        alpha: 1
+        alpha: 1,
       }, 300, Phaser.Easing.Linear.None, true);
 
       // Show the level intro text, as well as the start button
       setTimeout(() => {
         this.game.add.tween(this.endText).to({
-          alpha: 0
+          alpha: 0,
         }, 300, Phaser.Easing.Linear.None, true);
       }, 2000);
 
@@ -404,5 +395,3 @@ export class GridGrind extends Phaser.State {
   }
 
 }
-
-export default GridGrind;

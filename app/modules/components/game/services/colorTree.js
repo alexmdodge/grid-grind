@@ -43,23 +43,22 @@ export class ColorTree {
   add(data, toNodeData) {
     // Creates a node with the data stored and uses the
     // breadth first search
-    var node = new ColorNode(data);
-    var parent = toNodeData ? this.findBFS(toNodeData) : null;
+    const node = new ColorNode(data);
+    const parent = toNodeData ? this.findBFS(toNodeData) : null;
 
     // As a reminder null will return false, and any object
     // will return true, even with no data assigned.
     if (parent) {
       parent.children.push(node);
-    } else {
-
+    } else if (!this.root) {
       // If this is the top level and a root hasn't been assigned
       // the node will be assigned to it
-      if (!this.root) {
-        this.root = node;
-      } else {
-        return 'Root node is already assigned';
-      }
+      this.root = node;
+    } else {
+      return 'Root node is already assigned';
     }
+
+    return 'Success';
   }
 
   /*
@@ -78,28 +77,23 @@ export class ColorTree {
 
     // Initializes array named queue with node object which
     // contains a sub array of all child nodes
-    var queue = [this.root];
+    const queue = [this.root];
 
     // While there are entries in the queue then continue
     // At most is O(n) where n is the number of nodes in
     // the tree
     while (queue.length) {
-
       // Removes the node in the queue at index 0
-      var node = queue.shift();
+      const node = queue.shift();
 
       // Iterate through the child nodes in the current
       // array and check if they contain the data.
-      for (var i = 0; i < node.children.length; i++) {
-
+      for (let i = 0; i < node.children.length; i += 1) {
         if (node.children[i].data === data) {
-
           // If data found splice it from current child node
           // array
           node.children.splice(i, 1);
-
         } else {
-
           // If data not found add the child node to the queue
           // and the search continues
           queue.push(node.children[i]);
@@ -116,7 +110,7 @@ export class ColorTree {
    *
    */
   contains(data) {
-    return this.findBFS(data) ? true : false;
+    return !!this.findBFS(data);
   }
 
   /*
@@ -128,17 +122,16 @@ export class ColorTree {
    */
   findBFS(data) {
     // Grab the root node to start the search
-    var queue = [this.root];
+    const queue = [this.root];
 
     // Initiate same search as in the remove method
     while (queue.length) {
-
-      var node = queue.shift();
+      const node = queue.shift();
 
       if (node.data === data) {
         return node;
       }
-      for (var i = 0; i < node.children.length; i++) {
+      for (let i = 0; i < node.children.length; i += 1) {
         queue.push(node.children[i]);
       }
     }
@@ -148,13 +141,13 @@ export class ColorTree {
   }
 
   /*
-   * _preOrder
+   * preOrder
    *
    * Uses a recursive approach to search the tree depth first
    * Will execute the function of the highest node first
    *
    */
-  _preOrder(node, fn) {
+  preOrder(node, fn) {
     if (node) {
       if (fn) {
         fn(node);
@@ -162,23 +155,23 @@ export class ColorTree {
 
       // For each element in the child array it will
       // continue to dive deeper until null is returned
-      for (var i = 0; i < node.children.length; i++) {
-        this._preOrder(node.children[i], fn);
+      for (let i = 0; i < node.children.length; i += 1) {
+        this.preOrder(node.children[i], fn);
       }
     }
   }
 
   /*
-   * _postOrder
+   * postOrder
    *
    *  Uses a recursive approach to search the tree depth first
    *  Will execute the function of the lowest node first
    *
    */
-  _postOrder(node, fn) {
+  postOrder(node, fn) {
     if (node) {
-      for (var i = 0; i < node.children.length; i++) {
-        this._postOrder(node.children[i], fn);
+      for (let i = 0; i < node.children.length; i += 1) {
+        this.postOrder(node.children[i], fn);
       }
       if (fn) {
         fn(node);
@@ -194,13 +187,12 @@ export class ColorTree {
    *
    */
   traverseDFS(fn, method) {
-    var current = this.root;
-
+    const current = this.root;
 
     if (method) {
-      this['_' + method](current, fn);
+      this[method](current, fn);
     } else {
-      this._preOrder(current, fn);
+      this.preOrder(current, fn);
     }
   }
 
@@ -212,13 +204,13 @@ export class ColorTree {
    *
    */
   traverseBFS(fn) {
-    var queue = [this.root];
+    const queue = [this.root];
     while (queue.length) {
-      var node = queue.shift();
+      const node = queue.shift();
       if (fn) {
         fn(node);
       }
-      for (var i = 0; i < node.children.length; i++) {
+      for (let i = 0; i < node.children.length; i += 1) {
         queue.push(node.children[i]);
       }
     }

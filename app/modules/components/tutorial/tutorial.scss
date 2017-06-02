@@ -3,75 +3,85 @@
 .tutorial {
   box-sizing: border-box;
   background-color: rgba(0,0,0,0.2);
-  display: none;
   position: absolute;
   top: 0;
   z-index: 10;
   width: 100%;
   height: 100vh;
 
-  .skip-tutorial {
-    border-bottom: 2px solid rgba(0,0,0,0);
+  &__skip {
+    background: none;
+    border: none;
     cursor: pointer;
     position: absolute;
     right: 40px;
-    top: 15px;
+    top: 40px;
     font-family: $primary-font;
     font-weight: bold;
     font-size: 1.6em;
-    color: white;
+    color: #bbb;
     text-transform: uppercase;
     transition: all 0.2s ease-in-out;
 
     &:hover { 
-      color: darken(white,10);
+      color: darken(#bbb,20);
       transition: all 0.2s ease-in-out;
     }
   }
 
-  .tutorial-slide1,
-  .tutorial-slide2,
-  .tutorial-slide3,
-  .tutorial-slide4 {
-    position: absolute;
-    border-radius: 10px;
-    border-top: 5px solid #ccc;
-    border-bottom: 5px solid #ccc;
-    background-color: #fff;
+  &--closed {
     display: none;
-    margin: 0 auto;
-    top: 10vh;
-    left: 0;
-    right: 0;
-    padding: 20px 30px;
-    text-align: center;
-    width: 80%;
-
-    p { font-size: 1.3em;}
   }
 
-  img {
-    width: 40%;
+  &__slide {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 10px solid #bbb;
+    background-color: #fff;
+    padding: 20px 30px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+
+    p { font-size: 1.3em;}
+
+    div {
+      width: 80%;
+    }
+  }
+
+  &__img {
     margin: 0 auto;
+    img {
+      width: 60%;
+    }
   }
 
   h1, h2 {
     text-transform: uppercase;
     font-weight: bold;
   }
+}
 
-  .button-back,
-  .button-next,
-  .button-start {
-    display: block;
-    color: #eee;
-    margin: 10px;
-    font-size: 1.8em;
-    border: none;
-  }
+.tut-button {
+  background: none;
+  font-family: $primary-font;
+  display: block;
+  color: #ccc;
+  margin: 10px;
+  padding: 10px;
+  font-size: 1.8em;
+  border: none;
+  outline: none;
+  cursor: pointer;
 
-  .button-back {
-    float: left;
+  &__back {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     transition: all 0.1s ease-in-out;
     &:hover { 
       transition: all 0.1s ease-in-out;
@@ -79,8 +89,10 @@
     }
   }
 
-  .button-next {
-    float: right;
+  &__next {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     transition: all 0.1s ease-in-out;
     &:hover {
       transition: all 0.1s ease-in-out;
@@ -88,22 +100,35 @@
     }
   }
 
-  .button-start {
-    background-color: lighten($primary-green,100);
-    color: $primary-green;
-    border: 5px solid $primary-green;
+  &__next--hidden {
+    display: none;
+  }
+
+  &__start {
+    background-color: lighten($primary-blue,100);
+    color: $primary-blue;
+    border: 5px solid $primary-blue;
+    border-radius: 5px;
+    bottom: 140px;
     font-family: $primary-font;
     font-size: 2em;
     font-weight: bold;
-    margin: 80px auto;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
     padding: 20px;
     width: 50%;
+    transform: translateX(-50%);
     transition: all 0.2s ease-in-out;
 
     &:hover { 
-      background-color: $primary-green; 
+      background-color: $primary-blue; 
       color: white;
       transition: all 0.2s ease-in-out;
     }
+  }
+
+  &__start--hidden {
+    display: none;
   }
 }

@@ -5,7 +5,8 @@ let StringReplacePlugin = require("string-replace-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /* Build Variables */
-let inProduction = (process.env.NODE.ENV === 'production');
+let inProduction = (process.env.NODE_ENV === 'production');
+const PHASER_DIR = path.join(__dirname, '/node_modules/phaser/');
 
 /* Main Webpack File */
 module.exports = {
@@ -25,6 +26,24 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /pixi\.js$/,
+        use: [{
+          loader: 'expose-loader',
+          options: 'PIXI',
+        }],
+      }, {
+        test: /phaser-split\.js$/,
+        use: [{
+          loader: 'expose-loader',
+          options: 'Phaser',
+        }],
+      }, {
+        test: /p2\.js$/,
+        use: [{
+          loader: 'expose-loader',
+          options: 'p2',
+        }],
+      }, {
         // Template Processing
         test: /\.pug?/,
         use: {
@@ -33,16 +52,7 @@ module.exports = {
             pretty: true,
           }
         }
-      } , {
-        // Font Processing
-        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]'
-          }
-        }
-      } , {
+      }, {
         // Stylesheets Processing
         test: /\.s[ac]ss$/,
         use: ExtractTextPlugin.extract({
@@ -57,22 +67,13 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: { 
-              presets: ['env'],
+              presets: ['env', 'react', 'stage-1'],
               compact: false,
             }
           } , {
             loader: 'eslint-loader',
           }
         ]
-      } , {
-        // Image processing
-        test: /\.(png|svg|jpg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: 'images/[name].[ext]'
-          }
-        }],
       }
     ]
   },
@@ -101,10 +102,13 @@ module.exports = {
     ],
 
     // Extensions that are used
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
 
     // Alias for common files
     alias: {
+      phaser: path.join(PHASER_DIR, 'build/custom/phaser-split.js'),
+      pixi: path.join(PHASER_DIR, 'build/custom/pixi.js'),
+      p2: path.join(PHASER_DIR, 'build/custom/p2.js'),
       Services: path.resolve(__dirname, 'app/modules/services/'),
     }
   }
