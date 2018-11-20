@@ -1,9 +1,0 @@
-## Customize dependencies
-dependencies:
-  pre:
-    - npm install
-  
-## Customize test commands
-test:
-  override:
-    - mocha -w -R spec --require babel-register ./test/gridGrindTest.js # Use mocha for testing

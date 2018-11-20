@@ -27,19 +27,8 @@ In order to move to the next level you have to achieve a minimum number of point
 	<a name="usage" aria-hidden="true" class="anchor"></a>
 	Usage
 </h1>
-This game leverages Phaser, jQuery, and a couple of other pieces to make it go! To get started ensure NodeJS is installed and up to date, then run,
 
-`npm install`
 
-You can then use the gulpfile to run the build and try it out yourself,
-
-`gulp`
-
-If you've made a contribution and want to run the tests use,
-
-`npm test`
-
-The tests are written with Mocha using Chai expect.
 
 <h1>
 	<a name="todo" aria-hidden="true" class="anchor"></a>
